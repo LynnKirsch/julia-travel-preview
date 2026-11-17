@@ -37,24 +37,24 @@
         };
     };
     const draft = restoreDraft();
-    // Clear the previously confirmed third concept once for the new review round.
-    // Keep wishes and references, and never touch already saved review results.
+    // One-time reset for the next public review round: clear previously confirmed
+    // choice on the plain review page, but preserve comments, reference links,
+    // and saved Supabase results. Explicit choice links keep working.
     try {
-        const resetKey = 'julia-travel:coral-review-reset:v1';
+        const resetKey = 'julia-travel:review-choice-reset:v2';
         if (!localStorage.getItem(resetKey)) {
-            if (draft.choice === 'stan-inspired') {
+            const params = new URLSearchParams(location.search);
+            const hashChoice = location.hash.slice(1);
+            const explicitChoice = params.has('choice') || validChoice(hashChoice) || hashChoice === 'tropical-glass';
+            if (!explicitChoice) {
                 draft.choice = null;
-                localStorage.setItem(draftKey, JSON.stringify(draft));
                 localStorage.removeItem(legacyKey);
-                const url = new URL(location.href);
-                if (url.searchParams.get('choice') === 'stan-inspired' || url.searchParams.get('choice') === 'tropical-glass') url.searchParams.delete('choice');
-                if (url.hash === '#stan-inspired' || url.hash === '#tropical-glass') url.hash = '';
-                try { history.replaceState(null, '', url.href); } catch { /* Some browsers restrict history updates. */ }
+                localStorage.setItem(draftKey, JSON.stringify(draft));
             }
             localStorage.setItem(resetKey, '1');
         }
     } catch { /* The review remains usable without browser storage. */ }
-    const referenceURL = value => {
+        const referenceURL = value => {
         const text = value.trim();
         if (!text || !/^https?:\/\//i.test(text)) return null;
         try { const url = new URL(text); return ['http:', 'https:'].includes(url.protocol) && url.hostname && !url.username && !url.password ? url : null; } catch { return null; }
