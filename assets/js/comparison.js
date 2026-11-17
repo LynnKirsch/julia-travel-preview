@@ -37,20 +37,25 @@
         };
     };
     const draft = restoreDraft();
-    // One-time reset for the next public review round: clear previously confirmed
-    // choice on the plain review page, but preserve comments, reference links,
-    // and saved Supabase results. Explicit choice links keep working.
+    // Start a fresh public review round once per browser.
+    // Clear only the browser draft; immutable results in Supabase are untouched.
     try {
-        const resetKey = 'julia-travel:review-choice-reset:v2';
+        const resetKey = 'julia-travel:review-form-reset:v3';
         if (!localStorage.getItem(resetKey)) {
-            const params = new URLSearchParams(location.search);
-            const hashChoice = location.hash.slice(1);
-            const explicitChoice = params.has('choice') || validChoice(hashChoice) || hashChoice === 'tropical-glass';
-            if (!explicitChoice) {
-                draft.choice = null;
-                localStorage.removeItem(legacyKey);
-                localStorage.setItem(draftKey, JSON.stringify(draft));
-            }
+            draft.choice = null;
+            draft.comment = '';
+            draft.references = normalizeReferences([]);
+            localStorage.removeItem(legacyKey);
+            localStorage.setItem(draftKey, JSON.stringify(draft));
+            const url = new URL(location.href);
+            url.searchParams.delete('choice');
+            url.searchParams.delete('comment');
+            url.searchParams.delete('ref');
+            const hashChoice = url.hash.slice(1);
+            if (validChoice(hashChoice) || hashChoice === 'tropical-glass') url.hash = '';
+            try {
+                if (url.href !== location.href) history.replaceState(null, '', url.href);
+            } catch { /* Some browsers restrict history updates. */ }
             localStorage.setItem(resetKey, '1');
         }
     } catch { /* The review remains usable without browser storage. */ }
