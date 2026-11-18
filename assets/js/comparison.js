@@ -19,6 +19,7 @@
     const images = [];
     let viewing = defaultView, revision = 0, nextImageId = 0, replaceId = null;
     let imageQueue = Promise.resolve();
+    let uploadEpoch = 0;
     let saving = false, saved = null, attempt = null;
     const validChoice = value => typeof value === 'string' && Object.hasOwn(names, value);
     const normalizeReferences = values => {
@@ -103,7 +104,7 @@
         $('summary-references').textContent = String(validReferences().length);
         $('summary-images').textContent = String(images.length);
         $('copy-choice').disabled = saving;
-        $('confirm-choice').disabled = viewing === draft.choice;
+        $('confirm-choice').disabled = saving || viewing === draft.choice;
         options.forEach(button => {
             const selected = button.dataset.variant === draft.choice;
             button.classList.toggle('is-selected', selected);
@@ -122,7 +123,27 @@
         updateSummary();
     };
     options.forEach(button => button.addEventListener('click', () => view(button.dataset.variant)));
-    $('confirm-choice').addEventListener('click', () => { draft.choice = viewing; changed(); });
+    $('confirm-choice').addEventListener('click', () => {
+        if (saving || draft.choice === viewing) return;
+        // A new confirmed design starts a fresh review, not a copy of the last one.
+        uploadEpoch++;
+        draft.choice = viewing;
+        draft.comment = '';
+        draft.references = normalizeReferences([]);
+        wishes.value = '';
+        resizeComment();
+        renderReferences();
+        images.forEach(image => URL.revokeObjectURL(image.url));
+        images.length = 0;
+        imageInput.value = '';
+        replaceInput.value = '';
+        replaceId = null;
+        $('image-error').textContent = '';
+        renderImages();
+        saved = null;
+        attempt = null;
+        changed();
+    });
     const resizeComment = () => {
         wishes.style.height = 'auto';
         wishes.style.height = Math.min(260, Math.max(120, wishes.scrollHeight)) + 'px';
@@ -204,12 +225,16 @@
         return { id: ++nextImageId, file, url };
     };
     const queueImages = (files, replacing = null) => {
+        const epoch = uploadEpoch;
         imageQueue = imageQueue.then(async () => {
+            if (epoch !== uploadEpoch) return;
             const errors = [];
             for (const file of files) {
+                if (epoch !== uploadEpoch) return;
                 if (replacing === null && images.length >= MAX_IMAGES) { errors.push('Можно прикрепить не больше трёх изображений.'); break; }
                 try {
                     const item = await prepareImage(file);
+                    if (epoch !== uploadEpoch) { URL.revokeObjectURL(item.url); return; }
                     if (replacing !== null) {
                         const index = images.findIndex(image => image.id === replacing);
                         if (index < 0) { URL.revokeObjectURL(item.url); break; }
@@ -220,7 +245,7 @@
             }
             $('image-error').textContent = errors.join(' ');
             renderImages(); resetFeedback(); updateSummary();
-        }).catch(() => { $('image-error').textContent = 'Не удалось добавить изображение. Попробуйте выбрать файл ещё раз.'; });
+        }).catch(() => { if (epoch === uploadEpoch) $('image-error').textContent = 'Не удалось добавить изображение. Попробуйте выбрать файл ещё раз.'; });
     };
     $('add-images').addEventListener('click', () => imageInput.click());
     imageInput.addEventListener('change', () => { const files = [...imageInput.files]; imageInput.value = ''; queueImages(files); });
