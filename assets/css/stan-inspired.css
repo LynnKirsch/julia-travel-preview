@@ -4,38 +4,48 @@ body.concept-stan { --bg:#fff;--fg:#17172b;--fg-2:#4e4e66;--muted:#5b5b72;--surf
 .stan-stage { position:relative; isolation:isolate; overflow:hidden; min-height:760px; display:flex; flex-direction:column; padding:22px 0 12px; color:#fff; font-family:"Stan NT Somic",sans-serif; background:#07554b url('../images/img-1920x1080-q85.webp') center/cover no-repeat; border-radius:0 0 40px 40px; }
 .hero__video { position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .3s ease; pointer-events:none; }
 .hero__video.is-playing { opacity:1; }
-.stan-stage::before { content:""; position:absolute; inset:0; z-index:-1; pointer-events:none; background:linear-gradient(90deg,rgba(0,43,39,.88),rgba(0,48,41,.48) 52%,rgba(0,46,43,.08)),linear-gradient(0deg,rgba(0,47,40,.48),transparent 55%,rgba(0,43,40,.15)); }
-.concept-stan .site-header { width:min(calc(100% - 80px),1200px); margin-inline:auto; border:1px solid rgba(255,255,255,.65); border-radius:28px; background:rgba(255,255,255,.91); color:#172525; box-shadow:0 12px 35px rgba(0,38,33,.15); }
-@supports (backdrop-filter:blur(16px)) { .concept-stan .site-header { background:rgba(255,255,255,.78); backdrop-filter:blur(16px); } }
-.concept-stan .header-inner { width:100%; min-height:76px; padding:0 24px; }
-.concept-stan .brand-symbol { color:#006f55; border-color:#006f55; }
+.stan-stage::before { content:""; position:absolute; inset:0; z-index:-1; pointer-events:none; background:linear-gradient(180deg,#002b27b8 0,#002b279e 70px,transparent 230px),linear-gradient(90deg,rgba(0,43,39,.88),rgba(0,48,41,.48) 52%,rgba(0,46,43,.08)),linear-gradient(0deg,rgba(0,47,40,.48),transparent 55%,rgba(0,43,40,.15)); }
+.concept-stan .site-header { border:0; background:transparent; color:#fff; }
+.concept-stan .header-inner { min-height:64px; padding-block:0; gap:24px; }
+.concept-stan .brand { margin-left:-2px; }
+.stan-logo { width:200px; height:auto; }
 .concept-stan .site-nav { align-items:center; gap:8px; }
-.concept-stan .site-nav a,.concept-stan .site-nav button { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 14px; border:0; color:#25243c; background:transparent; font:600 14px/1.2 "Stan NT Somic",sans-serif; white-space:nowrap; }
+.concept-stan .site-nav a,.concept-stan .site-nav button { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 12px; border:0; color:inherit; background:transparent; font:600 14px/1.2 "Stan NT Somic",sans-serif; white-space:nowrap; }
 .concept-stan .site-nav [aria-current]::before { content:""; width:8px; height:8px; border-radius:50%; background:#20d69b; }
-.stan-contact { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 15px; border:1px solid #6255ff; border-radius:24px; color:#493bc8; background:rgba(255,255,255,.55); font:600 14px/1.2 "Stan NT Somic",sans-serif; white-space:nowrap; }
-.stan-contact img { width:17px; height:17px; object-fit:contain; filter:brightness(0) saturate(100%) invert(31%) sepia(92%) saturate(3731%) hue-rotate(232deg); }
+.stan-contact { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 15px; border:1px solid #fffe; border-radius:24px; color:inherit; background:transparent; font:600 14px/1.2 "Stan NT Somic",sans-serif; white-space:nowrap; transition:color .25s ease,background-color .25s ease,border-color .25s ease; }
+.stan-contact img { width:17px; height:17px; object-fit:contain; filter:brightness(0) invert(1); transition:filter .25s ease; }
+.stan-contact:focus-visible { background:#fffbef; border-color:#fffbef; color:#17372f; }
+.stan-contact:focus-visible img { filter:brightness(0) saturate(100%) invert(16%) sepia(17%) saturate(1044%) hue-rotate(112deg) brightness(93%); }
 .concept-stan button[aria-disabled="true"] { cursor:default; }
-.concept-stan button:focus-visible,.concept-stan .stan-takeoff:focus-visible { outline:3px solid #ffc400; outline-offset:3px; }
+.concept-stan .stan-stage :is(a,button):focus-visible { outline:3px solid #ffc400; outline-offset:3px; }
 .concept-stan .hero { flex:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(260px,330px); align-items:end; gap:70px; padding-block:96px 62px; }
-.concept-stan .hero-copy { display:flex; flex-direction:column; align-items:flex-start; min-width:0; }
-.stan-eyebrow { display:inline-block; margin-bottom:18px; color:#e6ffd0; font-size:clamp(19px,2vw,26px); font-weight:600; line-height:1.3; }
-.concept-stan .hero h1 { max-width:100%; margin:0; font-size:clamp(46px,5.8vw,82px); font-weight:700; font-synthesis:none; line-height:1.03; letter-spacing:-.045em; text-wrap:initial; }
+.concept-stan .hero-copy { container-type:inline-size; display:flex; flex-direction:column; align-items:flex-start; min-width:0; }
+.stan-eyebrow { margin-bottom:12px; color:#e6ffd0; font-size:clamp(18px,1.8vw,23px); font-weight:500; line-height:1.3; }
+.concept-stan .hero h1 { max-width:100%; margin:0; font-size:min(82px,10.25cqi); font-weight:700; font-synthesis:none; line-height:1.03; letter-spacing:-.045em; text-wrap:initial; }
 .concept-stan .hero h1 span { display:block; white-space:nowrap; }
-.concept-stan .hero .stan-takeoff { position:relative; overflow:hidden; gap:14px; min-height:66px; margin-top:30px; padding:15px 28px; border:0; border-radius:40px; background:#20f5a7; color:#10392f; font-size:19px; transition:background-color .25s ease; }
+.stan-actions { display:flex; gap:14px; max-width:100%; margin-top:30px; }
+.concept-stan .stan-actions .button { width:auto; min-height:66px; margin:0; padding:12px 27px; border-radius:40px; font:700 19px/1.25 "Stan NT Somic",sans-serif; }
+.concept-stan .hero .stan-takeoff { position:relative; overflow:hidden; gap:14px; background:#20f5a7; color:#10392f; transition:background-color .25s ease; }
+.stan-guides { border-color:#fffe; background:transparent; color:#fff; transition:background-color .25s ease,color .25s ease,border-color .25s ease; }
+.stan-guides:focus-visible { border-color:#fffbef; background:#fffbef; color:#17372f; }
 .stan-takeoff img { width:31px; height:31px; object-fit:contain; transition:transform .3s ease,opacity .22s ease; }
 .stan-takeoff span { transition:transform .3s ease; }
-@media (hover:hover) and (pointer:fine) { .stan-takeoff:hover { background:#00dfa0; } .stan-takeoff:hover img { transform:translate(42px,-40px); opacity:0; } .stan-takeoff:hover span { transform:translateX(-22.5px); } }
+@media (hover:hover) and (pointer:fine) {
+ .concept-stan .hero .stan-takeoff:hover { background:#00dfa0; }
+ .stan-contact:hover { background:#fffbef; border-color:#fffbef; color:#17372f; }
+ .stan-contact:hover img { filter:brightness(0) saturate(100%) invert(16%) sepia(17%) saturate(1044%) hue-rotate(112deg) brightness(93%); }
+ .stan-guides:hover { border-color:#fffbef; background:#fffbef; color:#17372f; }
+ .stan-card:hover .stan-card-image img { transform:scale(1.04); }
+}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+ .stan-takeoff:hover img { transform:translate(42px,-40px); opacity:0; }
+ .stan-takeoff:hover span { transform:translateX(calc((var(--stan-plane-size,31px) + var(--stan-plane-gap,14px)) / -2)); }
+}
 .stan-card { width:100%; margin:0; padding:10px; border-radius:25px; background:#fffbef; color:#17372f; box-shadow:0 20px 50px rgba(0,30,27,.24); }
 .stan-card-image { overflow:hidden; aspect-ratio:4/4.25; border-radius:17px; }
 .stan-card-image img { width:100%; height:100%; object-fit:cover; object-position:50% 55%; transition:transform .5s ease; }
-.stan-card figcaption { display:grid; align-items:center; padding:15px 11px 10px; font-size:17px; font-weight:600; line-height:1.38; }
-.stan-card-text,.stan-card-action { grid-area:1/1; transition:opacity .25s ease; }
-.stan-card-action { opacity:0; pointer-events:none; min-height:48px; padding:10px 12px; border:0; border-radius:24px; color:#fff; background:#6255ff; font:600 15px/1.25 "Stan NT Somic",sans-serif; }
+.stan-card figcaption { padding:15px 11px 10px; font-size:17px; font-weight:600; line-height:1.38; }
 .stan-card figcaption span { color:#087a55; text-decoration:underline; text-decoration-color:#efc348; text-decoration-thickness:3px; text-underline-offset:3px; }
-.stan-card:focus-within .stan-card-text { opacity:0; }
-.stan-card:focus-within .stan-card-action { opacity:1; pointer-events:auto; }
-@media (hover:hover) and (pointer:fine) { .stan-card:hover .stan-card-image img { transform:scale(1.04); } .stan-card:hover .stan-card-text { opacity:0; } .stan-card:hover .stan-card-action { opacity:1; pointer-events:auto; } }
-@media (hover:none), (max-width:760px) { .stan-card figcaption { gap:12px; } .stan-card-text,.stan-card-action { grid-area:auto; } .stan-card-action { opacity:1; pointer-events:auto; } .stan-card:focus-within .stan-card-text { opacity:1; } }
 .destination-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
 .destination-card { display:grid; grid-template-columns:1fr 1fr; padding:12px; background:#fff; border:1px solid #e8e7f0; border-radius:26px; box-shadow:0 8px 24px #17172b05; }
 .destination-image { border-radius:16px; overflow:hidden; }
@@ -44,9 +54,15 @@ body.concept-stan { --bg:#fff;--fg:#17172b;--fg-2:#4e4e66;--muted:#5b5b72;--surf
 .round-link:hover { color:#fff; background:#6255ff; }
 
 @media(max-width:1100px) { .concept-stan .hero { gap:30px; } .destination-text { padding:20px; } }
+@media(min-width:761px) and (max-width:1050px) {
+ .concept-stan .hero { grid-template-columns:minmax(0,1fr) minmax(240px,28%); }
+ .stan-actions { gap:10px; }
+ .concept-stan .stan-actions .button { min-height:54px; padding-inline:14px; font-size:15px; }
+ .concept-stan .hero .stan-takeoff { --stan-plane-size:24px; --stan-plane-gap:8px; gap:var(--stan-plane-gap); }
+ .stan-takeoff img { width:var(--stan-plane-size); height:var(--stan-plane-size); }
+}
 @media(max-width:850px) {
  .concept-stan .hero { gap:24px; }
- .concept-stan .hero h1 { font-size:clamp(35px,4.6vw,40px); }
  .concept-stan .header-inner { gap:10px; }
  .concept-stan .site-nav a,.concept-stan .site-nav button { padding:0 9px; font-size:12px; }
  .stan-contact { padding:0 10px; font-size:12px; }
@@ -59,17 +75,17 @@ body.concept-stan { --bg:#fff;--fg:#17172b;--fg-2:#4e4e66;--muted:#5b5b72;--surf
 @media(max-width:760px) {
  .stan-stage { min-height:0; padding-top:12px; }
  .stan-stage::before { background:linear-gradient(180deg,rgba(0,42,37,.62),rgba(0,50,44,.78) 60%,rgba(0,47,41,.55)); }
- .concept-stan .site-header { width:calc(100% - 32px); border-radius:23px; }
- .concept-stan .header-inner { min-height:68px; padding:10px 15px; flex-wrap:wrap; gap:6px; }
- .concept-stan .brand { font-size:22px; }
+ .concept-stan .header-inner { min-height:0; flex-wrap:wrap; gap:6px; }
+ .stan-logo { width:175px; }
  .concept-stan .site-nav { order:3; flex-basis:100%; justify-content:space-between; margin:0; gap:0; }
- .concept-stan .site-nav a,.concept-stan .site-nav button { min-height:40px; padding:0 9px; font-size:12px; }
- .stan-contact { margin-left:auto; min-height:40px; }
- .concept-stan .hero { grid-template-columns:minmax(0,1fr); gap:30px; padding-block:70px 34px; }
+ .concept-stan .site-nav a,.concept-stan .site-nav button { min-height:44px; padding:0; font-size:12px; }
+ .stan-contact { margin-left:auto; }
+ .concept-stan .hero { grid-template-columns:minmax(0,1fr); gap:28px; padding-block:62px 34px; }
  .concept-stan .hero h1 { font-size:clamp(43px,11.4vw,63px); }
  .concept-stan .hero h1 span { white-space:normal; }
- .stan-eyebrow { font-size:18px; margin-bottom:14px; }
- .concept-stan .hero .stan-takeoff { width:100%; max-width:380px; margin-top:24px; font-size:17px; }
+ .stan-eyebrow { font-size:17px; margin-bottom:10px; }
+ .stan-actions { flex-direction:column; align-items:flex-start; gap:10px; margin-top:24px; }
+ .concept-stan .stan-actions .button { min-height:52px; max-width:100%; padding:9px 20px; font-size:17px; }
  .stan-card { max-width:330px; justify-self:center; }
  .stan-card-image { aspect-ratio:4/3.4; }
  .stan-card-image img { object-position:50% 50%; }
@@ -80,10 +96,14 @@ body.concept-stan { --bg:#fff;--fg:#17172b;--fg-2:#4e4e66;--muted:#5b5b72;--surf
 }
 @media(max-width:360px) { .destination-text { padding:12px; } }
 @media(max-width:760px) { .stan-stage { border-radius:0 0 28px 28px; } .destination-card { padding:8px; } .destination-text { padding:12px; } }
-@media(prefers-reduced-motion:reduce) { .hero__video { display:none; } .stan-takeoff,.stan-takeoff img,.stan-takeoff span,.stan-card-text,.stan-card-action,.stan-card-image img { transition:none; } .stan-card:hover .stan-card-image img { transform:none; } }
+@media(prefers-reduced-motion:reduce) {
+ .hero__video { display:none; }
+ .concept-stan .hero .stan-takeoff,.stan-guides,.stan-contact,.stan-contact img,.stan-card-image img { transition:none; }
+ .stan-card:hover .stan-card-image img { transform:none; }
+}
 @media(prefers-reduced-motion:no-preference) {
  .concept-stan .stan-eyebrow { animation:julia-intro-rise .65s .05s ease-out backwards; }
  .concept-stan .hero h1 { animation:julia-intro-rise .65s .16s ease-out backwards; }
- .concept-stan .stan-takeoff { animation:julia-intro-rise .65s .27s ease-out backwards; }
+ .concept-stan .stan-actions { animation:julia-intro-rise .65s .27s ease-out backwards; }
  .concept-stan .stan-card { animation:julia-intro-side .7s .2s ease-out backwards; }
 }
