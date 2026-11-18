@@ -250,10 +250,6 @@
     $('copy-choice').addEventListener('click', async () => {
         if (saving) return;
         if (!draft.choice) { copyMessage.textContent = 'Сначала выберите дизайн кнопкой «Выбрать этот вариант».'; $('confirm-choice').focus(); return; }
-        if (draft.choice === 'emerald-lagoon') {
-            copyMessage.textContent = 'Вариант 04 пока доступен для локального согласования. Сервер ещё не принимает этот вариант, поэтому ссылка на результат не создана.';
-            return;
-        }
         if (!validateReferences()) return;
         saving = true; updateSummary();
         try {
