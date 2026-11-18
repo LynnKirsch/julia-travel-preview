@@ -3,7 +3,8 @@
         'coral-travel': { name: JuliaTravelConceptNames['coral-travel'], colors: ['#FF385C', '#222222', '#FFFFFF', '#F7F7F7', '#FFF3D4'] },
         'colorful-ocean': { name: JuliaTravelConceptNames['colorful-ocean'], colors: ['#397EF5', '#6646D9', '#00B8A9', '#50D9AC', '#F1F5FF'] },
         'tropical-glass': { name: 'Tropical Glass', colors: ['#007F80', '#00C6B5', '#FFB82E', '#17333D', '#FFF5E5'] },
-        'stan-inspired': { name: JuliaTravelConceptNames['stan-inspired'], colors: ['#6255FF', '#EEECFF', '#FFFFFF', '#17172B', '#4258E8', '#F7F7FB'] }
+        'stan-inspired': { name: JuliaTravelConceptNames['stan-inspired'], colors: ['#6255FF', '#EEECFF', '#FFFFFF', '#17172B', '#4258E8', '#F7F7FB'] },
+        'emerald-lagoon': { name: JuliaTravelConceptNames['emerald-lagoon'], colors: ['#103F38', '#FFF9EC', '#CEE6C3', '#153B32', '#DFC69D', '#F5EFDF', '#D4DED2'] }
     });
     const tokenPattern = /^[A-Za-z0-9_-]{43}$/;
     const endpoint = () => {        const value = window.JuliaTravelReviewConfig?.apiBaseUrl;

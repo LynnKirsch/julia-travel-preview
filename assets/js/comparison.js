@@ -6,12 +6,18 @@
     const MAX_IMAGES = 3, MAX_BYTES = 5 * 1024 * 1024;
     const $ = id => document.getElementById(id);
     const options = [...document.querySelectorAll('[data-variant]')];
+    const defaultView = 'stan-inspired';
+    const archivedConcepts = new Set(['coral-travel', 'colorful-ocean']);
+    const showAll = new URLSearchParams(location.search).get('variants') === 'all';
+    options.forEach(option => {
+        option.hidden = !showAll && archivedConcepts.has(option.dataset.variant);
+    });
     const frame = $('live-preview');
     const wishes = $('wishes'), references = $('reference-fields');
     const copyMessage = $('copy-message'), copyField = $('copy-field');
     const imageInput = $('image-input'), replaceInput = $('replace-image-input');
     const images = [];
-    let viewing = 'coral-travel', revision = 0, nextImageId = 0, replaceId = null;
+    let viewing = defaultView, revision = 0, nextImageId = 0, replaceId = null;
     let imageQueue = Promise.resolve();
     let saving = false, saved = null, attempt = null;
     const validChoice = value => typeof value === 'string' && Object.hasOwn(names, value);
@@ -244,6 +250,10 @@
     $('copy-choice').addEventListener('click', async () => {
         if (saving) return;
         if (!draft.choice) { copyMessage.textContent = 'Сначала выберите дизайн кнопкой «Выбрать этот вариант».'; $('confirm-choice').focus(); return; }
+        if (draft.choice === 'emerald-lagoon') {
+            copyMessage.textContent = 'Вариант 04 пока доступен для локального согласования. Сервер ещё не принимает этот вариант, поэтому ссылка на результат не создана.';
+            return;
+        }
         if (!validateReferences()) return;
         saving = true; updateSummary();
         try {
@@ -292,8 +302,8 @@
         }
     });
     window.addEventListener('popstate', () => {
-        Object.assign(draft, restoreDraft()); wishes.value = draft.comment; resizeComment(); renderReferences(); resetFeedback(); persist(); view(draft.choice || 'coral-travel');
+        Object.assign(draft, restoreDraft()); wishes.value = draft.comment; resizeComment(); renderReferences(); resetFeedback(); persist(); view(draft.choice || defaultView);
     });
     persist();
-    view(draft.choice || 'coral-travel');
+    view(draft.choice || defaultView);
 })();

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru" id="top">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Julia Travel — 04. Изумрудная лагуна</title>
+  <meta name="description" content="Направления, полезные материалы и путеводители для путешествия во Вьетнам.">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="../assets/css/common.css">
+<link rel="stylesheet" href="../assets/css/emerald-lagoon.css">
+<script src="../assets/js/concept-names.js" defer></script>
+<script src="../assets/js/concepts.js" defer></script>
+</head>
+<body class="concept-lagoon">
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+
+
+
+<main id="main">
+<div class="lagoon-stage">
+<video class="hero__video" autoplay muted loop playsinline preload="metadata" poster="../assets/images/img-1920x1080-q85.webp" aria-hidden="true"><source data-src="https://www.dropbox.com/scl/fi/ghgn0lcwpjb3nn3eptv3x/plyagh.mp4?rlkey=f90kkj7xe7v4wa0hpgbo7ccpf&amp;raw=1" type="video/mp4"></video>
+<script>
+  (() => {
+    const video = document.querySelector('.hero__video');
+    const source = video.querySelector('source');
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    const updateMotion = () => {
+      if (reducedMotion.matches) {
+        video.pause(); video.classList.remove('is-playing'); source.removeAttribute('src'); video.load();
+      } else {
+        source.src = source.dataset.src; video.load();
+        video.play().catch(() => video.classList.remove('is-playing'));
+      }
+    };
+    video.addEventListener('playing', () => video.classList.add('is-playing'));
+    video.addEventListener('error', () => video.classList.remove('is-playing'), true);
+    video.addEventListener('pause', () => video.classList.remove('is-playing'));
+    reducedMotion.addEventListener('change', updateMotion);
+    updateMotion();
+  })();
+</script>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#top" aria-label="Julia Travel — наверх"><img class="lagoon-logo" src="../assets/images/logo.png" width="1529" height="263" alt=""></a>
+    <nav class="site-nav" aria-label="Основная навигация">
+      <button type="button" aria-current="location" aria-disabled="true" title="Раздел готовится">Направления</button>
+      <button type="button" aria-disabled="true" title="Раздел готовится">Путеводители</button>
+      <button type="button" aria-disabled="true" title="Раздел готовится">Обо мне</button>
+    </nav>
+    <button class="lagoon-contact" type="button" aria-disabled="true" title="Контакт пока не указан">Связаться</button>
+  </div>
+</header>
+  <section class="hero container" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <p class="lagoon-eyebrow">Путешествия по Вьетнаму</p>
+      <h1 id="hero-title">Путешествия <span>с Юлией Горбачевой</span></h1>
+      <p class="lagoon-description">Помогу выбрать курорт и продумать детали поездки</p>
+      <div class="lagoon-actions">
+        <button class="lagoon-primary" type="button" aria-disabled="true" title="Раздел готовится">Подобрать тур</button>
+        <button class="lagoon-secondary" type="button" aria-disabled="true" title="Раздел готовится">Смотреть путеводители</button>
+      </div>
+    </div>
+    <img class="lagoon-portrait" src="../assets/images/img-800x1067-q85.webp" width="800" height="1067" alt="Юлия в соломенной шляпе" fetchpriority="high">
+  </section>
+</div>
+</main>
+</body>
+</html>

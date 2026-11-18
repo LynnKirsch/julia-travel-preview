@@ -1,0 +1,171 @@
+.concept-lagoon {
+    --bg: #f5f7f1;
+    --fg: #153b32;
+    --lagoon-deep: #103f38;
+    --lagoon-white: #fff9ec;
+    --lagoon-mint: #9cebaf;
+    --lagoon-sand: #dfc69d;
+    --lagoon-outline: #f2faf4;
+    --surface: var(--bg);
+    --border: var(--lagoon-outline);
+}
+
+.lagoon-stage {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-top: 22px;
+    color: var(--lagoon-white);
+    font-family: "Manrope Local", sans-serif;
+    background: var(--lagoon-deep) url("../images/img-1920x1080-q85.webp") center / cover no-repeat;
+}
+
+.lagoon-stage .hero__video {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity .35s ease;
+    pointer-events: none;
+}
+.lagoon-stage .hero__video.is-playing { opacity: 1; }
+.lagoon-stage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        linear-gradient(180deg, #061b1ac2, #061b1a96 57px, transparent 155px),
+        radial-gradient(ellipse 72% 72% at 12% 56%, #032820b8, #063d339e 54%, transparent 100%);
+}
+
+.concept-lagoon .lagoon-stage .container { width: min(calc(100% - 5.2vw), 1490px); }
+.concept-lagoon .site-header { background: transparent; border: 0; }
+.concept-lagoon .header-inner { min-height: 44px; padding: 0; gap: 26px; }
+.concept-lagoon .brand { margin-inline-start: -2px; }
+.lagoon-logo { width: clamp(158px, 15vw, 206px); height: auto; }
+.concept-lagoon .site-nav { gap: clamp(12px, 2.3vw, 32px); }
+.concept-lagoon .site-nav button, .lagoon-contact, .lagoon-actions button {
+    appearance: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    cursor: default;
+}
+.concept-lagoon .site-nav button {
+    position: relative;
+    border: 0;
+    padding: 0;
+    min-height: 44px;
+    font-size: 14px;
+    font-weight: 650;
+}
+.concept-lagoon .site-nav [aria-current]::after {
+    content: "";
+    position: absolute;
+    inset: auto auto 4px 0;
+    width: 22px;
+    height: 2px;
+    background: var(--lagoon-sand);
+}
+.lagoon-contact, .lagoon-actions button {
+    border: 1px solid var(--lagoon-outline);
+    border-radius: 12px;
+    transition: color .25s ease, background-color .25s ease, border-color .25s ease;
+}
+.lagoon-contact { padding: 0 17px; min-height: 44px; font-size: 14px; font-weight: 650; white-space: nowrap; }
+.concept-lagoon .site-nav button, .lagoon-contact { text-shadow: 0 1px 5px #061b1abf; }
+
+.concept-lagoon .hero {
+    flex: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(230px, 32.6%);
+    align-items: center;
+    gap: clamp(24px, 5.1vw, 76px);
+    padding-block: clamp(40px, 4.4vw, 63px) clamp(48px, 7vw, 106px);
+}
+.concept-lagoon .hero-copy { container-type: inline-size; }
+.concept-lagoon .hero-copy { text-shadow: 0 2px 12px #04251e80; }
+.lagoon-eyebrow { font-size: clamp(16px, 1.8vw, 26px); font-weight: 550; margin-bottom: 18px; }
+.concept-lagoon .hero h1 {
+    margin: 0;
+    font-size: min(83px, 9.75cqi);
+    font-weight: 800;
+    letter-spacing: -.032em;
+    line-height: 1.11;
+    text-wrap: initial;
+}
+.concept-lagoon h1 span { display: block; }
+.lagoon-description { margin-top: 19px; font-size: clamp(16px, 1.8vw, 26px); }
+.lagoon-actions { display: flex; flex-wrap: wrap; gap: clamp(12px, 1.8vw, 26px); margin-top: clamp(20px, 3.2vw, 46px); }
+.lagoon-actions button {
+    min-height: clamp(44px, 4.2vw, 60px);
+    min-width: min(30cqi, 258px);
+    padding: 8px clamp(13px, 1.65vw, 24px);
+    border-radius: 14px;
+    font-size: clamp(14px, 1.4vw, 20px);
+    font-weight: 750;
+}
+.lagoon-actions .lagoon-primary { background: var(--lagoon-mint); color: var(--fg); border-color: var(--lagoon-mint); }
+.lagoon-actions .lagoon-secondary { font-size: clamp(14px, 1.25vw, 18px); }
+.lagoon-portrait {
+    width: 85%;
+    justify-self: end;
+    height: auto;
+    aspect-ratio: 4 / 5.2;
+    object-fit: cover;
+    object-position: center 53%;
+    border-radius: clamp(18px, 2.3vw, 34px);
+}
+.lagoon-stage :is(a, button):focus-visible {
+    outline: 2px solid var(--lagoon-sand);
+    outline-offset: 4px;
+}
+.lagoon-actions button:focus-visible, .lagoon-contact:focus-visible {
+    background: var(--bg);
+    border-color: var(--bg);
+    color: var(--fg);
+}
+.lagoon-contact:focus-visible { text-shadow: none; }
+@media (hover: hover) and (pointer: fine) {
+    .lagoon-actions button:hover, .lagoon-contact:hover {
+        background: var(--bg);
+        border-color: var(--bg);
+        color: var(--fg);
+    }
+    .lagoon-contact:hover { text-shadow: none; }
+}
+@media (max-width: 760px) {
+    .lagoon-stage { min-height: 0; padding-top: 12px; }
+    .lagoon-stage::before {
+        background:
+            linear-gradient(180deg, #061b1ac4, #103f388f 155px, #052e258f 475px, transparent 670px),
+            radial-gradient(ellipse 95% 39% at 16% 43%, #05261c9c, transparent);
+    }
+    .concept-lagoon .lagoon-stage .container { width: calc(100% - 32px); }
+    .concept-lagoon .header-inner { min-height: 0; gap: 6px; }
+    .lagoon-contact { margin-inline-start: auto; padding-inline: 12px; font-size: 13px; }
+    .concept-lagoon .site-nav {
+        order: 3;
+        flex-basis: 100%;
+        justify-content: space-between;
+        margin: 0;
+    }
+    .concept-lagoon .site-nav button { font-size: 12px; }
+    .concept-lagoon .hero { grid-template-columns: minmax(0, 1fr); gap: 23px; padding-block: 33px 24px; }
+    .concept-lagoon .hero h1 { font-size: clamp(36px, 10.35vw, 64px); }
+    .lagoon-eyebrow { margin-bottom: 11px; font-size: 14px; }
+    .lagoon-description { max-width: 31ch; margin-top: 12px; }
+    .lagoon-actions { flex-direction: column; align-items: flex-start; margin-top: 20px; gap: 9px; }
+    .lagoon-actions button { min-width: 0; padding-inline: 15px; border-radius: 12px; }
+    .lagoon-portrait { max-width: 340px; justify-self: start; aspect-ratio: 4 / 3; object-position: center 48%; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .lagoon-stage .hero__video { display: none; }
+    .lagoon-contact, .lagoon-actions button { transition: none; }
+}
