@@ -193,7 +193,7 @@ html:not([data-lagoon-experiment]) .lagoon-actions button { letter-spacing: .003
     position: absolute;
     z-index: -1;
     inset: clamp(-88px, -6vw, -53px) 0 0;
-    background: url("../images/generated-drafts/img-350x227.png")
+    background: url("../images/generated-drafts/img-300x195.png")
         left clamp(-104px, -7vw, -90px) top / clamp(300px, 32vw, 440px) auto no-repeat;
     transform: scaleX(-1);
     pointer-events: none;
@@ -918,9 +918,9 @@ html:not([data-lagoon-experiment]) :is(.lagoon-story-bio-item:first-child p, .la
 .lagoon-guide--nha-trang { padding-block-start: clamp(0px, calc(113px - 8vw), 38px); }
 .lagoon-guide--nha-trang h2 { max-width: 17ch; }
 .lagoon-guide--nha-trang .lagoon-guide-phone { inset-inline: auto 4%; }
-.lagoon-guide--nha-trang .lagoon-guide-flowers--left { inset-inline-start: 4%; }
+.lagoon-guide--nha-trang .lagoon-guide-flowers--left { inset-inline-start: -2.5%; }
 .lagoon-guide--nha-trang .lagoon-guide-flowers--right {
-    inset-inline-end: calc(clamp(-62px, (1200px - 100vw) / 2 + 5px, -20px) + clamp(12px, 2.2vw, 28px));
+    inset-inline-end: clamp(-62px, (1200px - 100vw) / 2 + 5px, -20px);
     width: 55%;
 }
 @media (min-width: 781px) {
@@ -944,7 +944,7 @@ html:not([data-lagoon-experiment]) :is(.lagoon-story-bio-item:first-child p, .la
     .lagoon-guide h2 { font-size: clamp(32px, 7.5vw, 46px); }
     .lagoon-guide-cta { min-height: 46px; }
     .lagoon-guide--nha-trang { padding-block-start: clamp(22px, 5vw, 34px); }
-    .lagoon-guide--nha-trang .lagoon-guide-flowers--right { inset-inline-end: -2px; }
+    .lagoon-guide--nha-trang .lagoon-guide-flowers--right { inset-inline-end: -20px; }
 }
 
 @keyframes lagoon-reveal-fade {
