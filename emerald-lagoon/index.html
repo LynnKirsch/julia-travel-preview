@@ -53,24 +53,24 @@
 </header>
   <section class="hero container" aria-labelledby="hero-title">
     <div class="hero-copy">
-      <p class="lagoon-eyebrow">Путешествия по Вьетнаму</p>
-      <h1 id="hero-title">Путешествия <span>с Юлией Горбачевой</span></h1>
-      <p class="lagoon-description">Помогу выбрать курорт и продумать детали поездки</p>
-      <div class="lagoon-actions">
+      <p class="lagoon-eyebrow" data-reveal="title">Путешествия по Вьетнаму</p>
+      <h1 id="hero-title" data-reveal="title">Путешествия <span>с Юлией Горбачевой</span></h1>
+      <p class="lagoon-description" data-reveal="description">Помогу выбрать курорт и продумать детали поездки</p>
+      <div class="lagoon-actions" data-reveal="actions">
         <button class="lagoon-primary" type="button" aria-disabled="true" title="Раздел готовится">Подобрать тур</button>
         <button class="lagoon-secondary" type="button" aria-disabled="true" title="Раздел готовится">Смотреть путеводители</button>
       </div>
     </div>
-    <img class="lagoon-portrait" src="../assets/images/img-800x1067-q85.webp" width="800" height="1067" alt="Юлия в соломенной шляпе" fetchpriority="high">
+    <img class="lagoon-portrait" src="../assets/images/img-800x1067-q85.webp" width="800" height="1067" alt="Юлия в соломенной шляпе" fetchpriority="high" data-reveal="portrait">
   </section>
 </div>
   <section class="lagoon-destinations" id="destinations" aria-labelledby="lagoon-destinations-title">
     <div class="container lagoon-destinations-grid">
       <header class="lagoon-destinations-intro">
-        <h2 id="lagoon-destinations-title">Два настроения Вьетнама</h2>
-        <p>Фукуок — для тех, кто мечтает о тропических пляжах и неспешном отдыхе. Нячанг — для тех, кто любит море, прогулки и яркую жизнь курортного города. Выберите направление по душе.</p>
+        <h2 id="lagoon-destinations-title" data-reveal="title">Два настроения Вьетнама</h2>
+        <p data-reveal="description">Фукуок — для тех, кто мечтает о тропических пляжах и неспешном отдыхе. Нячанг — для тех, кто любит море, прогулки и яркую жизнь курортного города. Выберите направление по душе.</p>
       </header>
-      <article class="lagoon-destination lagoon-destination--island">
+      <article class="lagoon-destination lagoon-destination--island" data-reveal="card">
         <div class="lagoon-destination-photo">
           <img src="../assets/images/phu-quoc-bai-sao.webp" alt="Пляж Бай-Сао на Фукуоке" loading="lazy">
         </div>
@@ -81,7 +81,7 @@
         </div>
         <img class="lagoon-destination-figure" src="../assets/images/generated-drafts/img-400x600 (1).png" width="400" height="600" alt="" loading="lazy">
       </article>
-      <article class="lagoon-destination lagoon-destination--city">
+      <article class="lagoon-destination lagoon-destination--city" data-reveal="card">
         <div class="lagoon-destination-photo">
           <img src="../assets/images/nha-trang-coast.webp" alt="Пляж и городская застройка Нячанга" loading="lazy">
         </div>
@@ -99,7 +99,7 @@
     </div>
   </section>
   <section class="lagoon-questions" id="travel-questions" aria-label="Вопросы перед первой поездкой">
-    <div class="lagoon-question-row" data-row="1">
+    <div class="lagoon-question-row" data-row="1" data-reveal="row">
       <div class="lagoon-question-track">
         <ul class="lagoon-question-list" role="list">
           <li>Когда лучше ехать во Вьетнам?</li>
@@ -115,7 +115,7 @@
         </ul>
       </div>
     </div>
-    <div class="lagoon-question-row" data-row="2">
+    <div class="lagoon-question-row" data-row="2" data-reveal="row">
       <div class="lagoon-question-track">
         <ul class="lagoon-question-list" role="list">
           <li>Какой пляж выбрать?</li>
@@ -131,7 +131,7 @@
         </ul>
       </div>
     </div>
-    <div class="lagoon-question-row" data-row="3">
+    <div class="lagoon-question-row" data-row="3" data-reveal="row">
       <div class="lagoon-question-track">
         <ul class="lagoon-question-list" role="list">
           <li>Как понять, какой тур мне подходит?</li>
@@ -166,6 +166,324 @@
       });
       section.classList.add('is-animated');
       toggle.hidden = false;
+    })();
+  </script>
+  <section class="lagoon-story" id="about-julia" aria-labelledby="lagoon-story-title">
+    <div class="lagoon-story-corner-decor" aria-hidden="true">
+      <img class="lagoon-story-decor lagoon-story-palm" src="../assets/images/generated-drafts/img-350x251.png" width="350" height="251" alt="" loading="lazy" data-reveal="decor">
+      <img class="lagoon-story-decor lagoon-story-heading-shade" src="../assets/images/generated-drafts/img-480x401.png" width="480" height="401" alt="" loading="lazy" data-reveal="decor">
+    </div>
+    <div class="lagoon-story-flower" aria-hidden="true">
+      <img class="lagoon-story-decor lagoon-story-hibiscus" src="../assets/images/generated-drafts/img-350x350.png" width="350" height="350" alt="" loading="lazy" data-reveal="decor">
+    </div>
+    <div class="container lagoon-story-content">
+      <h2 class="lagoon-story-statement" id="lagoon-story-title" data-reveal="title">
+        <span>Путешествие <picture>
+          <source media="(prefers-reduced-motion: reduce)" srcset="assets/images/phu-quoc-bai-sao.webp">
+          <img src="../assets/images/generated-drafts/julia-travel-ocean-boat-stable.gif" width="358" height="154" alt="" loading="lazy">
+        </picture> становится понятнее,</span>
+        <span>когда рядом есть человек, <picture>
+          <source media="(prefers-reduced-motion: reduce)" srcset="assets/images/nha-trang-coast.webp">
+          <img src="../assets/images/generated-drafts/julia-travel-palm-beach-stable.gif" width="358" height="154" alt="" loading="lazy">
+        </picture></span>
+        <span>который уже видел всё это своими глазами</span>
+      </h2>
+      <svg class="lagoon-story-stroke" viewBox="0 0 380 27" aria-hidden="true" focusable="false" data-reveal="stroke">
+        <path d="M1 24C89 1 250-8 376 14c-89-12-205-9-296 2C46 20 24 23 1 26c-1 0-1-1 0-2Z" fill="currentColor"/>
+      </svg>
+
+      <div class="lagoon-story-fan-stage">
+        <div class="lagoon-story-fan">
+          <img src="../assets/images/img-1000x1333-q85 (1).webp" width="1000" height="1333" alt="Юлия и ребёнок в плетёной арке" loading="lazy">
+          <img src="../assets/images/img-1000x1778-q85 (2).webp" width="1000" height="1778" alt="Юлия и ребёнок рядом с двумя слонами" loading="lazy">
+          <img src="../assets/images/img-1024x1820-q85 (1).webp" width="1024" height="1820" alt="Слон в воде" loading="lazy">
+          <img src="../assets/images/img-1024x1820-q85 (12).webp" width="1024" height="1820" alt="Ребёнок на качелях у водопада" loading="lazy">
+        </div>
+        <img class="lagoon-story-decor lagoon-story-lotus" src="../assets/images/generated-drafts/img-200x118 (1).png" width="200" height="118" alt="" loading="lazy" data-reveal="decor">
+      </div>
+
+      <div class="lagoon-story-bio">
+        <div class="lagoon-story-bio-item" data-reveal="bio-start">
+          <img src="../assets/images/generated-drafts/img-200x200.png" width="200" height="200" alt="" loading="lazy">
+          <div>
+            <h3>Меня зовут Юлия Горбачева.</h3>
+            <p>Я люблю путешествовать, открывать новые места и делиться своим опытом. В своих путеводителях я собираю полезные детали, а при подборе отдыха помогаю учесть ваши пожелания.</p>
+          </div>
+        </div>
+        <div class="lagoon-story-bio-item" data-reveal="bio-end">
+          <span class="lagoon-story-bio-divider" aria-hidden="true"></span>
+          <img src="../assets/images/generated-drafts/img-200x200 (1).png" width="200" height="200" alt="" loading="lazy">
+          <div>
+            <h3>Для меня Вьетнам —</h3>
+            <p>это не только курорты, но и живые детали: улицы, рынки, лодки, море и настроение каждого места.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="lagoon-offers" id="offers" aria-labelledby="lagoon-offers-title">
+    <div class="container lagoon-offers-grid" data-reveal-group>
+      <div class="lagoon-offers-copy">
+        <h2 id="lagoon-offers-title" data-reveal="title">Что я предлагаю</h2>
+        <ol class="lagoon-offers-list" role="list">
+          <li data-reveal="service">
+            <span class="lagoon-offers-number" aria-hidden="true">01</span>
+            <div>
+              <h3>Путеводители</h3>
+              <p>Готовые PDF-гиды с рекомендациями, маршрутами и полезными деталями для самостоятельной подготовки к поездке.</p>
+            </div>
+          </li>
+          <li data-reveal="service">
+            <span class="lagoon-offers-number" aria-hidden="true">02</span>
+            <div>
+              <h3>Консультация и подбор тура</h3>
+              <p>Помогу выбрать направление, курорт и отель с учётом ваших пожеланий и формата отдыха.</p>
+            </div>
+          </li>
+          <li data-reveal="service">
+            <span class="lagoon-offers-number" aria-hidden="true">03</span>
+            <div>
+              <h3>Бесплатные маршруты</h3>
+              <p>Готовые идеи прогулок и поездок, которые помогут познакомиться с интересными местами Вьетнама.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+      <div class="lagoon-offers-photos">
+        <img class="lagoon-offers-photo lagoon-offers-photo--flowers" src="../assets/images/img-1024x1820-q85 (28).webp" width="1024" height="1820" alt="Розовые цветы у воды" loading="lazy" data-reveal="decor">
+        <img class="lagoon-offers-photo lagoon-offers-photo--beach" src="../assets/images/img-1920x1080-q85.webp" width="1920" height="1080" alt="Тропический пляж с бирюзовой водой" loading="lazy" data-reveal="decor">
+        <img class="lagoon-offers-photo lagoon-offers-photo--nature" src="../assets/images/img-1024x1820-q85 (22).webp" width="1024" height="1820" alt="Зелёный тропический сад" loading="lazy" data-reveal="decor">
+        <img class="lagoon-offers-map" src="../assets/images/generated-drafts/img-300x300.png" width="300" height="300" alt="" loading="lazy" data-reveal="decor">
+        <img class="lagoon-offers-flight" src="../assets/images/generated-drafts/img-250x188.png" width="250" height="188" alt="" data-reveal="decor">
+      </div>
+    </div>
+  </section>
+  <section class="lagoon-guide" id="phu-quoc-guide" aria-labelledby="phu-quoc-guide-title">
+    <div class="lagoon-guide-palm-layer" aria-hidden="true">
+      <img class="lagoon-guide-palm" src="../assets/images/generated-drafts/img-480x240.png" width="480" height="240" alt="" loading="lazy">
+    </div>
+    <div class="container lagoon-guide-inner" data-reveal-group>
+      <div class="lagoon-guide-art" data-reveal="guide-art">
+        <img class="lagoon-guide-flowers lagoon-guide-flowers--left" src="../assets/images/generated-drafts/img-480x720 (1).png" width="480" height="720" alt="" loading="lazy">
+        <img class="lagoon-guide-flowers lagoon-guide-flowers--right" src="../assets/images/generated-drafts/img-480x720 (2).png" width="480" height="720" alt="" loading="lazy">
+        <img class="lagoon-guide-phone" src="../assets/images/generated-drafts/img-640x800.png" width="640" height="800" alt="Обложка путеводителя по Фукуоку на экране смартфона" loading="lazy">
+      </div>
+      <div class="lagoon-guide-copy">
+        <h2 id="phu-quoc-guide-title" data-reveal="title">Начните с пляжей курорта Фукуока</h2>
+        <p data-reveal="description">Фукуок — тропический остров на юго-западе Вьетнама, в Сиамском заливе. Здесь пляжи с мягким песком, тёплое море и живописная природа. В путеводителе собраны рекомендации, маршруты и полезные детали, которые помогут спланировать отдых.</p>
+        <div class="lagoon-guide-actions">
+          <button class="lagoon-guide-cta lagoon-guide-cta--more" type="button" aria-disabled="true" title="Страница путеводителя готовится" data-reveal="guide-action">Узнать подробнее</button>
+          <button class="lagoon-guide-cta lagoon-guide-cta--buy" type="button" aria-disabled="true" title="Покупка пока недоступна" data-reveal="guide-action">Купить — 999 ₽</button>
+        </div>
+        <div class="lagoon-guide-divider" aria-hidden="true" data-reveal="decor">
+          <img src="../assets/images/generated-drafts/img-128x85.png" width="128" height="85" alt="" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="lagoon-guide lagoon-guide--nha-trang" id="nha-trang-guide" aria-labelledby="nha-trang-guide-title">
+    <div class="container lagoon-guide-inner" data-reveal-group>
+      <div class="lagoon-guide-art" data-reveal="guide-art">
+        <img class="lagoon-guide-flowers lagoon-guide-flowers--left" src="../assets/images/generated-drafts/img-480x720 (3).png" width="480" height="720" alt="" loading="lazy">
+        <img class="lagoon-guide-flowers lagoon-guide-flowers--right" src="../assets/images/generated-drafts/img-480x720 (10).png" width="480" height="720" alt="" loading="lazy">
+        <img class="lagoon-guide-phone" src="../assets/images/generated-drafts/img-480x600.png" width="480" height="600" alt="Обложка путеводителя по Нячангу на экране смартфона" loading="lazy">
+      </div>
+      <div class="lagoon-guide-copy">
+        <h2 id="nha-trang-guide-title" data-reveal="title">Почувствуйте ритм курортного Нячанга</h2>
+        <p data-reveal="description">Нячанг — курортный город на юге центрального Вьетнама, на берегу Южно-Китайского моря. Здесь длинные пляжи соседствуют с оживлёнными улицами, кафе, рынками и интересными местами для поездок. В путеводителе собраны маршруты и полезные рекомендации, которые помогут выбрать район для отдыха и спланировать каждый день.</p>
+        <div class="lagoon-guide-actions">
+          <button class="lagoon-guide-cta lagoon-guide-cta--more" type="button" aria-disabled="true" title="Страница путеводителя готовится" data-reveal="guide-action">Узнать подробнее</button>
+          <button class="lagoon-guide-cta lagoon-guide-cta--buy" type="button" aria-disabled="true" title="Покупка пока недоступна" data-reveal="guide-action">Купить — 999 ₽</button>
+        </div>
+        <div class="lagoon-guide-divider" aria-hidden="true" data-reveal="decor">
+          <img src="../assets/images/generated-drafts/img-128x85.png" width="128" height="85" alt="" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    (() => {
+      const fan = document.querySelector('.lagoon-story-fan');
+      const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+      let framePending = false;
+
+      const update = () => {
+        framePending = false;
+        if (reducedMotion.matches) {
+          fan.style.removeProperty('--fan-progress');
+          return;
+        }
+
+        const start = window.innerHeight * .96;
+        const end = window.innerHeight * .47;
+        const progress = (start - fan.getBoundingClientRect().top) / (start - end);
+        fan.style.setProperty('--fan-progress', Math.min(1, Math.max(0, progress)));
+      };
+
+      const scheduleUpdate = () => {
+        if (framePending) return;
+        framePending = true;
+        requestAnimationFrame(update);
+      };
+
+      window.addEventListener('scroll', scheduleUpdate, { passive: true });
+      window.addEventListener('resize', scheduleUpdate);
+      window.addEventListener('pageshow', scheduleUpdate);
+      reducedMotion.addEventListener('change', scheduleUpdate);
+      update();
+    })();
+
+    (() => {
+      if (!('IntersectionObserver' in window) || !matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+
+      const groups = new Map();
+      const wideLayout = matchMedia('(min-width: 781px)').matches;
+      const observer = new IntersectionObserver(entries => {
+        for (const { target, isIntersecting } of entries) {
+          const elements = groups.get(target);
+          if (!isIntersecting || !elements) continue;
+          observer.unobserve(target);
+          for (const element of elements) {
+            if (element.dataset.revealState === 'pending') element.dataset.revealState = 'shown';
+          }
+          groups.delete(target);
+        }
+      });
+
+      for (const element of document.querySelectorAll('[data-reveal]')) {
+        if (element.contains(document.activeElement)) continue;
+        element.dataset.revealState = 'pending';
+        const target = (wideLayout && element.closest('[data-reveal-group]')) || element;
+        if (!groups.has(target)) groups.set(target, []);
+        groups.get(target).push(element);
+      }
+      for (const target of groups.keys()) observer.observe(target);
+
+      document.addEventListener('focusin', event => {
+        const element = event.target.closest('[data-reveal-state]');
+        if (!element) return;
+        delete element.dataset.revealState;
+      });
+    })();
+
+    (() => {
+      if (!('IntersectionObserver' in window)) return;
+      const cleanupKey = Symbol.for('juliaTravel.offersParallaxCleanup');
+
+      const mount = () => {
+        const composition = document.querySelector('.lagoon-offers-photos');
+        if (!composition) return;
+        composition[cleanupKey]?.();
+
+        const controller = new AbortController();
+        const { signal } = controller;
+        const pointerOptions = { passive: true, signal };
+        const motion = matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
+        const depths = [[10, -6], [-15, 9], [9, 11]];
+        const layers = [...composition.querySelectorAll('.lagoon-offers-photo')].map((element, index) => ({
+          element, depth: depths[index], x: 0, y: 0
+        }));
+        let nearby = false;
+        let strength = 1;
+        let targetX = 0;
+        let targetY = 0;
+        let frame = 0;
+        let lastTime = 0;
+
+        const render = time => {
+          const blend = 1 - Math.exp(-(lastTime ? Math.min(time - lastTime, 40) : 16) / 105);
+          lastTime = time;
+          let moving = false;
+
+          for (const layer of layers) {
+            const goalX = targetX * strength * layer.depth[0];
+            const goalY = targetY * strength * layer.depth[1];
+            layer.x += (goalX - layer.x) * blend;
+            layer.y += (goalY - layer.y) * blend;
+
+            if (Math.hypot(goalX - layer.x, goalY - layer.y) < .04) {
+              layer.x = goalX;
+              layer.y = goalY;
+            } else {
+              moving = true;
+            }
+            layer.element.style.translate = layer.x || layer.y ? `${layer.x}px ${layer.y}px` : '';
+          }
+
+          frame = moving ? requestAnimationFrame(render) : 0;
+          if (!frame) lastTime = 0;
+        };
+
+        const schedule = () => {
+          if (nearby && motion.matches && !frame) frame = requestAnimationFrame(render);
+        };
+        const stopFrame = () => {
+          cancelAnimationFrame(frame);
+          frame = lastTime = 0;
+        };
+        const release = () => {
+          targetX = targetY = 0;
+          schedule();
+        };
+        const reset = () => {
+          stopFrame();
+          targetX = targetY = 0;
+          for (const layer of layers) {
+            layer.x = layer.y = 0;
+            layer.element.style.translate = '';
+          }
+        };
+
+        const visibility = new IntersectionObserver(([entry]) => {
+          nearby = entry.isIntersecting;
+          if (nearby) {
+            strength = Math.min(1, entry.boundingClientRect.width / 420);
+            schedule();
+          } else {
+            stopFrame();
+          }
+        }, { rootMargin: '64px 0px' });
+        visibility.observe(composition);
+
+        const attachment = new MutationObserver(() => {
+          if (!composition.isConnected) cleanup();
+        });
+        attachment.observe(document.body, { childList: true, subtree: true });
+
+        const cleanup = () => {
+          controller.abort();
+          visibility.disconnect();
+          attachment.disconnect();
+          reset();
+          delete composition[cleanupKey];
+        };
+        composition[cleanupKey] = cleanup;
+
+        window.addEventListener('pointermove', event => {
+          if (!motion.matches || event.pointerType !== 'mouse') return;
+          targetX = Math.max(-1, Math.min(1, event.clientX / window.innerWidth * 2 - 1));
+          targetY = Math.max(-1, Math.min(1, event.clientY / window.innerHeight * 2 - 1));
+          schedule();
+        }, pointerOptions);
+        window.addEventListener('pointerout', event => {
+          if (event.pointerType === 'mouse' && event.relatedTarget === null) release();
+        }, pointerOptions);
+        window.addEventListener('pointercancel', release, pointerOptions);
+        window.addEventListener('blur', release, { signal });
+        window.addEventListener('resize', () => {
+          if (nearby) strength = Math.min(1, composition.clientWidth / 420);
+          release();
+        }, pointerOptions);
+        motion.addEventListener('change', () => {
+          if (!motion.matches) reset();
+        }, { signal });
+        window.addEventListener('pagehide', event => {
+          cleanup();
+          if (event.persisted) window.addEventListener('pageshow', mount, { once: true });
+        }, { signal });
+      };
+
+      mount();
     })();
   </script>
 </main>

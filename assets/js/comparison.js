@@ -6,9 +6,11 @@
     const MAX_IMAGES = 3, MAX_BYTES = 5 * 1024 * 1024;
     const $ = id => document.getElementById(id);
     const options = [...document.querySelectorAll('[data-variant]')];
-    const defaultView = 'stan-inspired';
-    const archivedConcepts = new Set(['coral-travel', 'colorful-ocean']);
+    const defaultView = 'emerald-lagoon';
+    const archivedConcepts = new Set(['coral-travel', 'colorful-ocean', 'stan-inspired']);
     const showAll = new URLSearchParams(location.search).get('variants') === 'all';
+    const commentOnly = document.querySelector('.comparison').dataset.reviewFields === 'comment';
+    if (showAll) document.querySelector('.compare-title').textContent = 'Сравните варианты';
     options.forEach(option => {
         option.hidden = !showAll && archivedConcepts.has(option.dataset.variant);
     });
@@ -22,6 +24,7 @@
     let uploadEpoch = 0;
     let saving = false, saved = null, attempt = null;
     const validChoice = value => typeof value === 'string' && Object.hasOwn(names, value);
+    const canChoose = value => validChoice(value) && (showAll || !archivedConcepts.has(value));
     const normalizeReferences = values => {
         const result = (Array.isArray(values) ? values : []).slice(0, 5).map(value => typeof value === 'string' ? value.slice(0, 2048) : '');
         while (result.length < 3) result.push('');
@@ -97,23 +100,24 @@
         } catch { $('draft-status').textContent = 'Браузер не позволяет сохранить черновик. Перед закрытием страницы скопируйте результат.'; }
     };
     const updateSummary = () => {
-        document.querySelector('#choice-status strong').textContent = draft.choice ? names[draft.choice] : 'не выбран';
-        $('choice-check').hidden = !draft.choice;
-        $('summary-choice').textContent = draft.choice ? names[draft.choice] : 'Не выбран';
+        const choice = canChoose(draft.choice) ? draft.choice : null;
+        document.querySelector('#choice-status strong').textContent = choice ? names[choice] : 'не выбран';
+        $('choice-check').hidden = !choice;
+        $('summary-choice').textContent = choice ? names[choice] : 'Не выбран';
         $('summary-comment').textContent = draft.comment.trim() ? 'заполнен' : 'не заполнен';
         $('summary-references').textContent = String(validReferences().length);
         $('summary-images').textContent = String(images.length);
         $('copy-choice').disabled = saving;
-        $('confirm-choice').disabled = saving || viewing === draft.choice;
+        $('confirm-choice').disabled = saving || viewing === choice;
         options.forEach(button => {
-            const selected = button.dataset.variant === draft.choice;
+            const selected = button.dataset.variant === choice;
             button.classList.toggle('is-selected', selected);
             button.setAttribute('aria-label', 'Просмотреть ' + names[button.dataset.variant] + (selected ? '. Выбрано' : ''));
         });
     };
     const changed = () => { resetFeedback(); persist(); updateSummary(); updateAddress(); };
     const view = value => {
-        if (!validChoice(value)) return;
+        if (!canChoose(value)) value = defaultView;
         viewing = value;
         options.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.variant === value)));
         const page = options.find(button => button.dataset.variant === value).dataset.preview;
@@ -274,19 +278,21 @@
     };
     $('copy-choice').addEventListener('click', async () => {
         if (saving) return;
-        if (!draft.choice) { copyMessage.textContent = 'Сначала выберите дизайн кнопкой «Выбрать этот вариант».'; $('confirm-choice').focus(); return; }
-        if (!validateReferences()) return;
+        if (!canChoose(draft.choice)) { copyMessage.textContent = 'Сначала выберите дизайн кнопкой «Выбрать этот вариант».'; $('confirm-choice').focus(); return; }
+        if (!commentOnly && !validateReferences()) return;
         saving = true; updateSummary();
         try {
-            await imageQueue;
-            if ($('image-error').textContent) throw new Error('Проверьте прикреплённые изображения: ' + $('image-error').textContent);
+            if (!commentOnly) {
+                await imageQueue;
+                if ($('image-error').textContent) throw new Error('Проверьте прикреплённые изображения: ' + $('image-error').textContent);
+            }
             const version = revision;
             if (saved?.version === version) { await copySavedLink(saved.url, version); return; }
             api.endpoint(); // Fail clearly before creating a token when storage is unconfigured.
             if (!attempt || attempt.version !== version) attempt = { version, token: api.createToken() };
-            const snapshot = { choice: draft.choice, comment: draft.comment, references: validReferences() };
-            const files = images.map(item => item.file);
-            copyMessage.textContent = 'Сохраняем выбор и изображения…';
+            const snapshot = { choice: draft.choice, comment: draft.comment, references: commentOnly ? [] : validReferences() };
+            const files = commentOnly ? [] : images.map(item => item.file);
+            copyMessage.textContent = commentOnly ? 'Сохраняем выбор…' : 'Сохраняем выбор и изображения…';
             $('copy-choice').textContent = 'Сохранение…';
             let result;
             if (attempt.uncertain) {
