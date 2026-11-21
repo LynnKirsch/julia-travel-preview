@@ -14,6 +14,16 @@
     options.forEach(option => {
         option.hidden = !showAll && archivedConcepts.has(option.dataset.variant);
     });
+    const availableOptions = options.filter(option => !option.hidden);
+    const singleChoice = availableOptions.length === 1 ? availableOptions[0].dataset.variant : null;
+    const confirmChoice = $('confirm-choice'), copyChoice = $('copy-choice');
+    const submitLabel = singleChoice ? 'Отправить комментарий' : 'Скопировать ссылку';
+    confirmChoice.closest('.choice-bar').hidden = Boolean(singleChoice);
+    if (singleChoice) {
+        $('result-title').textContent = 'Отправка комментария';
+        $('summary-choice').hidden = true;
+        $('share-instruction-text').textContent = 'После сохранения вы сможете отправить ссылку на комментарий разработчику в';
+    }
     const frame = $('live-preview');
     const wishes = $('wishes'), references = $('reference-fields');
     const copyMessage = $('copy-message'), copyField = $('copy-field');
@@ -107,8 +117,9 @@
         $('summary-comment').textContent = draft.comment.trim() ? 'заполнен' : 'не заполнен';
         $('summary-references').textContent = String(validReferences().length);
         $('summary-images').textContent = String(images.length);
-        $('copy-choice').disabled = saving;
-        $('confirm-choice').disabled = saving || viewing === choice;
+        copyChoice.disabled = saving;
+        if (!saving) copyChoice.textContent = saved?.version === revision ? 'Скопировать ссылку' : submitLabel;
+        confirmChoice.disabled = Boolean(singleChoice) || saving || viewing === choice;
         options.forEach(button => {
             const selected = button.dataset.variant === choice;
             button.classList.toggle('is-selected', selected);
@@ -127,8 +138,8 @@
         updateSummary();
     };
     options.forEach(button => button.addEventListener('click', () => view(button.dataset.variant)));
-    $('confirm-choice').addEventListener('click', () => {
-        if (saving || draft.choice === viewing) return;
+    confirmChoice.addEventListener('click', () => {
+        if (singleChoice || saving || draft.choice === viewing) return;
         // A new confirmed design starts a fresh review, not a copy of the last one.
         uploadEpoch++;
         draft.choice = viewing;
@@ -267,18 +278,22 @@
             if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
             await navigator.clipboard.writeText(url);
             if (version !== revision) return;
-            copyMessage.textContent = 'Ссылка скопирована. Отправьте её разработчику';
+            copyMessage.textContent = singleChoice
+                ? 'Комментарий сохранён. Ссылка скопирована, её можно отправить разработчику.'
+                : 'Ссылка скопирована. Отправьте её разработчику';
             copyField.hidden = true; $('copy-field-label').hidden = true;
         } catch {
             if (version !== revision) return;
-            copyMessage.textContent = 'Результат сохранён. Браузер не разрешил копирование — скопируйте ссылку из поля ниже.';
+            copyMessage.textContent = (singleChoice ? 'Комментарий сохранён.' : 'Результат сохранён.')
+                + ' Браузер не разрешил копирование. Скопируйте ссылку из поля ниже.';
             copyField.value = url; copyField.rows = 3; copyField.hidden = false; $('copy-field-label').hidden = false;
             copyField.focus(); copyField.select();
         }
     };
-    $('copy-choice').addEventListener('click', async () => {
+    copyChoice.addEventListener('click', async () => {
         if (saving) return;
-        if (!canChoose(draft.choice)) { copyMessage.textContent = 'Сначала выберите дизайн кнопкой «Выбрать этот вариант».'; $('confirm-choice').focus(); return; }
+        const choice = singleChoice || draft.choice;
+        if (!canChoose(choice)) { copyMessage.textContent = 'Сначала выберите дизайн кнопкой «Выбрать этот вариант».'; confirmChoice.focus(); return; }
         if (!commentOnly && !validateReferences()) return;
         saving = true; updateSummary();
         try {
@@ -290,10 +305,10 @@
             if (saved?.version === version) { await copySavedLink(saved.url, version); return; }
             api.endpoint(); // Fail clearly before creating a token when storage is unconfigured.
             if (!attempt || attempt.version !== version) attempt = { version, token: api.createToken() };
-            const snapshot = { choice: draft.choice, comment: draft.comment, references: commentOnly ? [] : validReferences() };
+            const snapshot = { choice, comment: draft.comment, references: commentOnly ? [] : validReferences() };
             const files = commentOnly ? [] : images.map(item => item.file);
-            copyMessage.textContent = commentOnly ? 'Сохраняем выбор…' : 'Сохраняем выбор и изображения…';
-            $('copy-choice').textContent = 'Сохранение…';
+            copyMessage.textContent = singleChoice ? 'Сохраняем комментарий…' : commentOnly ? 'Сохраняем выбор…' : 'Сохраняем выбор и изображения…';
+            copyChoice.textContent = 'Сохранение…';
             let result;
             if (attempt.uncertain) {
                 copyMessage.textContent = 'Проверяем результат предыдущей попытки…';
@@ -317,7 +332,7 @@
             // The capability lives in the fragment: it is not sent to GitHub Pages or in referrers.
             url.hash = 'result=' + result.token;
             if (version !== revision) {
-                copyMessage.textContent = 'Форма изменилась во время сохранения. Нажмите «Скопировать ссылку», чтобы сохранить актуальный результат.';
+                copyMessage.textContent = `Форма изменилась во время сохранения. Нажмите «${submitLabel}», чтобы сохранить актуальный результат.`;
                 return;
             }
             saved = { version, url: url.href };
@@ -325,7 +340,7 @@
         } catch (error) {
             copyMessage.textContent = error.message || 'Не удалось сохранить результат. Повторите попытку; форма остаётся заполненной.';
         } finally {
-            saving = false; $('copy-choice').textContent = 'Скопировать ссылку'; updateSummary();
+            saving = false; updateSummary();
         }
     });
     window.addEventListener('popstate', () => {
