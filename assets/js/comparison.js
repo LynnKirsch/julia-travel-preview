@@ -294,6 +294,11 @@
         if (saving) return;
         const choice = singleChoice || draft.choice;
         if (!canChoose(choice)) { copyMessage.textContent = 'Сначала выберите дизайн кнопкой «Выбрать этот вариант».'; confirmChoice.focus(); return; }
+        if (singleChoice && commentOnly && !draft.comment.trim()) {
+            copyMessage.textContent = 'Введите комментарий перед отправкой.';
+            wishes.focus();
+            return;
+        }
         if (!commentOnly && !validateReferences()) return;
         saving = true; updateSummary();
         try {
