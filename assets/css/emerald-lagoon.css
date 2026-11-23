@@ -1163,6 +1163,15 @@ html:not([data-lagoon-experiment]) :is(.lagoon-story-bio-item:first-child p, .la
     background: #f5efdf;
 }
 .lagoon-materials > .container, .lagoon-blog > .container { width: min(calc(100% - 32px), 1290px); }
+@media (min-width: 1280px) {
+    .lagoon-materials > .container, .lagoon-blog > .container { width: min(calc(100% - 80px), 1340px); }
+    .lagoon-materials-grid, .lagoon-blog-grid {
+        --original-row: min(calc(100vw - 32px), 1290px);
+        --original-gap: clamp(19px, 2.06vw, 30px);
+        grid-template-columns: repeat(3, calc((var(--original-row) - 2 * var(--original-gap)) / 3));
+        column-gap: calc((100% - (var(--original-row) - 2 * var(--original-gap))) / 2);
+    }
+}
 .lagoon-materials-intro, .lagoon-blog-intro {
     position: relative;
     text-align: center;
@@ -1361,7 +1370,8 @@ html:not([data-lagoon-experiment]) :is(.lagoon-story-bio-item:first-child p, .la
 .lagoon-blog {
     position: relative;
     isolation: isolate;
-    padding-block: clamp(66px, 6vw, 86px) clamp(72px, 7vw, 106px);
+    --materials-drop: clamp(24px, 2.5vw, 36px);
+    padding-block: clamp(66px, 6vw, 86px) calc(clamp(72px, 7vw, 106px) + 20px);
     background: #f5efdf;
 }
 .lagoon-blog-decor {
@@ -1383,7 +1393,10 @@ html:not([data-lagoon-experiment]) :is(.lagoon-story-bio-item:first-child p, .la
 }
 .lagoon-blog-grid {
     margin-top: clamp(30px, 3.5vw, 50px);
+    padding-bottom: var(--materials-drop);
 }
+.lagoon-article:nth-child(2) { top: var(--materials-drop); }
+@media (max-width: 760px) { .lagoon-blog { --materials-drop: 0px; } }
 .lagoon-article {
     position: relative;
     isolation: isolate;
@@ -2088,4 +2101,10 @@ html:not([data-lagoon-experiment]) :is(.lagoon-story-bio-item:first-child p, .la
     .lagoon-footer-content > :nth-child(2) { --reveal-delay: 335ms; }
     .lagoon-footer-content > :nth-child(3) { --reveal-delay: 410ms; }
     .lagoon-footer-gallery { --reveal-delay: 485ms; }
+}
+@media (min-width: 1280px) {
+    .lagoon-materials-grid, .lagoon-blog-grid {
+        grid-template-columns: repeat(3, calc((var(--original-row) - 2 * var(--original-gap)) / 3));
+        column-gap: calc((100% - (var(--original-row) - 2 * var(--original-gap))) / 2);
+    }
 }
