@@ -1,29 +1,17 @@
 /* Review drafts stay local; sharing requires confirmed server persistence. */
 (() => {
     const names = window.JuliaTravelConceptNames;
-    const draftKey = 'julia-travel:design-review:v2';
-    const legacyKey = 'julia-travel:palette-choice:v1';
+    const draftKey = 'julia-travel:design-review:minimal-julia:v1';
     const MAX_IMAGES = 3, MAX_BYTES = 5 * 1024 * 1024;
     const $ = id => document.getElementById(id);
     const options = [...document.querySelectorAll('[data-variant]')];
-    const defaultView = 'emerald-lagoon';
-    const archivedConcepts = new Set(['coral-travel', 'colorful-ocean', 'stan-inspired']);
-    const showAll = new URLSearchParams(location.search).get('variants') === 'all';
+    const defaultView = 'minimal-julia';
     const commentOnly = document.querySelector('.comparison').dataset.reviewFields === 'comment';
-    if (showAll) document.querySelector('.compare-title').textContent = 'Сравните варианты';
-    options.forEach(option => {
-        option.hidden = !showAll && archivedConcepts.has(option.dataset.variant);
-    });
-    const availableOptions = options.filter(option => !option.hidden);
-    const singleChoice = availableOptions.length === 1 ? availableOptions[0].dataset.variant : null;
+    options.forEach(option => { option.hidden = option.dataset.variant !== defaultView; });
     const confirmChoice = $('confirm-choice'), copyChoice = $('copy-choice');
-    const submitLabel = singleChoice ? 'Отправить комментарий' : 'Скопировать ссылку';
-    confirmChoice.closest('.choice-bar').hidden = Boolean(singleChoice);
-    if (singleChoice) {
-        $('result-title').textContent = 'Отправка комментария';
-        $('summary-choice').hidden = true;
-        $('share-instruction-text').textContent = 'После сохранения вы сможете отправить ссылку на комментарий разработчику в';
-    }
+    const submitLabel = 'Отправить комментарий';
+    $('result-title').textContent = 'Отправка комментария';
+    $('share-instruction-text').textContent = 'После сохранения вы сможете отправить ссылку на комментарий разработчику в';
     const frame = $('live-preview');
     const wishes = $('wishes'), references = $('reference-fields');
     const copyMessage = $('copy-message'), copyField = $('copy-field');
@@ -33,53 +21,23 @@
     let imageQueue = Promise.resolve();
     let uploadEpoch = 0;
     let saving = false, saved = null, attempt = null;
-    const validChoice = value => typeof value === 'string' && Object.hasOwn(names, value);
-    const canChoose = value => validChoice(value) && (showAll || !archivedConcepts.has(value));
+    const canChoose = value => value === defaultView;
     const normalizeReferences = values => {
         const result = (Array.isArray(values) ? values : []).slice(0, 5).map(value => typeof value === 'string' ? value.slice(0, 2048) : '');
         while (result.length < 3) result.push('');
         return result;
     };
     const restoreDraft = () => {
-        let saved = {}, legacy = null;
-        try { saved = JSON.parse(localStorage.getItem(draftKey) || '{}') || {}; legacy = localStorage.getItem(legacyKey); } catch { /* Empty draft when storage is unavailable. */ }
-        const params = new URLSearchParams(location.search);
-        const hashChoice = location.hash.slice(1);
-        const incoming = params.has('choice') ? params.get('choice') : (validChoice(hashChoice) || hashChoice === 'tropical-glass' ? hashChoice : (Object.hasOwn(saved, 'choice') ? saved.choice : legacy));
-        // Existing form drafts/links select the replacement; immutable saved
-        // results keep Tropical Glass's original name and colors in review-api.
-        const candidate = incoming === 'tropical-glass' ? 'stan-inspired' : incoming;
-        const comment = params.has('comment') ? params.get('comment') : saved.comment;
+        let saved = {};
+        try { saved = JSON.parse(localStorage.getItem(draftKey) || '{}') || {}; } catch { /* Empty draft. */ }
         return {
-            choice: validChoice(candidate) ? candidate : null,
-            comment: typeof comment === 'string' ? comment.slice(0, 1000) : '',
-            references: normalizeReferences(params.has('ref') ? params.getAll('ref') : saved.references)
+            choice: null,
+            comment: typeof saved.comment === 'string' ? saved.comment.slice(0, 1000) : '',
+            references: normalizeReferences(saved.references)
         };
     };
     const draft = restoreDraft();
-    // Start a fresh public review round once per browser.
-    // Clear only the browser draft; immutable results in Supabase are untouched.
-    try {
-        const resetKey = 'julia-travel:review-form-reset:v3';
-        if (!localStorage.getItem(resetKey)) {
-            draft.choice = null;
-            draft.comment = '';
-            draft.references = normalizeReferences([]);
-            localStorage.removeItem(legacyKey);
-            localStorage.setItem(draftKey, JSON.stringify(draft));
-            const url = new URL(location.href);
-            url.searchParams.delete('choice');
-            url.searchParams.delete('comment');
-            url.searchParams.delete('ref');
-            const hashChoice = url.hash.slice(1);
-            if (validChoice(hashChoice) || hashChoice === 'tropical-glass') url.hash = '';
-            try {
-                if (url.href !== location.href) history.replaceState(null, '', url.href);
-            } catch { /* Some browsers restrict history updates. */ }
-            localStorage.setItem(resetKey, '1');
-        }
-    } catch { /* The review remains usable without browser storage. */ }
-        const referenceURL = value => {
+    const referenceURL = value => {
         const text = value.trim();
         if (!text || !/^https?:\/\//i.test(text)) return null;
         try { const url = new URL(text); return ['http:', 'https:'].includes(url.protocol) && url.hostname && !url.username && !url.password ? url : null; } catch { return null; }
@@ -92,20 +50,10 @@
         copyField.value = '';
         $('copy-field-label').hidden = true;
     };
-    const updateAddress = () => {
-        if (!draft.choice) return;
-        const url = new URL(location.href);
-        url.searchParams.set('choice', draft.choice);
-        // Remove legacy text parameters; durable sharing uses result.html and an opaque token.
-        url.searchParams.delete('comment'); url.searchParams.delete('ref');
-        try { if (url.href !== location.href) history.replaceState(null, '', url.href); }
-        catch { /* Some browsers restrict history updates. */ }
-    };
     const persist = () => {
         // Only text and the final choice are saved. Files, names and Object URLs never enter storage.
         try {
             localStorage.setItem(draftKey, JSON.stringify(draft));
-            if (draft.choice) localStorage.setItem(legacyKey, draft.choice);
             $('draft-status').textContent = '';
         } catch { $('draft-status').textContent = 'Браузер не позволяет сохранить черновик. Перед закрытием страницы скопируйте результат.'; }
     };
@@ -119,14 +67,14 @@
         $('summary-images').textContent = String(images.length);
         copyChoice.disabled = saving;
         if (!saving) copyChoice.textContent = saved?.version === revision ? 'Скопировать ссылку' : submitLabel;
-        confirmChoice.disabled = Boolean(singleChoice) || saving || viewing === choice;
+        confirmChoice.disabled = saving || viewing === choice;
         options.forEach(button => {
             const selected = button.dataset.variant === choice;
             button.classList.toggle('is-selected', selected);
             button.setAttribute('aria-label', 'Просмотреть ' + names[button.dataset.variant] + (selected ? '. Выбрано' : ''));
         });
     };
-    const changed = () => { resetFeedback(); persist(); updateSummary(); updateAddress(); };
+    const changed = () => { resetFeedback(); persist(); updateSummary(); };
     const view = value => {
         if (!canChoose(value)) value = defaultView;
         viewing = value;
@@ -139,24 +87,8 @@
     };
     options.forEach(button => button.addEventListener('click', () => view(button.dataset.variant)));
     confirmChoice.addEventListener('click', () => {
-        if (singleChoice || saving || draft.choice === viewing) return;
-        // A new confirmed design starts a fresh review, not a copy of the last one.
-        uploadEpoch++;
+        if (saving || draft.choice === viewing) return;
         draft.choice = viewing;
-        draft.comment = '';
-        draft.references = normalizeReferences([]);
-        wishes.value = '';
-        resizeComment();
-        renderReferences();
-        images.forEach(image => URL.revokeObjectURL(image.url));
-        images.length = 0;
-        imageInput.value = '';
-        replaceInput.value = '';
-        replaceId = null;
-        $('image-error').textContent = '';
-        renderImages();
-        saved = null;
-        attempt = null;
         changed();
     });
     const resizeComment = () => {
@@ -278,13 +210,13 @@
             if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
             await navigator.clipboard.writeText(url);
             if (version !== revision) return;
-            copyMessage.textContent = singleChoice
+            copyMessage.textContent = canChoose(draft.choice)
                 ? 'Комментарий сохранён. Ссылка скопирована, её можно отправить разработчику.'
                 : 'Ссылка скопирована. Отправьте её разработчику';
             copyField.hidden = true; $('copy-field-label').hidden = true;
         } catch {
             if (version !== revision) return;
-            copyMessage.textContent = (singleChoice ? 'Комментарий сохранён.' : 'Результат сохранён.')
+            copyMessage.textContent = (canChoose(draft.choice) ? 'Комментарий сохранён.' : 'Результат сохранён.')
                 + ' Браузер не разрешил копирование. Скопируйте ссылку из поля ниже.';
             copyField.value = url; copyField.rows = 3; copyField.hidden = false; $('copy-field-label').hidden = false;
             copyField.focus(); copyField.select();
@@ -292,9 +224,9 @@
     };
     copyChoice.addEventListener('click', async () => {
         if (saving) return;
-        const choice = singleChoice || draft.choice;
+        const choice = draft.choice;
         if (!canChoose(choice)) { copyMessage.textContent = 'Сначала выберите дизайн кнопкой «Выбрать этот вариант».'; confirmChoice.focus(); return; }
-        if (singleChoice && commentOnly && !draft.comment.trim()) {
+        if (!draft.comment.trim()) {
             copyMessage.textContent = 'Введите комментарий перед отправкой.';
             wishes.focus();
             return;
@@ -312,7 +244,7 @@
             if (!attempt || attempt.version !== version) attempt = { version, token: api.createToken() };
             const snapshot = { choice, comment: draft.comment, references: commentOnly ? [] : validReferences() };
             const files = commentOnly ? [] : images.map(item => item.file);
-            copyMessage.textContent = singleChoice ? 'Сохраняем комментарий…' : commentOnly ? 'Сохраняем выбор…' : 'Сохраняем выбор и изображения…';
+            copyMessage.textContent = canChoose(draft.choice) ? 'Сохраняем комментарий…' : commentOnly ? 'Сохраняем выбор…' : 'Сохраняем выбор и изображения…';
             copyChoice.textContent = 'Сохранение…';
             let result;
             if (attempt.uncertain) {

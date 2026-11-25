@@ -4,10 +4,12 @@
         'colorful-ocean': { name: JuliaTravelConceptNames['colorful-ocean'], colors: ['#397EF5', '#6646D9', '#00B8A9', '#50D9AC', '#F1F5FF'] },
         'tropical-glass': { name: 'Tropical Glass', colors: ['#007F80', '#00C6B5', '#FFB82E', '#17333D', '#FFF5E5'] },
         'stan-inspired': { name: JuliaTravelConceptNames['stan-inspired'], colors: ['#6255FF', '#EEECFF', '#FFFFFF', '#17172B', '#4258E8', '#F7F7FB'] },
+        'minimal-julia': { name: JuliaTravelConceptNames['minimal-julia'], colors: ['#F5F7F1', '#EEF3E9', '#E7F1E3', '#FFFFFF', '#173D32', '#285D46', '#D5EBCF', '#95F27E'] },
         'emerald-lagoon': { name: JuliaTravelConceptNames['emerald-lagoon'], colors: ['#103F38', '#FFF9EC', '#CEE6C3', '#153B32', '#DFC69D', '#F5EFDF', '#D4DED2'] }
     });
     const tokenPattern = /^[A-Za-z0-9_-]{43}$/;
-    const endpoint = () => {        const value = window.JuliaTravelReviewConfig?.apiBaseUrl;
+    const endpoint = () => {
+        const value = window.JuliaTravelReviewConfig?.apiBaseUrl;
         if (!value) throw new Error('Хранилище ещё не настроено. Ссылка не создана. Все поля и изображения остаются в форме; повторите попытку после подключения хранилища.');
         const url = new URL(value);
         if (url.protocol !== 'https:') throw new Error('Неверный адрес хранилища. Обратитесь к разработчику.');

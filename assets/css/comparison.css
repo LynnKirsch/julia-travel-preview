@@ -24,6 +24,8 @@ h1 { font-size: clamp(28px,3.1vw,40px); line-height: 1.16; letter-spacing: -.035
 .variant-option.is-selected { border-color: #007b6b; box-shadow: 0 0 0 1px #007b6b; background: #eefaf6; }
 .palette { display: inline-flex; flex-wrap: nowrap; gap: 7px; }
 .palette i { display: block; flex: 0 0 auto; width: 20px; height: 20px; border: 1px solid #00000028; border-radius: 50%; background: var(--color); }
+[data-variant="minimal-julia"] .palette { grid-row: auto; flex-wrap: wrap; }
+.palette-label { grid-column: 1; color: var(--muted); font-size: 13px; }
 .variant-state { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 10px; font-size: 12px; font-weight: 600; min-height: 18px; }
 .viewing-mark { color: #3157bc; visibility: hidden; }
 [aria-pressed="true"] .viewing-mark { visibility: visible; }
