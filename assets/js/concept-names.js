@@ -4,5 +4,5 @@ globalThis.JuliaTravelConceptNames = Object.freeze({
     'colorful-ocean': '02. Океан красок',
     'stan-inspired': '03. Тропический импульс',
     'emerald-lagoon': '04. Изумрудная лагуна',
-    'minimal-julia': 'Вариант № 05'
+    'minimal-julia': 'Зелёный минимализм'
 });
