@@ -195,8 +195,11 @@
 .product > :last-child { grid-column: 6 / span 7; }
 .product ul { list-style: none; padding-inline-start: 0; }
 .product li {
+  display: grid;
+  align-items: center;
+  min-height: 21px;
   padding-inline-start: 32px;
-  background: url("../images/generated-drafts/img-80x80.png") left .16em / 21px 21px no-repeat;
+  background: url("../images/generated-drafts/img-80x80.png") left center / 21px 21px no-repeat;
 }
 .guide-purchase, .mini-purchase { align-items: center; }
 .guide-purchase strong, .mini-purchase strong { white-space: nowrap; }
