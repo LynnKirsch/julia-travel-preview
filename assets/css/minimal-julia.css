@@ -382,13 +382,15 @@
     column-gap: var(--reference-gap);
     justify-content: space-between;
   }
-  .offers-cards { max-width: none; }
-  .destination-cards {
+  .offers-cards, .destination-cards {
     --materials-drop: clamp(24px, 2.5vw, 36px);
     max-width: none;
     padding-bottom: var(--materials-drop);
   }
-  .destination-cards > :nth-child(2) { top: var(--materials-drop); }
+  :is(.offers-cards, .destination-cards) > :nth-child(2) {
+    position: relative;
+    top: var(--materials-drop);
+  }
 }
 
 @media (min-width: 721px) {
