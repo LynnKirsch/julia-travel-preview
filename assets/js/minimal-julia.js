@@ -2,14 +2,16 @@
 (() => {
   const motion = matchMedia('(prefers-reduced-motion: no-preference)');
   if (!('IntersectionObserver' in window) || !motion.matches) return;
-  const selector = '.v5-section :is(h2,h3,p,li,a,button,strong), .lagoon-faq :is(h2,p,summary,a,button), .lagoon-footer :is(h2,h3,p,li,a,button), .site-header :is(a,button), .hero [data-reveal]';
-  const candidates = [...document.querySelectorAll(selector)];
-  const elements = candidates.filter(element => {
-    if (element.closest('.hero')) return true;
-    if (element.matches('li') && element.querySelector('a,button')) return false;
-    if (element.parentElement.closest('h1,h2,h3,p,a,button,summary,strong')) return false;
-    return element.textContent.trim() || element.matches('button');
+  const textAndControls = ':is(h1,h2,h3,p,li,a,button,input,strong,summary,time,.media-badge,.lagoon-reading-time,.lagoon-offers-number)';
+  const selector = `:is(main,.lagoon-footer,.preview-toolbar) ${textAndControls}, .hero [data-reveal], .preview-toolbar > span`;
+  const elements = [...document.querySelectorAll(selector)].filter(element => {
+    if (element.closest('.hero')) return element.hasAttribute('data-reveal');
+    if (element.matches('li') && element.querySelector('a,button,h3')) return false;
+    if (element.parentElement.closest('h1,h2,h3,p,a,button,summary,strong,time')) return false;
+    return element.textContent.trim() || element.matches('button,input');
   });
+  const groups = 'article,details,.lagoon-review-card,.lagoon-faq-intro,.lagoon-footer-intro,.lagoon-footer-brand,.lagoon-footer-nav,.lagoon-footer-contacts,.lagoon-reviews-controls,.section-action,.lagoon-materials-actions,form,.header-inner,header,section';
+  const rows = '.offers-cards,.destination-cards,.mini,.lagoon-materials-grid,.lagoon-blog-grid,.lagoon-reviews-track,.lagoon-faq-questions,.lagoon-footer-content';
   const counts = new Map();
   const observer = new IntersectionObserver(entries => {
     for (const entry of entries) {
@@ -17,24 +19,32 @@
       entry.target.dataset.revealState = 'shown';
       observer.unobserve(entry.target);
     }
-  }, { rootMargin: '0px 0px 80px' });
+  });
+  const revealFocused = element => {
+    const target = element.closest('[data-reveal-state]');
+    if (!target) return;
+    delete target.dataset.revealState;
+    observer.unobserve(target);
+  };
   elements.forEach(element => {
     if (!element.closest('.hero')) {
-      const group = element.closest('.card,.product,.lagoon-footer-brand,.lagoon-footer-nav,.lagoon-footer-contacts,.lagoon-faq-questions,header,section') || element.parentElement;
+      const group = element.closest(groups) || element.parentElement;
       const index = counts.get(group) || 0;
+      const position = group.parentElement.matches(rows)
+        ? [...group.parentElement.children].indexOf(group)
+        : 0;
+      const offset = group.matches('article,details,.lagoon-review-card,.lagoon-reviews-controls,.section-action,.lagoon-materials-actions') ? 110 : 0;
       counts.set(group, index + 1);
       element.classList.add('cascade-reveal');
-      element.style.setProperty('--cascade-delay', `${Math.min(index, 5) * 90}ms`);
+      element.style.setProperty('--cascade-delay', `${Math.min(offset + position * 70 + index * 85, 460)}ms`);
       if (!element.dataset.reveal) element.dataset.reveal = 'cascade-item';
     }
-    if (!element.contains(document.activeElement)) element.dataset.revealState = 'pending';
-    observer.observe(element);
+    if (!element.contains(document.activeElement)) {
+      element.dataset.revealState = 'pending';
+      observer.observe(element);
+    }
   });
-  document.addEventListener('focusin', event => {
-    const element = event.target.closest('[data-reveal-state]');
-    if (element) delete element.dataset.revealState;
-    if (element) observer.unobserve(element);
-  });
+  document.addEventListener('focusin', event => revealFocused(event.target));
   motion.addEventListener('change', () => {
     if (motion.matches) return;
     observer.disconnect();
@@ -42,25 +52,49 @@
   });
 })();
 
-// Desktop reveals scrolling inside a fixed card; smaller screens show complete reviews.
+// The reviews use the same scroll-snap layout and expandable quotes as concept 04.
 (() => {
-  const compact = matchMedia('(max-width: 1024px)');
-  const items = document.querySelectorAll('#traveler-reviews .card');
-  items.forEach(item => {
-    const button = item.querySelector('.review-toggle');
+  const track = document.querySelector('.lagoon-reviews-track');
+  const previous = document.querySelector('[data-review-step="-1"]');
+  const next = document.querySelector('[data-review-step="1"]');
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+  const updateControls = () => {
+    const available = track.scrollWidth - track.clientWidth;
+    previous.disabled = track.scrollLeft < 2;
+    next.disabled = available - track.scrollLeft < 2;
+    track.tabIndex = available > 1 ? 0 : -1;
+  };
+  for (const button of [previous, next]) {
     button.addEventListener('click', () => {
-      const expanded = button.getAttribute('aria-expanded') !== 'true';
-      button.setAttribute('aria-expanded', String(expanded));
-      button.textContent = expanded ? 'Свернуть' : 'Читать полностью';
-      item.classList.toggle('is-expanded', expanded);
-      if (!expanded) item.querySelector('.review-full').scrollTop = 0;
+      const step = track.children[1].offsetLeft - track.children[0].offsetLeft;
+      const position = Math.round(track.scrollLeft / step) + Number(button.dataset.reviewStep);
+      track.scrollTo({ left: position * step, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
     });
-  });
-  compact.addEventListener('change', () => items.forEach(item => {
-    item.classList.remove('is-expanded');
-    const button = item.querySelector('.review-toggle');
-    button.setAttribute('aria-expanded', 'false');
-    button.textContent = 'Читать полностью';
-    item.querySelector('.review-full').scrollTop = 0;
-  }));
+  }
+  for (const button of track.querySelectorAll('.lagoon-review-toggle')) {
+    const quote = document.getElementById(button.getAttribute('aria-controls'));
+    const full = quote.querySelector('.lagoon-review-full');
+    button.addEventListener('click', () => {
+      const expanded = full.hidden;
+      full.hidden = !expanded;
+      quote.scrollTop = 0;
+      button.setAttribute('aria-expanded', String(expanded));
+      button.textContent = expanded ? 'Свернуть отзыв' : 'Читать весь отзыв';
+      if (expanded) {
+        quote.tabIndex = 0;
+        quote.focus({ preventScroll: true });
+      } else {
+        quote.removeAttribute('tabindex');
+      }
+    });
+  }
+  track.addEventListener('scroll', updateControls, { passive: true });
+  new ResizeObserver(updateControls).observe(track);
+  updateControls();
 })();
+
+document.querySelector('.lagoon-footer-form').addEventListener('submit', event => {
+  event.preventDefault();
+  event.currentTarget.querySelector('[role="status"]').textContent = 'Отправка пока недоступна.';
+});
