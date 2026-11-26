@@ -100,7 +100,7 @@
   .hero [data-reveal="hero-action-first"] { --reveal-delay:240ms; }
   .hero [data-reveal="hero-action-second"] { --reveal-delay:360ms; }
   .cascade-reveal[data-reveal-state="shown"] { --reveal-duration:600ms; --reveal-offset:14px; --reveal-delay:var(--cascade-delay,0ms); }
-  :is(button, .v5-button, .lagoon-contact, .lagoon-actions a, .lagoon-guide-cta)[data-reveal-state="shown"] {
+  :is(button, .v5-button, .lagoon-contact, .lagoon-actions a, .lagoon-guide-cta, .lagoon-destination-more)[data-reveal-state="shown"] {
     transform-origin: center;
     animation-name: lagoon-button-reveal;
     animation-duration: 360ms;
@@ -357,6 +357,11 @@
 .destination-cards .lagoon-destination-more {
   width: 100%;
   margin-top: clamp(4px, .6vw, 12px);
+}
+.destination-cards a.lagoon-destination-more {
+  display: grid;
+  place-items: center;
+  text-decoration: none;
 }
 .destination-cards > :nth-child(2) { --destination-button-bg: #f3d477; }
 .destination-cards > :nth-child(3) { --destination-button-bg: var(--lagoon-sand); }

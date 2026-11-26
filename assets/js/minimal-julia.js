@@ -11,7 +11,7 @@
     return element.textContent.trim() || element.matches('button,input');
   });
   const groups = 'article,details,.lagoon-review-card,.lagoon-faq-intro,.lagoon-footer-intro,.lagoon-footer-brand,.lagoon-footer-nav,.lagoon-footer-contacts,.lagoon-reviews-controls,.section-action,.lagoon-materials-actions,form,.header-inner,header,section';
-  const rows = '.offers-cards,.destination-cards,.mini,.lagoon-materials-grid,.lagoon-blog-grid,.lagoon-reviews-track,.lagoon-faq-questions,.lagoon-footer-content';
+  const rows = '.offers-cards,.destination-cards,.mini,.lagoon-materials-grid,.lagoon-blog-grid,.lagoon-reviews-track,.lagoon-faq-questions,.lagoon-footer-content,.phu-planning-grid,.phu-routes-grid';
   const counts = new Map();
   const observer = new IntersectionObserver(entries => {
     for (const entry of entries) {
@@ -55,6 +55,7 @@
 // The reviews use the same scroll-snap layout and expandable quotes as concept 04.
 (() => {
   const track = document.querySelector('.lagoon-reviews-track');
+  if (!track) return;
   const previous = document.querySelector('[data-review-step="-1"]');
   const next = document.querySelector('[data-review-step="1"]');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -94,7 +95,7 @@
   updateControls();
 })();
 
-document.querySelector('.lagoon-footer-form').addEventListener('submit', event => {
+document.querySelector('.lagoon-footer-form')?.addEventListener('submit', event => {
   event.preventDefault();
   event.currentTarget.querySelector('[role="status"]').textContent = 'Отправка пока недоступна.';
 });

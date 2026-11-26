@@ -1,0 +1,147 @@
+.phu-quoc-page {
+  --phu-section-copy: clamp(16px, 1.38vw, 20px);
+  --phu-card-inset: clamp(24px, 2.5vw, 56px);
+}
+
+.phu-quoc-page .phu-site-header {
+  padding-block: clamp(12px, 1.4vw, 24px);
+  background: var(--lagoon-deep);
+  color: var(--lagoon-white);
+}
+.phu-quoc-page .header-inner { width: var(--section-width); max-width: none; }
+.phu-quoc-page .phu-site-header a:focus-visible { outline-color: var(--lagoon-white); }
+.phu-quoc-page .phu-site-header .lagoon-contact:hover { border-color: transparent; }
+
+.phu-quoc-page .phu-crumbs { padding-block-start: clamp(18px, 2.25vw, 42px); }
+.phu-quoc-page .phu-crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 13px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: clamp(13px, 1vw, 17px);
+}
+.phu-quoc-page .phu-crumbs li + li::before { content: "/" / ""; margin-inline-end: 13px; opacity: .56; }
+.phu-quoc-page .phu-crumbs li[aria-current] { font-weight: 700; }
+
+.phu-quoc-page .phu-hero {
+  padding-block-start: clamp(24px, 3.1vw, 72px);
+}
+.phu-quoc-page .phu-hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.04fr);
+  align-items: center;
+  gap: clamp(26px, 4.5vw, 116px);
+}
+.phu-quoc-page .phu-eyebrow {
+  margin-block-end: 12px;
+  font-size: clamp(12px, .88vw, 17px);
+  font-weight: 750;
+  letter-spacing: .1em;
+}
+.phu-quoc-page .phu-hero h1 {
+  max-width: 17ch;
+  font-size: clamp(37px, 4.25vw, 104px);
+  line-height: 1.04;
+  text-wrap: balance;
+}
+.phu-quoc-page .phu-hero h1::after {
+  content: "";
+  display: block;
+  width: clamp(110px, 13vw, 205px);
+  height: clamp(9px, 1.05vw, 16px);
+  margin-block: .28em .34em;
+  background: var(--heading-stroke-color);
+  mask: var(--heading-stroke) center / 100% 100% no-repeat;
+}
+.phu-quoc-page .phu-intro, .phu-quoc-page .phu-section-intro > p {
+  max-width: 70ch;
+  font-size: var(--phu-section-copy);
+  line-height: 1.55;
+}
+.phu-quoc-page .phu-actions { gap: 12px; margin-block-start: clamp(22px, 2.6vw, 54px); }
+.phu-quoc-page .v5-button { gap: .5em; max-width: 100%; }
+.phu-quoc-page .phu-secondary { background: #cee6c3; border-color: transparent; }
+.phu-quoc-page .phu-secondary:is(:hover, :focus-visible) { background: var(--lagoon-deep); color: var(--lagoon-white); }
+.phu-quoc-page .v5-button[aria-disabled="true"] { cursor: default; }
+.phu-quoc-page .phu-hero-media { align-self: center; }
+.phu-quoc-page .phu-hero-media img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+}
+.phu-quoc-page .phu-credit { margin-block-start: 12px; color: #50614c; font-size: 12px; }
+.phu-quoc-page .phu-credit a { text-decoration: underline; text-underline-offset: .18em; }
+
+.phu-quoc-page .phu-section-intro { text-align: center; margin-block-end: clamp(28px, 3.6vw, 84px); }
+.phu-quoc-page .phu-section-intro > p { margin-inline: auto; }
+.phu-quoc-page .phu-planning-grid, .phu-quoc-page .phu-routes-grid {
+  display: grid;
+  gap: var(--v5-gap);
+}
+.phu-quoc-page .phu-planning-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.phu-quoc-page .phu-planning-card {
+  padding: var(--phu-card-inset);
+  background: color-mix(in srgb, var(--lagoon-white) 58%, #cee6c3);
+}
+.phu-quoc-page .phu-planning-card .lagoon-offers-number {
+  width: clamp(45px, 4.5vw, 68px);
+  margin-block-end: 8px;
+}
+.phu-quoc-page .phu-planning-card:nth-child(2) { background: color-mix(in srgb, var(--lagoon-white) 76%, #f3d477); }
+.phu-quoc-page .phu-planning-card:nth-child(2) .lagoon-offers-number { background: #f3d477; }
+.phu-quoc-page .phu-planning-card:nth-child(3) { background: color-mix(in srgb, var(--lagoon-white) 72%, var(--lagoon-sand)); }
+.phu-quoc-page .phu-planning-card:nth-child(3) .lagoon-offers-number { background: var(--lagoon-sand); }
+
+.phu-quoc-page .phu-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  justify-items: start;
+  gap: clamp(24px, 4vw, 100px);
+  padding: clamp(26px, 4.3vw, 104px);
+  border: 1px solid var(--lagoon-white);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+}
+.phu-quoc-page .phu-panel h2 { max-width: 25ch; }
+.phu-quoc-page .phu-panel h2::after { margin-inline: 0; }
+.phu-quoc-page .phu-panel--mini { background: color-mix(in srgb, var(--lagoon-white) 65%, #cee6c3); }
+.phu-quoc-page .phu-panel--guide { background: var(--lagoon-deep); color: var(--lagoon-white); --heading-stroke-color: #a8c89a; }
+.phu-quoc-page .phu-panel--guide .v5-button:hover { background: var(--lagoon-white); color: var(--lagoon-deep); }
+.phu-quoc-page .phu-panel--guide .v5-button:focus-visible { outline-color: var(--lagoon-white); }
+.phu-quoc-page .phu-panel--help { background: color-mix(in srgb, var(--lagoon-white) 80%, #f3d477); }
+.phu-quoc-page .phu-guide-action { display: grid; justify-items: start; gap: 12px; }
+
+.phu-quoc-page .phu-routes-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.phu-quoc-page .phu-route { padding: 0; gap: 0; overflow: hidden; }
+.phu-quoc-page .phu-route-media { aspect-ratio: 16 / 9; overflow: hidden; }
+.phu-quoc-page .phu-route-media img { width: 100%; height: 100%; object-fit: cover; }
+.phu-quoc-page .phu-route:first-child img { object-position: center 55%; }
+.phu-quoc-page .phu-route-copy { display: grid; flex: 1; grid-template-rows: auto 1fr auto; gap: 14px; padding: var(--phu-card-inset); }
+.phu-quoc-page .phu-route-copy > p { font-size: var(--card-copy); line-height: 1.38; }
+.phu-quoc-page .phu-route-action { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-block-start: 8px; }
+.phu-quoc-page :is(.phu-route-action, .phu-guide-action) strong { font-size: clamp(20px, 1.65vw, 40px); white-space: nowrap; }
+
+.phu-quoc-page .lagoon-footer-content { border-top: 1px solid #cdd5b8; }
+.phu-quoc-page #contact { scroll-margin-block-start: 24px; }
+
+@media (max-width: 900px) {
+  .phu-quoc-page .phu-panel { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .phu-quoc-page .phu-hero-layout, .phu-quoc-page .phu-planning-grid { grid-template-columns: minmax(0, 1fr); }
+  .phu-quoc-page .phu-hero h1 { max-width: none; }
+  .phu-quoc-page .phu-hero-media img { aspect-ratio: 4 / 3; }
+}
+@media (max-width: 640px) {
+  .phu-quoc-page .phu-routes-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (min-width: 1920px) {
+  .phu-quoc-page { --phu-section-copy: var(--wide-copy); }
+}

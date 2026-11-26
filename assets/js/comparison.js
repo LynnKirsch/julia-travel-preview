@@ -13,6 +13,8 @@
     $('result-title').textContent = 'Отправка комментария';
     $('share-instruction-text').textContent = 'После сохранения вы сможете отправить ссылку на комментарий разработчику в';
     const frame = $('live-preview');
+    const previewPages = [...document.querySelectorAll('[data-preview-src]')];
+    let previewPage = previewPages[0];
     const wishes = $('wishes'), references = $('reference-fields');
     const copyMessage = $('copy-message'), copyField = $('copy-field');
     const imageInput = $('image-input'), replaceInput = $('replace-image-input');
@@ -75,14 +77,30 @@
         });
     };
     const changed = () => { resetFeedback(); persist(); updateSummary(); };
+    const renderPreviewPage = page => {
+        previewPage = page;
+        previewPages.forEach(button => button.setAttribute('aria-pressed', String(button === page)));
+        $('preview-page-title').textContent = page.dataset.previewTitle;
+        frame.title = 'Julia Travel: ' + page.dataset.previewTitle;
+        $('full-preview').href = page.dataset.previewSrc;
+    };
+    previewPages.forEach(page => page.addEventListener('click', () => {
+        if (page === previewPage) return;
+        renderPreviewPage(page);
+        frame.src = page.dataset.previewSrc + '?embed=1';
+    }));
+    frame.addEventListener('load', () => {
+        try {
+            const current = frame.contentWindow.location.pathname;
+            const page = previewPages.find(button => new URL(button.dataset.previewSrc, location.href).pathname === current);
+            if (page) renderPreviewPage(page);
+        } catch { /* An external page cannot change the selected preview. */ }
+    });
     const view = value => {
         if (!canChoose(value)) value = defaultView;
         viewing = value;
         options.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.variant === value)));
-        const page = options.find(button => button.dataset.variant === value).dataset.preview;
-        if (frame.getAttribute('src') !== page + '?embed=1') frame.src = page + '?embed=1';
-        frame.title = 'Julia Travel: ' + names[value];
-        $('full-preview').href = page;
+        renderPreviewPage(previewPage);
         updateSummary();
     };
     options.forEach(button => button.addEventListener('click', () => view(button.dataset.variant)));
