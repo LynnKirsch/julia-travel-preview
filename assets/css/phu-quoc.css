@@ -557,3 +557,17 @@ html.phu-lqip .phu-quoc-page .phu-hero-shell.phu-hero-loaded .phu-hero-photo {
     rgba(15, 58, 50, 0) 100%
   );
 }
+
+
+/* Blog category pills lighten on card hover. */
+.phu-quoc-page #useful-articles .lagoon-article-panel .lagoon-reading-time {
+  transition: background-color .3s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .phu-quoc-page #useful-articles .lagoon-article:hover .lagoon-reading-time {
+    background-color: #fff9ec;
+  }
+}
+.phu-quoc-page #useful-articles .lagoon-article:focus-within .lagoon-reading-time {
+  background-color: #fff9ec;
+}
