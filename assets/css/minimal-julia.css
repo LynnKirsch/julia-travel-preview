@@ -920,3 +920,20 @@ body.julia-home-page .lagoon-article-read .home-chevron-disc { width: 1.55em; }
     background-color: #fff9ec;
   }
 }
+
+
+/* Day plans share the pastel colors of service cards 02 and 03. */
+body.julia-home-page #phu-quoc-guide .mini > .mini-card:first-child {
+  background: #faf1d5;
+}
+body.julia-home-page #phu-quoc-guide .mini > .mini-card:nth-child(2) {
+  background: #f8ebe0;
+}
+body.julia-home-page #phu-quoc-guide .mini > .mini-card:first-child .mini-purchase .v5-button:not(:hover):not(:focus-visible) {
+  background: #cee6c3;
+  color: var(--fg);
+}
+body.julia-home-page #phu-quoc-guide .mini > .mini-card:nth-child(2) .mini-purchase .v5-button:not(:hover):not(:focus-visible) {
+  background: #f3d477;
+  color: var(--fg);
+}
