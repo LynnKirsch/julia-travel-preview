@@ -173,6 +173,7 @@ body:is(.julia-home-page, .phu-quoc-page) main > :is(#offers, #planning)::before
   body.julia-home-page #phu-quoc-guide .product > div:last-child > p,
   body.phu-quoc-page .phu-guide-copy > p
 ) {
+  margin-block-start: 0;
   margin-block-end: clamp(18px, 1.8vw, 34px);
   font-size: var(--card-copy);
   line-height: 1.38;
