@@ -1,4 +1,11 @@
 /* Concept 05. Brand ink, ivory and font families inherit the Lagoon tokens. */
+@media (max-width: 639px) {
+  body:is(.julia-home-page, .phu-quoc-page) {
+    --jt-mobile-inset: clamp(20px, 5.5vw, 26px);
+    --jt-mobile-gap: clamp(18px, 4.8vw, 24px);
+    --jt-mobile-action-gap: clamp(24px, 6.4vw, 32px);
+  }
+}
 body:is(.julia-home-page, .phu-quoc-page) {
   --jt-page-bg: #f5efdf;
   --jt-yellow: #f3d477;
@@ -55,6 +62,43 @@ body:is(.julia-home-page, .phu-quoc-page) {
 
 @media (min-width: 1440px) {
   body:is(.julia-home-page, .phu-quoc-page) { --section-gutter: 4vw; }
+}
+
+@media (min-width: 1441px) {
+  body.julia-home-page {
+    --section-gutter: max(var(--v5-gutter), calc(57.6px - (100vw - 1440px) * .032));
+    --jt-review-trip-size: clamp(13px, calc(13px + (100vw - 1440px) * .0104167), 18px);
+    --jt-review-stars-size: clamp(17px, calc(17px + (100vw - 1440px) * .0125), 23px);
+    --jt-review-adjust: clamp(0px, calc((100vw - 1440px) / 480), 1px);
+    --jt-faq-row-gap: clamp(10px, calc(10px + (100vw - 1440px) * .0104167), 15px);
+    --jt-faq-answer-gap: clamp(0px, calc((100vw - 1440px) * .0375), 18px);
+  }
+  body:is(.julia-home-page, .phu-quoc-page) {
+    --jt-tag-step: clamp(0px, calc((100vw - 1440px) / 480), 1px);
+    --jt-footer-step: clamp(0px, calc((100vw - 1440px) / 480), 1px);
+    --jt-footer-gap: clamp(24px, 2.7vw, 39px);
+    --jt-footer-description: clamp(275px, calc(275px + (100vw - 1440px) * .449), 490px);
+    --jt-footer-gallery: clamp(291px, calc(291px + (100vw - 1440px) * .4625), 513px);
+    --jt-footer-photo-gap: clamp(8px, calc(8px + (100vw - 1440px) * .0083333), 12px);
+    --jt-blog-gap: clamp(38px, calc(47px - (100vw - 1440px) * .01875), 47px);
+    --jt-blog-card: clamp(410px, calc(410px + (100vw - 1440px) * .22), 640px);
+  }
+}
+
+@media (min-width: 1920px) {
+  body:is(.julia-home-page, .phu-quoc-page) {
+    --jt-blog-gap: clamp(38px, calc(38px + (100vw - 1920px) * .015625), 48px);
+    --jt-tag-step: clamp(1px, calc(1px + (100vw - 1920px) / 640), 2px);
+    --jt-footer-description: 100%;
+    --jt-footer-gallery: 100%;
+    --jt-footer-photo-gap: clamp(12px, calc(12px + (100vw - 1920px) * .00625), 16px);
+  }
+  body.julia-home-page {
+    --jt-review-trip-size: clamp(18px, calc(18px + (100vw - 1920px) * .00625), 22px);
+    --jt-review-stars-size: clamp(23px, calc(23px + (100vw - 1920px) * .009375), 29px);
+    --jt-faq-row-gap: clamp(15px, calc(15px + (100vw - 1920px) * .0046875), 18px);
+    --jt-faq-answer-gap: clamp(18px, calc(18px + (100vw - 1920px) * .00625), 22px);
+  }
 }
 
 body:is(.julia-home-page, .phu-quoc-page) {

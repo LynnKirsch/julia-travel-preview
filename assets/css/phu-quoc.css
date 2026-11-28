@@ -157,6 +157,7 @@
 .phu-quoc-page .phu-mini h2::after { margin-inline: 0; }
 .phu-quoc-page .phu-mini-copy .v5-button { margin-block-start: clamp(17px, 2vw, 35px); }
 .phu-quoc-page .phu-mini-media { position: relative; grid-column: span 6; }
+
 .phu-quoc-page .phu-mini-main-frame {
   position: relative;
   width: 100%;
@@ -274,13 +275,7 @@
 }
 @media (min-width: 761px) {
   .phu-quoc-page .phu-planning-grid {
-    --reference-row: min(calc(100vw - 32px), 1290px);
-    --reference-gap: clamp(19px, 2.06vw, 30px);
-    --reference-card: calc((var(--reference-row) - 2 * var(--reference-gap)) / 3);
     --planning-drop: clamp(24px, 2.5vw, 36px);
-    grid-template-columns: repeat(3, minmax(0, min(var(--reference-card), calc((100% - 2 * var(--reference-gap)) / 3))));
-    column-gap: var(--reference-gap);
-    justify-content: space-between;
     padding-block-end: var(--planning-drop);
   }
   .phu-quoc-page .phu-planning-grid > .phu-planning-card {
@@ -451,6 +446,10 @@ html.phu-lqip .phu-quoc-page .phu-hero-shell.phu-hero-loaded .phu-hero-photo {
     inset-inline-start: 0;
     margin: 0;
   }
+  /* Keep the intro clear of the tilted inset that overlaps the copy column. */
+  .phu-quoc-page .phu-mini-copy > .phu-intro {
+    max-width: 88%;
+  }
 }
 
 
@@ -476,4 +475,19 @@ html.phu-lqip .phu-quoc-page .phu-hero-shell.phu-hero-loaded .phu-hero-photo {
     margin-inline-start: auto;
     aspect-ratio: 1.45;
   }
+}
+
+@media (max-width: 639px) {
+  .phu-quoc-page .phu-section-intro { margin-block-end: var(--jt-mobile-action-gap); }
+  .phu-quoc-page .phu-section-intro > p { margin-block-start: var(--jt-mobile-gap); }
+  .phu-quoc-page .phu-help .phu-section-intro { margin-block-end: max(28px, var(--jt-mobile-action-gap)); }
+  .phu-quoc-page .phu-planning-card {
+    padding: var(--jt-mobile-inset);
+    gap: var(--jt-mobile-gap);
+  }
+  .phu-quoc-page .phu-mini { row-gap: var(--jt-mobile-action-gap); }
+  .phu-quoc-page .phu-mini-label { margin-block-end: var(--jt-mobile-gap); }
+  .phu-quoc-page .phu-mini-copy > .phu-intro,
+  .phu-quoc-page .phu-mini-copy .v5-button { margin-block-start: var(--jt-mobile-action-gap); }
+  .phu-quoc-page :is(.phu-route-copy, .phu-guide-copy) { gap: var(--jt-mobile-gap); }
 }

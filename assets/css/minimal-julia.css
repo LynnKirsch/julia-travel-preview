@@ -333,14 +333,6 @@
   gap: 22px;
 }
 @media (min-width: 761px) {
-  .offers-cards, .destination-cards, .lagoon-materials-grid, .lagoon-blog-grid {
-    --reference-row: min(calc(100vw - 32px), 1290px);
-    --reference-gap: clamp(19px, 2.06vw, 30px);
-    --reference-card: calc((var(--reference-row) - 2 * var(--reference-gap)) / 3);
-    grid-template-columns: repeat(3, minmax(0, min(var(--reference-card), calc((100% - 2 * var(--reference-gap)) / 3))));
-    column-gap: var(--reference-gap);
-    justify-content: space-between;
-  }
   .offers-cards, .destination-cards {
     --materials-drop: clamp(24px, 2.5vw, 36px);
     max-width: none;
@@ -424,7 +416,8 @@
   font-size: clamp(14px, 1.4vw, 20px);
   font-weight: 750;
 }
-.concept-lagoon .lagoon-actions .lagoon-secondary { font-size: clamp(14px, 1.25vw, 18px); }
+/* The secondary CTA keeps the same type scale as the filled button;
+ * hierarchy comes from its transparent surface, not from smaller text. */
 .concept-lagoon .lagoon-stage :is(.lagoon-actions a, .lagoon-contact):is(:hover, :focus-visible) {
   background: var(--bg);
   color: var(--fg);
@@ -569,6 +562,19 @@ body.julia-home-page .lagoon-destination-copy h3 {
 }
 @media (max-width: 650px) {
   .lagoon-footer .lagoon-footer-gallery { justify-self: start; }
+}
+
+@media (max-width: 639px) {
+  .julia-home-page #offers .card h3 { margin-block-end: var(--jt-mobile-gap); }
+  .julia-home-page #phu-quoc-guide {
+    --purchase-card-padding: var(--jt-mobile-inset);
+    --purchase-copy-gap: var(--jt-mobile-gap);
+  }
+  .julia-home-page .about > div p + p { margin-block-start: var(--jt-mobile-gap); }
+  .julia-home-page .about h2 { margin-block-end: var(--jt-mobile-gap); }
+  .julia-home-page .about .v5-button { margin-block-start: var(--jt-mobile-action-gap); }
+  .julia-home-page .about .about-facts { margin-block-start: var(--jt-mobile-action-gap); }
+  .julia-home-page .guide-purchase { row-gap: var(--jt-mobile-gap); }
 }
 
 @media (1440px <= width < 1920px) {

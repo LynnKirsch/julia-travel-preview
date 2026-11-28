@@ -158,6 +158,157 @@ body.phu-quoc-page .phu-mini {
   color: var(--lagoon-white);
 }
 
+/* Shared three-card geometry. Individual sections retain their own vertical layout. */
+@media (min-width: 761px) {
+  body:is(.julia-home-page, .phu-quoc-page) :is(.offers-cards, .destination-cards, .lagoon-materials-grid, .lagoon-blog-grid, .phu-planning-grid) {
+    --jt-reference-gap: clamp(19px, 2.06vw, 30px);
+    --jt-reference-card: calc((min(calc(100vw - 32px), 1290px) - 2 * var(--jt-reference-gap)) / 3);
+    --jt-grid-gap: max(var(--jt-reference-gap), calc((100% - 3 * var(--jt-reference-card)) / 2));
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, min(var(--jt-reference-card), calc((100% - 2 * var(--jt-reference-gap)) / 3))));
+    column-gap: var(--jt-grid-gap);
+    justify-content: center;
+  }
+}
+@media (min-width: 1441px) {
+  body:is(.julia-home-page, .phu-quoc-page) :is(.offers-cards, .destination-cards, .lagoon-materials-grid, .lagoon-blog-grid, .phu-planning-grid) {
+    grid-template-columns: repeat(3, minmax(0, var(--jt-blog-card)));
+    column-gap: var(--jt-blog-gap);
+  }
+}
+
+/* The two day plans share the same purchase and contents actions. */
+body:is(.julia-home-page, .phu-quoc-page) .jt-day-actions {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 16px;
+  row-gap: 16px;
+}
+body:is(.julia-home-page, .phu-quoc-page) .jt-day-actions .v5-button {
+  justify-self: end;
+  margin: 0;
+  gap: clamp(8px, .75vw, 17px);
+}
+body:is(.julia-home-page, .phu-quoc-page) .jt-day-details {
+  grid-column: 1 / -1;
+  justify-self: start;
+  cursor: default;
+}
+body:is(.julia-home-page, .phu-quoc-page) :is(#phu-quoc-guide, #guide, #routes) :is(.jt-day-details, .guide-purchase .v5-button:not(.primary), .phu-guide .phu-text-action) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: .55em;
+  min-height: 0;
+  min-width: 0;
+  width: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--fg);
+  font-family: var(--lagoon-copy-font);
+  font-size: var(--grid-action-copy);
+  font-weight: 700;
+  line-height: 1.25;
+  text-decoration: none;
+  text-align: left;
+}
+body:is(.julia-home-page, .phu-quoc-page) .jt-day-details:focus-visible {
+  outline: 3px solid var(--lagoon-deep);
+  outline-offset: 4px;
+}
+
+@media (min-width: 1441px) {
+  body:is(.julia-home-page, .phu-quoc-page) .media-badge {
+    font-size: calc(11.52px + 4.5 * var(--jt-tag-step));
+    padding: calc(6px + 2 * var(--jt-tag-step)) calc(10px + 3 * var(--jt-tag-step));
+  }
+  body:is(.julia-home-page, .phu-quoc-page) .lagoon-reading-time {
+    font-size: calc(13px + 4 * var(--jt-tag-step));
+    gap: calc(7px + 2 * var(--jt-tag-step));
+  }
+  body:is(.julia-home-page, .phu-quoc-page) .lagoon-reading-time > svg {
+    width: 1.23em;
+    height: 1.23em;
+    flex: none;
+  }
+  body:is(.julia-home-page, .phu-quoc-page) .lagoon-article-panel .lagoon-reading-time {
+    padding: calc(4px + 1.5 * var(--jt-tag-step)) calc(9px + 3 * var(--jt-tag-step));
+  }
+  body.julia-home-page .lagoon-material-copy .lagoon-material-type {
+    font-size: calc(12px + 4 * var(--jt-tag-step));
+    gap: calc(5px + 2 * var(--jt-tag-step));
+  }
+  body.julia-home-page .lagoon-material-type svg {
+    width: 1.42em;
+    height: 1.42em;
+    flex: none;
+  }
+  body.phu-quoc-page .phu-mini-label {
+    font-size: calc(13.68px + 4.2 * var(--jt-tag-step));
+  }
+  body:is(.julia-home-page, .phu-quoc-page) .lagoon-faq-questions summary {
+    font-size: min(var(--card-title), calc(18px + (100vw - 1440px) * .02084));
+  }
+  body:is(.julia-home-page, .phu-quoc-page) .lagoon-faq-questions details p {
+    font-size: min(var(--card-copy), calc(16px + (100vw - 1440px) * .01));
+  }
+  body.julia-home-page .lagoon-faq-questions { row-gap: var(--jt-faq-row-gap); }
+  body.julia-home-page .lagoon-faq-questions details[open] p { padding-block-start: var(--jt-faq-answer-gap); }
+  body.julia-home-page .lagoon-review-trip {
+    font-size: var(--jt-review-trip-size);
+    margin-block-start: calc(9px - var(--jt-review-adjust));
+  }
+  body.julia-home-page .lagoon-review-rating {
+    font-size: var(--jt-review-stars-size);
+    letter-spacing: calc(.1em + 1 * var(--jt-review-adjust));
+    margin-block-start: calc(9px + var(--jt-review-adjust));
+  }
+  body.julia-home-page .lagoon-review-text {
+    font-size: calc(var(--card-copy) - 1.2 * var(--jt-review-adjust));
+    margin-block: calc(13px + 3 * var(--jt-review-adjust)) calc(10px + 10 * var(--jt-review-adjust));
+  }
+  body:is(.julia-home-page, .phu-quoc-page) .lagoon-footer > .container {
+    width: var(--section-width);
+    max-width: none;
+  }
+  body:is(.julia-home-page, .phu-quoc-page) .lagoon-footer-content {
+    column-gap: var(--jt-footer-gap);
+    grid-template-columns:
+      minmax(0, calc((100% - 3 * var(--jt-footer-gap)) * .2564 + 50 * var(--jt-footer-step)))
+      minmax(0, calc((100% - 3 * var(--jt-footer-gap)) * .2092 - 20 * var(--jt-footer-step)))
+      minmax(0, calc((100% - 3 * var(--jt-footer-gap)) * .2301 - 20 * var(--jt-footer-step)))
+      minmax(0, calc((100% - 3 * var(--jt-footer-gap)) * .3043 - 10 * var(--jt-footer-step)));
+  }
+  body:is(.julia-home-page, .phu-quoc-page) .lagoon-footer-brand p {
+    max-width: var(--jt-footer-description);
+  }
+  body:is(.julia-home-page, .phu-quoc-page) .lagoon-footer .lagoon-footer-gallery {
+    width: min(100%, var(--jt-footer-gallery));
+    gap: var(--jt-footer-photo-gap);
+  }
+}
+
+@media (min-width: 1920px) {
+  body.julia-home-page .lagoon-review-text { font-size: calc(var(--card-copy) * .94); }
+}
+
+/* Review slider arrows: a square hit area at every width.
+ * The diameter follows the shared action height, so 1440 keeps its
+ * reference size and 1920/2240/2560 scale with the rest of the layout. */
+body.julia-home-page .lagoon-reviews-controls [data-review-step] {
+  box-sizing: border-box;
+  inline-size: var(--action-height);
+  block-size: var(--action-height);
+  min-inline-size: var(--action-height);
+  min-block-size: var(--action-height);
+  aspect-ratio: 1 / 1;
+  flex: 0 0 auto;
+  padding: 0;
+  font-size: clamp(18px, calc(var(--action-height) * .3), 26px);
+}
+
 /* Matching full-guide typography and room between description and list. */
 :is(
   body.julia-home-page #phu-quoc-guide .product h3,
@@ -292,6 +443,55 @@ body:is(.julia-home-page, .phu-quoc-page) #useful-articles .lagoon-article:focus
 }
 
 /* Component-specific text sizes converge on the wide role at 1920px. */
+@media (max-width: 639px) {
+  body.julia-home-page .lagoon-material-footer {
+    flex-wrap: nowrap;
+  }
+  body.julia-home-page .lagoon-material-copy .lagoon-material-type {
+    min-width: 0;
+  }
+  body.julia-home-page .lagoon-material-type svg,
+  body.julia-home-page .lagoon-material-footer .lagoon-guide-cta {
+    flex: none;
+  }
+  body.julia-home-page .lagoon-material-type span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  body.julia-home-page .lagoon-material-footer .lagoon-guide-cta {
+    white-space: nowrap;
+  }
+  body:is(.julia-home-page, .phu-quoc-page) :is(.lagoon-destination-copy, .lagoon-material-copy, .lagoon-article-panel, .lagoon-review-card) {
+    padding: var(--jt-mobile-inset);
+    gap: var(--jt-mobile-gap);
+  }
+  body:is(.julia-home-page, .phu-quoc-page) :is(#phu-quoc-guide, main) :is(.guide-purchase, .mini-purchase, .phu-purchase) {
+    padding-block-start: var(--jt-mobile-gap);
+    gap: var(--jt-mobile-gap);
+  }
+  body:is(.julia-home-page, .phu-quoc-page) :is(.lagoon-footer-form, .lagoon-faq-questions) {
+    gap: var(--jt-mobile-gap);
+  }
+  body:is(.julia-home-page, .phu-quoc-page) :is(#phu-quoc-guide, #routes) .jt-day-actions {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 18px;
+  }
+  body:is(.julia-home-page, .phu-quoc-page) .jt-day-actions .v5-button {
+    justify-self: stretch;
+    width: 100%;
+  }
+  :is(body.julia-home-page #phu-quoc-guide .product > div:last-child > p,
+      body.phu-quoc-page .phu-guide-copy > p) {
+    margin-block-end: var(--jt-mobile-action-gap);
+  }
+}
+
+@media (max-width: 360px) {
+  body.julia-home-page .lagoon-material-footer { gap: 3px; }
+  body.julia-home-page .lagoon-material-copy .lagoon-material-type { gap: 1px; }
+  body.julia-home-page .lagoon-material-footer .lagoon-guide-cta { padding-inline: 1px; }
+}
+
 @media (1440px <= width < 1920px) {
   .concept-lagoon .lagoon-contact, .concept-lagoon .lagoon-reviews-controls button, .concept-lagoon .lagoon-material-footer .lagoon-guide-cta {
     font-size: calc(14px + 5 * var(--jt-desktop-step));
@@ -317,13 +517,13 @@ body:is(.julia-home-page, .phu-quoc-page) #useful-articles .lagoon-article:focus
   .concept-lagoon .lagoon-footer-contacts small {
     font-size: calc(12px + 4 * var(--jt-desktop-step));
   }
-  .julia-home-page #phu-quoc-guide :is(.guide-purchase, .mini-purchase) .v5-button {
-    font-size: calc(14.688px + 4.312 * var(--jt-desktop-step));
-  }
   .concept-lagoon :is(.v5-button, .lagoon-article-read) { font-size: var(--grid-action-copy); }
+}
+
+body:is(.julia-home-page, .phu-quoc-page) :is(#phu-quoc-guide, #guide, #routes) :is(.guide-purchase .v5-button.primary, .jt-day-actions .v5-button.primary, .phu-guide .phu-purchase .v5-button.primary) {
+  font-size: var(--grid-action-copy);
 }
 
 @media (1920px <= width < 2560px) {
   .concept-lagoon .site-nav :is(a, button) { font-size: clamp(14px, calc(14px + (100vw - 1920px) * 0.00625), 18px); }
-  .concept-lagoon .media-badge { font-size: clamp(15.36px, calc(15.36px + (100vw - 1920px) * 0.00725), 20px); }
 }
