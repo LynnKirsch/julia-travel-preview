@@ -122,15 +122,10 @@ body:is(.julia-home-page, .phu-quoc-page) main > :is(#offers, #planning)::before
   border: 1px solid var(--lagoon-white);
   box-shadow: var(--card-shadow);
 }
+/* Identical solid ivory surface for the full guide and both day plans. */
 :is(
-  body.julia-home-page #phu-quoc-guide .product,
-  body.phu-quoc-page .phu-guide
-) {
-  background: #eaf5e8;
-}
-:is(
-  body.julia-home-page #phu-quoc-guide .mini-card,
-  body.phu-quoc-page #routes .phu-route
+  body.julia-home-page #phu-quoc-guide :is(.product, .mini-card),
+  body.phu-quoc-page :is(.phu-guide, .phu-route)
 ) {
   background: var(--lagoon-white);
 }
