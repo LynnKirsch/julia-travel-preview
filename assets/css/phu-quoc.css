@@ -407,18 +407,18 @@
 
 /* Gentle whole-card hover emphasis; images zoom only within their frames. */
 @media (hover: hover) and (pointer: fine) {
-  .phu-quoc-page :is(.phu-route, .phu-guide) {
+  .phu-quoc-page :is(.phu-route, .phu-guide, .phu-mini) {
     transition: box-shadow .32s ease, transform .32s cubic-bezier(.22,.61,.36,1);
     will-change: auto;
   }
-  .phu-quoc-page :is(.phu-route, .phu-guide) .phu-product-media img {
+  .phu-quoc-page :is(.phu-route, .phu-guide, .phu-mini) .phu-product-media img {
     transition: transform .55s cubic-bezier(.22,.61,.36,1);
   }
-  .phu-quoc-page :is(.phu-route, .phu-guide):hover {
+  .phu-quoc-page :is(.phu-route, .phu-guide, .phu-mini):hover {
     box-shadow: 0 8px 18px #403b2720;
     transform: translateY(-4px);
   }
-  .phu-quoc-page :is(.phu-route, .phu-guide):hover .phu-product-media img {
+  .phu-quoc-page :is(.phu-route, .phu-guide, .phu-mini):hover .phu-product-media img {
     transform: scale(1.045);
   }
 }
