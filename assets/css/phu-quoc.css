@@ -111,8 +111,8 @@
 }
 .phu-quoc-page .phu-hero-route .phu-chevron-disc { background: var(--phu-light-button); }
 .phu-quoc-page .phu-hero-route:hover .phu-chevron-disc { background: var(--lagoon-white); }
-.phu-quoc-page .phu-dark-action { border-color: transparent; background: var(--lagoon-deep); color: var(--lagoon-white); }
-.phu-quoc-page .phu-dark-action:hover { background: var(--fg); color: var(--lagoon-white); }
+.phu-quoc-page .phu-dark-action { border-color: transparent; background: var(--phu-yellow); color: var(--fg); }
+.phu-quoc-page .phu-dark-action:is(:hover, :focus-visible) { background: var(--lagoon-deep); color: var(--lagoon-white); }
 .phu-quoc-page .phu-light-action { border-color: transparent; background: var(--phu-light-button); color: var(--fg); }
 .phu-quoc-page .phu-light-action:hover { background: var(--lagoon-deep); color: var(--lagoon-white); }
 .phu-quoc-page button[aria-disabled="true"] { cursor: default; }
@@ -401,8 +401,8 @@
   text-wrap: balance;
 }
 .phu-quoc-page .phu-dark-action:is(:hover, :focus-visible) {
-  background: var(--phu-light-button);
-  color: var(--fg);
+  background: var(--lagoon-deep);
+  color: var(--lagoon-white);
 }
 
 /* Gentle whole-card hover emphasis; images zoom only within their frames. */
