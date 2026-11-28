@@ -1,11 +1,7 @@
 .phu-quoc-page {
-  --phu-section-gap: clamp(110px, 9.2vw, 230px);
+  --phu-section-gap: var(--jt-section-gap);
   --phu-mint: #eaf5e8;
-  --phu-light-button: #cee6c3;
-  --phu-yellow: #f3d477;
-  --phu-line: #cdd5b8;
   --phu-inset: clamp(18px, 2.1vw, 50px);
-  --phu-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m6 3 5 5-5 5' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
 /* First screen and navigation */
@@ -87,31 +83,6 @@
   gap: clamp(8px, .75vw, 17px);
   max-width: 100%;
 }
-.phu-quoc-page .phu-chevron {
-  display: inline-block;
-  flex: 0 0 auto;
-  width: .9em;
-  height: .9em;
-  background-color: currentColor;
-  mask: var(--phu-chevron) center / contain no-repeat;
-}
-.phu-quoc-page .phu-chevron-disc {
-  display: grid;
-  flex: 0 0 auto;
-  place-items: center;
-  width: 1.8em;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: var(--phu-yellow);
-  color: var(--fg);
-}
-.phu-quoc-page .phu-hero-route, .phu-quoc-page .phu-hero-route:hover {
-  border-color: transparent;
-  background: transparent;
-  color: var(--lagoon-white);
-}
-.phu-quoc-page .phu-hero-route .phu-chevron-disc { background: var(--phu-light-button); }
-.phu-quoc-page .phu-hero-route:hover .phu-chevron-disc { background: var(--lagoon-white); }
 .phu-quoc-page .phu-dark-action { border-color: transparent; background: var(--phu-yellow); color: var(--fg); }
 .phu-quoc-page .phu-dark-action:is(:hover, :focus-visible) { background: var(--lagoon-deep); color: var(--lagoon-white); }
 .phu-quoc-page .phu-light-action { border-color: transparent; background: var(--phu-light-button); color: var(--fg); }
@@ -168,10 +139,7 @@
 .phu-quoc-page .phu-mint-card {
   align-items: center;
   padding: var(--phu-inset);
-  border: 1px solid var(--lagoon-white);
   border-radius: var(--card-radius);
-  background: linear-gradient(135deg, #f4faef 0%, #e9f4e7 50%, #e0eee7 100%);
-  box-shadow: var(--card-shadow);
 }
 .phu-quoc-page .phu-mini-copy { grid-column: span 6; }
 .phu-quoc-page .phu-mini-label {
@@ -225,7 +193,6 @@
   min-width: 0;
   gap: 0;
   padding: 0;
-  background: linear-gradient(135deg, #f4faef 0%, #e9f4e7 50%, #e0eee7 100%);
 }
 .phu-quoc-page .phu-product-media {
   position: relative;
@@ -246,29 +213,10 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px clamp(10px, 1.1vw, 20px);
-  margin-block-start: auto;
-  padding-block-start: clamp(10px, 1.3vw, 24px);
-  border-top: 1px solid var(--phu-line);
 }
-.phu-quoc-page .phu-purchase strong { font-size: clamp(19px, 1.65vw, 40px); line-height: 1.2; white-space: nowrap; }
-.phu-quoc-page .phu-purchase .v5-button { padding-inline: clamp(12px, 1.35vw, 28px); }
 .phu-quoc-page .phu-guide { align-items: stretch; }
 .phu-quoc-page .phu-guide .phu-product-media { grid-column: span 4; min-height: 200px; aspect-ratio: 1.15; }
 .phu-quoc-page .phu-guide-copy { grid-column: span 8; }
-.phu-quoc-page .phu-guide h3 {
-  font-size: calc(var(--card-title) + 4px);
-  line-height: 1.15;
-}
-.phu-quoc-page .phu-guide ul { display: grid; gap: .38em; margin: 0 0 .3em; padding: 0; list-style: none; }
-.phu-quoc-page .phu-guide li { display: grid; grid-template-columns: 1.15em minmax(0, 1fr); align-items: center; gap: .58em; }
-.phu-quoc-page .phu-guide li::before {
-  content: "";
-  width: 1.15em;
-  height: 1.15em;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--phu-yellow) 64%, var(--lagoon-white))
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m4 8 2.5 2.5L12 5' fill='none' stroke='%23153b32' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 85% no-repeat;
-}
 .phu-quoc-page .phu-text-action {
   min-height: var(--action-height);
   font-size: var(--card-copy);
@@ -282,7 +230,6 @@
 .phu-quoc-page .phu-gallery figure { grid-column: span 2; min-width: 0; text-align: center; }
 .phu-quoc-page .phu-gallery img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: var(--card-radius); }
 .phu-quoc-page .phu-gallery figcaption { min-height: 2.4em; margin-block-start: 10px; font-size: var(--card-copy); font-weight: 700; line-height: 1.2; }
-.phu-quoc-page .lagoon-article-read .phu-chevron-disc { width: 1.55em; }
 .phu-quoc-page .lagoon-blog-actions { min-height: var(--action-height); }
 .phu-quoc-page .lagoon-footer-form .phu-cta { padding-inline: 10px; }
 .phu-quoc-page #contact { scroll-margin-block-start: 24px; }
@@ -380,20 +327,7 @@
 }
 
 /* First-screen interactions, preserving the background photo and composition. */
-.phu-quoc-page .phu-hero-actions .v5-button.primary:is(:hover, :focus-visible) {
-  background: var(--phu-light-button);
-  color: var(--fg);
-}
-.phu-quoc-page .phu-hero-actions .phu-hero-route {
-  color: var(--lagoon-white);
-}
-.phu-quoc-page .phu-hero-actions .phu-hero-route:is(:hover, :focus-visible) {
-  color: var(--phu-yellow);
-  background: transparent;
-}
-.phu-quoc-page .phu-hero-actions .phu-hero-route:is(:hover, :focus-visible) .phu-chevron-disc {
-  background: var(--lagoon-white);
-}
+
 
 /* Mini-guide tag is light green, the headline reads in two lines on desktop. */
 .phu-quoc-page .phu-mini-label {
@@ -414,40 +348,7 @@
   color: var(--lagoon-white);
 }
 
-/* Gentle whole-card hover emphasis; images zoom only within their frames. */
-@media (hover: hover) and (pointer: fine) {
-  .phu-quoc-page :is(.phu-route, .phu-guide, .phu-mini) {
-    transition: box-shadow .32s ease, transform .32s cubic-bezier(.22,.61,.36,1);
-    will-change: auto;
-  }
-  .phu-quoc-page :is(.phu-route, .phu-guide, .phu-mini) .phu-product-media img {
-    transition: transform .55s cubic-bezier(.22,.61,.36,1);
-  }
-  .phu-quoc-page :is(.phu-route, .phu-guide, .phu-mini):hover {
-    box-shadow: 0 8px 18px #403b2720;
-    transform: translateY(-4px);
-  }
-  .phu-quoc-page :is(.phu-route, .phu-guide, .phu-mini):hover .phu-product-media img {
-    transform: scale(1.045);
-  }
-  /* Zoom the photographs inside their fixed rounded frames, not the frames themselves. */
-  .phu-quoc-page .phu-mini :is(.phu-mini-main, .phu-mini-inset) {
-    transition: transform .55s cubic-bezier(.22,.61,.36,1);
-  }
-  .phu-quoc-page .phu-mini:hover :is(.phu-mini-main, .phu-mini-inset) {
-    transform: scale(1.045);
-  }
-}
-
 /* Full-guide hierarchy: bigger heading, stronger list separation, close action pair. */
-.phu-quoc-page .phu-guide h3 {
-  font-size: clamp(32px, 3.1vw, 50px);
-  line-height: 1.06;
-  letter-spacing: -.04em;
-}
-.phu-quoc-page .phu-guide-copy > p {
-  margin-block-end: clamp(18px, 1.8vw, 34px);
-}
 @media (min-width: 1200px) {
   .phu-quoc-page .phu-guide .phu-purchase {
     justify-content: flex-start;
@@ -560,33 +461,6 @@ html.phu-lqip .phu-quoc-page .phu-hero-shell.phu-hero-loaded .phu-hero-photo {
 .phu-quoc-page main > #planning.phu-section {
   position: relative;
 }
-.phu-quoc-page main > #planning.phu-section::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: clamp(36px, 4vw, 70px);
-  pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    rgba(15, 58, 50, .30) 0%,
-    rgba(15, 58, 50, .11) 38%,
-    rgba(15, 58, 50, 0) 100%
-  );
-}
-
-
-/* Blog category pills lighten on card hover. */
-.phu-quoc-page #useful-articles .lagoon-article-panel .lagoon-reading-time {
-  transition: background-color .3s ease;
-}
-@media (hover: hover) and (pointer: fine) {
-  .phu-quoc-page #useful-articles .lagoon-article:hover .lagoon-reading-time {
-    background-color: #fff9ec;
-  }
-}
-.phu-quoc-page #useful-articles .lagoon-article:focus-within .lagoon-reading-time {
-  background-color: #fff9ec;
-}
 
 
 /* Compact free mini-guide: smaller hero photograph and calmer copy spacing. */
@@ -602,21 +476,4 @@ html.phu-lqip .phu-quoc-page .phu-hero-shell.phu-hero-loaded .phu-hero-photo {
     margin-inline-start: auto;
     aspect-ratio: 1.45;
   }
-}
-
-
-/* Day plans: service-card 02 pale yellow and service-card 03 pale blush pink. */
-.phu-quoc-page #routes .phu-routes-grid > .phu-route:first-child {
-  background: #faf1d5;
-}
-.phu-quoc-page #routes .phu-routes-grid > .phu-route:nth-child(2) {
-  background: #f8ebe0;
-}
-.phu-quoc-page #routes .phu-route:first-child .phu-purchase .v5-button.primary:not(:hover):not(:focus-visible) {
-  background: #cee6c3;
-  color: var(--fg);
-}
-.phu-quoc-page #routes .phu-route:nth-child(2) .phu-purchase .v5-button.primary:not(:hover):not(:focus-visible) {
-  background: #f3d477;
-  color: var(--fg);
 }
