@@ -676,3 +676,247 @@
     font-size: var(--wide-button-text);
   }
 }
+
+
+
+/* Home-only visual parity with the Phu Quoc destination page. */
+body.julia-home-page {
+  --home-yellow: #f3d477;
+  --home-light-green: #cee6c3;
+  --home-line: #cdd5b8;
+  --home-guide-gradient: linear-gradient(135deg, #f4faef 0%, #e9f4e7 50%, #e0eee7 100%);
+  --home-chevron-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m6 3 5 5-5 5' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* Shared button symbol: the same right-pointing chevron as the Phu Quoc page. */
+body.julia-home-page :is(
+  .lagoon-contact, .lagoon-actions a, .v5-button, .lagoon-destination-more,
+  .lagoon-guide-cta, .lagoon-article-read, .lagoon-reviews-leave,
+  .lagoon-review-toggle, .lagoon-footer-form button
+) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, .75vw, 17px);
+}
+body.julia-home-page .home-chevron,
+body.julia-home-page .lagoon-review-toggle::after {
+  display: inline-block;
+  flex: none;
+  width: .9em;
+  height: .9em;
+  background-color: currentColor;
+  -webkit-mask: var(--home-chevron-mask) center / contain no-repeat;
+  mask: var(--home-chevron-mask) center / contain no-repeat;
+}
+body.julia-home-page .home-chevron-disc {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 1.8em;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--home-yellow);
+  color: var(--fg);
+}
+body.julia-home-page .lagoon-review-toggle { justify-content: space-between; }
+body.julia-home-page .lagoon-review-toggle::after { content: ""; }
+body.julia-home-page .lagoon-review-toggle[aria-expanded="true"]::after {
+  transform: rotate(-90deg);
+}
+body.julia-home-page .lagoon-reviews-controls [data-review-step] {
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+body.julia-home-page .lagoon-reviews-controls [data-review-step="-1"] .home-chevron {
+  transform: rotate(180deg);
+}
+
+/* First screen: yellow primary, borderless light secondary and their matching hovers. */
+body.julia-home-page .lagoon-stage .lagoon-actions .lagoon-primary {
+  border-color: transparent;
+  background: var(--home-yellow);
+  color: var(--fg);
+}
+body.julia-home-page .lagoon-stage .lagoon-actions .lagoon-primary:is(:hover, :focus-visible) {
+  border-color: transparent;
+  background: var(--home-light-green);
+  color: var(--fg);
+}
+body.julia-home-page .lagoon-stage .lagoon-actions .lagoon-secondary {
+  border-color: transparent;
+  background: transparent;
+  color: var(--lagoon-white);
+}
+body.julia-home-page .lagoon-stage .lagoon-actions .lagoon-secondary:is(:hover, :focus-visible) {
+  border-color: transparent;
+  background: transparent;
+  color: var(--home-yellow);
+}
+body.julia-home-page .lagoon-actions .lagoon-secondary .home-chevron-disc {
+  background: var(--home-light-green);
+}
+body.julia-home-page .lagoon-actions .lagoon-secondary:is(:hover, :focus-visible) .home-chevron-disc {
+  background: var(--lagoon-white);
+}
+body.julia-home-page .lagoon-stage .lagoon-contact {
+  display: inline-flex;
+  border-color: var(--lagoon-outline);
+}
+body.julia-home-page .lagoon-stage .lagoon-contact:is(:hover, :focus-visible) {
+  border-color: transparent;
+  background: var(--lagoon-white);
+  color: var(--fg);
+}
+
+/* The shadow is drawn only below the first screen, never on the left or right edges. */
+body.julia-home-page main > #offers {
+  position: relative;
+  padding-block-start: clamp(110px, 9.2vw, 230px);
+}
+body.julia-home-page main > #offers::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: clamp(36px, 4vw, 70px);
+  pointer-events: none;
+  background: linear-gradient(180deg,
+    rgba(15, 58, 50, .30) 0%,
+    rgba(15, 58, 50, .11) 38%,
+    rgba(15, 58, 50, 0) 100%);
+}
+
+/* Third-screen destination cards: the same lift and soft shadow as paid guides. */
+@media (hover: hover) and (pointer: fine) {
+  body.julia-home-page #destinations .lagoon-destination {
+    transition: transform .32s cubic-bezier(.22,.61,.36,1), box-shadow .32s ease;
+  }
+  body.julia-home-page #destinations .lagoon-destination:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px #403b2720;
+  }
+}
+
+/* The three paid materials share exactly the destination-page mint gradient. */
+body.julia-home-page #phu-quoc-guide :is(.product, .mini-card) {
+  border: 1px solid var(--lagoon-white);
+  background: var(--home-guide-gradient);
+  box-shadow: var(--card-shadow);
+}
+body.julia-home-page #phu-quoc-guide .product > div:last-child {
+  gap: clamp(9px, 1.05vw, 22px);
+}
+body.julia-home-page #phu-quoc-guide .product h3 {
+  margin: 0;
+  font-size: clamp(32px, 3.1vw, 50px);
+  line-height: 1.06;
+  letter-spacing: -.04em;
+}
+body.julia-home-page #phu-quoc-guide .product > div:last-child > p {
+  margin: 0 0 clamp(18px, 1.8vw, 34px);
+  font-size: var(--card-copy);
+  line-height: 1.38;
+}
+body.julia-home-page #phu-quoc-guide .product ul {
+  display: grid;
+  gap: .38em;
+  margin: 0 0 .3em;
+  padding: 0;
+  list-style: none;
+}
+body.julia-home-page #phu-quoc-guide .product li {
+  display: grid;
+  grid-template-columns: 1.15em minmax(0, 1fr);
+  align-items: center;
+  gap: .58em;
+  margin: 0;
+  font-size: var(--card-copy);
+  line-height: 1.38;
+}
+body.julia-home-page #phu-quoc-guide .product li::before {
+  content: "";
+  width: 1.15em;
+  height: 1.15em;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--home-yellow) 64%, var(--lagoon-white))
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m4 8 2.5 2.5L12 5' fill='none' stroke='%23153b32' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 85% no-repeat;
+}
+body.julia-home-page #phu-quoc-guide :is(.guide-purchase, .mini-purchase) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px clamp(10px, 1.1vw, 20px);
+  width: 100%;
+  margin-block-start: auto;
+  padding-block-start: clamp(10px, 1.3vw, 24px);
+  border-top: 1px solid var(--home-line);
+}
+body.julia-home-page #phu-quoc-guide :is(.product, .mini-card) strong {
+  font-size: clamp(19px, 1.65vw, 40px);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+body.julia-home-page #phu-quoc-guide :is(.guide-purchase, .mini-purchase) .v5-button {
+  border-color: transparent;
+  padding-inline: clamp(12px, 1.35vw, 28px);
+}
+body.julia-home-page #phu-quoc-guide :is(.guide-purchase, .mini-purchase) .v5-button.primary,
+body.julia-home-page #phu-quoc-guide .mini-purchase .v5-button {
+  background: var(--home-yellow);
+  color: var(--fg);
+}
+body.julia-home-page #phu-quoc-guide :is(.guide-purchase, .mini-purchase) .v5-button.primary:is(:hover, :focus-visible),
+body.julia-home-page #phu-quoc-guide .mini-purchase .v5-button:is(:hover, :focus-visible) {
+  background: var(--lagoon-deep);
+  color: var(--lagoon-white);
+}
+body.julia-home-page #phu-quoc-guide .guide-purchase .v5-button:not(.primary) {
+  background: transparent;
+  color: var(--fg);
+}
+body.julia-home-page #phu-quoc-guide .guide-purchase .v5-button:not(.primary):is(:hover, :focus-visible) {
+  background: transparent;
+  color: #427653;
+}
+@media (hover: hover) and (pointer: fine) {
+  body.julia-home-page #phu-quoc-guide :is(.product, .mini-card) {
+    transition: transform .32s cubic-bezier(.22,.61,.36,1), box-shadow .32s ease;
+  }
+  body.julia-home-page #phu-quoc-guide :is(.product, .mini-card):hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px #403b2720;
+  }
+  body.julia-home-page #phu-quoc-guide :is(.cover-placeholder, .mini-photo) img {
+    transition: transform .55s cubic-bezier(.22,.61,.36,1);
+  }
+  body.julia-home-page #phu-quoc-guide :is(.product, .mini-card):hover :is(.cover-placeholder, .mini-photo) img {
+    transform: scale(1.045);
+  }
+}
+
+/* Free materials: vertical lift rather than the original 3D tilt interaction. */
+@media (hover: hover) and (pointer: fine) {
+  body.julia-home-page #free-materials .lagoon-material-card {
+    transform: none;
+    transition: transform .32s cubic-bezier(.22,.61,.36,1), box-shadow .32s ease;
+  }
+  body.julia-home-page #free-materials .lagoon-materials-item:hover .lagoon-material-card {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px #403b2720;
+  }
+}
+
+/* Blog pills switch from mint to pale ivory when their card is hovered/focused. */
+body.julia-home-page #useful-articles .lagoon-reading-time {
+  transition: background-color .3s ease;
+}
+body.julia-home-page #useful-articles .lagoon-article:focus-within .lagoon-reading-time {
+  background-color: #fff9ec;
+}
+body.julia-home-page .lagoon-article-read .home-chevron-disc { width: 1.55em; }
+@media (hover: hover) and (pointer: fine) {
+  body.julia-home-page #useful-articles .lagoon-article:hover .lagoon-reading-time {
+    background-color: #fff9ec;
+  }
+}
