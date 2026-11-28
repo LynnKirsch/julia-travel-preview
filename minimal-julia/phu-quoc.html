@@ -4,13 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
+  <script>document.documentElement.classList.add('phu-lqip');</script>
+  <link rel="preload" as="image" href="../assets/images/img-1920x1081-q85 f.webp" type="image/webp" fetchpriority="high">
   <title>Фукуок · Страница направления — Julia Travel</title>
   <link rel="icon" href="../assets/images/logo.png" type="image/png">
   <link rel="stylesheet" href="../assets/fonts/fonts.css">
   <link rel="stylesheet" href="../assets/css/common.css">
   <link rel="stylesheet" href="../assets/css/emerald-lagoon.css">
   <link rel="stylesheet" href="../assets/css/minimal-julia.css?v=33">
-  <link rel="stylesheet" href="../assets/css/phu-quoc.css?v=3">
+  <link rel="stylesheet" href="../assets/css/phu-quoc.css?v=4">
   <script src="../assets/js/minimal-julia.js?v=12" defer></script>
 </head>
 <body class="concept-lagoon phu-quoc-page">
@@ -18,6 +20,21 @@
   <main id="main">
     <div class="phu-hero-shell">
       <img class="phu-hero-photo" src="../assets/images/img-1920x1081-q85 f.webp" width="1920" height="1081" alt="" fetchpriority="high">
+      <script>
+        (() => {
+          const hero = document.querySelector('.phu-hero-shell');
+          const image = hero?.querySelector('.phu-hero-photo');
+          if (!hero || !image) return;
+          const reveal = () => {
+            if (!image.naturalWidth) return;
+            const finish = () => hero.classList.add('phu-hero-loaded');
+            if (image.decode) image.decode().then(finish, finish);
+            else finish();
+          };
+          if (image.complete) reveal();
+          else image.addEventListener('load', reveal, { once: true });
+        })();
+      </script>
       <header class="site-header phu-site-header" role="banner">
         <div class="container header-inner">
           <a class="brand" href="index.html" aria-label="Julia Travel — главная"><img class="lagoon-logo" src="../assets/images/logo.png" width="1529" height="263" alt=""></a>
