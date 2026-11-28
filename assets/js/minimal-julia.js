@@ -3,7 +3,7 @@
   const motion = matchMedia('(prefers-reduced-motion: no-preference)');
   if (!('IntersectionObserver' in window) || !motion.matches) return;
   const textAndControls = ':is(h1,h2,h3,p,li,a,button,input,strong,summary,time,.media-badge,.lagoon-reading-time,.lagoon-offers-number)';
-  const selector = `:is(main,.lagoon-footer,.preview-toolbar) ${textAndControls}, .hero [data-reveal], .preview-toolbar > span`;
+  const selector = `:is(main,.lagoon-footer,.preview-toolbar) ${textAndControls}, .hero [data-reveal], .preview-toolbar > span, .phu-gallery figcaption`;
   const elements = [...document.querySelectorAll(selector)].filter(element => {
     if (element.closest('.hero')) return element.hasAttribute('data-reveal');
     if (element.matches('li') && element.querySelector('a,button,h3')) return false;
