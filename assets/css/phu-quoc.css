@@ -376,10 +376,10 @@
   color: var(--fg);
 }
 .phu-quoc-page .phu-hero-actions .phu-hero-route {
-  color: var(--phu-light-button);
+  color: var(--lagoon-white);
 }
 .phu-quoc-page .phu-hero-actions .phu-hero-route:is(:hover, :focus-visible) {
-  color: var(--lagoon-white);
+  color: var(--phu-yellow);
   background: transparent;
 }
 .phu-quoc-page .phu-hero-actions .phu-hero-route:is(:hover, :focus-visible) .phu-chevron-disc {
