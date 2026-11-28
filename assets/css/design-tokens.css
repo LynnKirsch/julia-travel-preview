@@ -20,6 +20,7 @@ body:is(.julia-home-page, .phu-quoc-page) {
 
   --jt-card-border: 1px solid #fff;
   --jt-paid-border: 1px solid var(--lagoon-white);
+  --jt-media-inset: clamp(16px, 1.1vw, 24px);
   --jt-pill-radius: 999px;
   --jt-price: clamp(19px, 1.65vw, 40px);
   --jt-card-leading: 1.38;

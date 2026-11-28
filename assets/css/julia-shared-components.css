@@ -219,6 +219,22 @@ body:is(.julia-home-page, .phu-quoc-page) .jt-day-details:focus-visible {
   outline-offset: 4px;
 }
 
+/* Day-plan photos are framed inside the existing media box, so the card
+ * keeps its outer size and the copy/price/actions stay in place. */
+body:is(.julia-home-page, .phu-quoc-page) #phu-quoc-guide .mini-photo,
+body:is(.julia-home-page, .phu-quoc-page) #routes .phu-route .phu-product-media {
+  padding: var(--jt-media-inset);
+}
+body:is(.julia-home-page, .phu-quoc-page) #phu-quoc-guide .mini-photo > img {
+  border-radius: var(--card-radius);
+}
+body:is(.julia-home-page, .phu-quoc-page) #routes .phu-route .phu-product-media img {
+  inset: var(--jt-media-inset);
+  width: calc(100% - 2 * var(--jt-media-inset));
+  height: calc(100% - 2 * var(--jt-media-inset));
+  border-radius: var(--card-radius);
+}
+
 @media (min-width: 1441px) {
   body:is(.julia-home-page, .phu-quoc-page) .media-badge {
     font-size: calc(11.52px + 4.5 * var(--jt-tag-step));
