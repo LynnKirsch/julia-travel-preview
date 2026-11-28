@@ -314,7 +314,7 @@
 
 /* Planning uses exactly the three-column proportions and spacing of the site's blog. */
 .phu-quoc-page main > #planning.phu-section {
-  padding-block-start: calc(var(--section-inset) * 1.2); /* extra air below the full-screen hero */
+  padding-block-start: calc(var(--section-inset) * 1.38); /* slightly more space under the hero */
 }
 @media (min-width: 761px) {
   .phu-quoc-page .phu-planning-grid {
@@ -534,4 +534,26 @@ html.phu-lqip .phu-quoc-page .phu-hero-shell.phu-hero-loaded .phu-hero-photo {
     inset-inline-start: 0;
     margin: 0;
   }
+}
+
+
+/* Keep the blurred hero preview inside the viewport; render shadow only below. */
+.phu-quoc-page .phu-hero-shell {
+  overflow: clip;
+}
+.phu-quoc-page main > #planning.phu-section {
+  position: relative;
+}
+.phu-quoc-page main > #planning.phu-section::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: clamp(36px, 4vw, 70px);
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 58, 50, .30) 0%,
+    rgba(15, 58, 50, .11) 38%,
+    rgba(15, 58, 50, 0) 100%
+  );
 }
