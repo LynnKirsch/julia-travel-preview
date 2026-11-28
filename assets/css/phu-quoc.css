@@ -188,28 +188,35 @@
 .phu-quoc-page .phu-mini h2::after { margin-inline: 0; }
 .phu-quoc-page .phu-mini-copy .v5-button { margin-block-start: clamp(17px, 2vw, 35px); }
 .phu-quoc-page .phu-mini-media { position: relative; grid-column: span 6; }
-.phu-quoc-page .phu-mini-main {
+.phu-quoc-page .phu-mini-main-frame {
+  position: relative;
   width: 100%;
-  height: auto;
   aspect-ratio: 1.22;
-  object-fit: cover;
-  object-position: 48% center;
+  overflow: hidden;
   border-radius: var(--card-radius);
 }
-.phu-quoc-page .phu-mini-inset {
+.phu-quoc-page .phu-mini-inset-frame {
   position: absolute;
   inset-inline-start: -12%;
   inset-block-end: calc(-1 * var(--phu-inset) - 11px);
   width: 40%;
-  height: auto;
   aspect-ratio: 1;
-  object-fit: cover;
-  object-position: center 69%;
+  overflow: hidden;
   border: clamp(3px, .37vw, 7px) solid #fff;
   border-radius: var(--card-radius);
   box-shadow: 0 9px 22px #103f3840;
   rotate: -8deg;
 }
+.phu-quoc-page :is(.phu-mini-main, .phu-mini-inset) {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.phu-quoc-page .phu-mini-main { object-position: 48% center; }
+.phu-quoc-page .phu-mini-inset { object-position: center 69%; }
 .phu-quoc-page .phu-route {
   display: grid;
   grid-column: span 6;
@@ -299,7 +306,7 @@
   .phu-quoc-page .phu-planning-heading { min-height: 0; align-items: center; }
   .phu-quoc-page .phu-planning-heading h3 { max-width: none; }
   .phu-quoc-page :is(.phu-mini-copy, .phu-mini-media, .phu-guide-copy, .phu-guide .phu-product-media) { grid-column: 1 / -1; }
-  .phu-quoc-page .phu-mini-inset { inset-inline-start: -7px; max-width: 155px; }
+  .phu-quoc-page .phu-mini-inset-frame { inset-inline-start: -7px; max-width: 155px; }
   .phu-quoc-page .phu-guide .phu-product-media { aspect-ratio: 3 / 2; min-height: 0; }
 }
 @media (max-width: 520px) {
@@ -419,6 +426,13 @@
     transform: translateY(-4px);
   }
   .phu-quoc-page :is(.phu-route, .phu-guide, .phu-mini):hover .phu-product-media img {
+    transform: scale(1.045);
+  }
+  /* Zoom the photographs inside their fixed rounded frames, not the frames themselves. */
+  .phu-quoc-page .phu-mini :is(.phu-mini-main, .phu-mini-inset) {
+    transition: transform .55s cubic-bezier(.22,.61,.36,1);
+  }
+  .phu-quoc-page .phu-mini:hover :is(.phu-mini-main, .phu-mini-inset) {
     transform: scale(1.045);
   }
 }
@@ -577,11 +591,11 @@ html.phu-lqip .phu-quoc-page .phu-hero-shell.phu-hero-loaded .phu-hero-photo {
 .phu-quoc-page .phu-mini-copy > .phu-intro {
   margin-block-start: clamp(20px, 1.9vw, 36px);
 }
-.phu-quoc-page .phu-mini-main {
+.phu-quoc-page .phu-mini-main-frame {
   aspect-ratio: 1.45;
 }
 @media (min-width: 761px) {
-  .phu-quoc-page .phu-mini-main {
+  .phu-quoc-page .phu-mini-main-frame {
     width: 90%;
     margin-inline-start: auto;
     aspect-ratio: 1.45;
