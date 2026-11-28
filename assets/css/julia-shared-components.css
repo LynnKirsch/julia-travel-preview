@@ -1,0 +1,292 @@
+/*
+ * Julia Travel — shared visual components
+ * Used by: minimal-julia/index.html and minimal-julia/phu-quoc.html.
+ * All common colors, interactive effects, guide-product styling,
+ * day-plan palettes and blog-tag hover states are owned here.
+ * Page-specific geometry and responsive layouts stay in their own stylesheets.
+ */
+body:is(.julia-home-page, .phu-quoc-page) {
+  --jt-yellow: #f3d477;
+  --jt-light-green: #cee6c3;
+  --jt-line: #cdd5b8;
+  --jt-pale-yellow: #faf1d5;
+  --jt-pale-pink: #f8ebe0;
+  --jt-guide-gradient: linear-gradient(135deg, #f4faef 0%, #e9f4e7 50%, #e0eee7 100%);
+  --jt-section-gap: clamp(110px, 9.2vw, 230px);
+  --jt-lift-shadow: 0 8px 18px #403b2720;
+  --jt-chevron-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m6 3 5 5-5 5' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+
+  /* Compatibility aliases for markup/CSS already used by the two pages. */
+  --home-yellow: var(--jt-yellow);
+  --home-light-green: var(--jt-light-green);
+  --home-line: var(--jt-line);
+  --home-guide-gradient: var(--jt-guide-gradient);
+  --home-chevron-mask: var(--jt-chevron-mask);
+  --phu-yellow: var(--jt-yellow);
+  --phu-light-button: var(--jt-light-green);
+  --phu-line: var(--jt-line);
+  --phu-chevron: var(--jt-chevron-mask);
+}
+
+/* The same chevron, circle and sizes across pages. */
+body:is(.julia-home-page, .phu-quoc-page) :is(.home-chevron, .phu-chevron),
+body.julia-home-page .lagoon-review-toggle::after {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: .9em;
+  height: .9em;
+  background-color: currentColor;
+  -webkit-mask: var(--jt-chevron-mask) center / contain no-repeat;
+  mask: var(--jt-chevron-mask) center / contain no-repeat;
+}
+body:is(.julia-home-page, .phu-quoc-page) :is(.home-chevron-disc, .phu-chevron-disc) {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 1.8em;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--jt-yellow);
+  color: var(--fg);
+}
+body:is(.julia-home-page, .phu-quoc-page) .lagoon-article-read :is(.home-chevron-disc, .phu-chevron-disc) {
+  width: 1.55em;
+}
+
+/* Matching hero CTAs: yellow -> pale green; ivory text -> yellow. */
+:is(
+  body.julia-home-page .lagoon-stage .lagoon-actions .lagoon-primary,
+  body.phu-quoc-page .phu-hero-actions .v5-button.primary
+) {
+  border-color: transparent;
+  background: var(--jt-yellow);
+  color: var(--fg);
+}
+:is(
+  body.julia-home-page .lagoon-stage .lagoon-actions .lagoon-primary,
+  body.phu-quoc-page .phu-hero-actions .v5-button.primary
+):is(:hover, :focus-visible) {
+  border-color: transparent;
+  background: var(--jt-light-green);
+  color: var(--fg);
+}
+:is(
+  body.julia-home-page .lagoon-stage .lagoon-actions .lagoon-secondary,
+  body.phu-quoc-page .phu-hero-actions .phu-hero-route
+) {
+  border-color: transparent;
+  background: transparent;
+  color: var(--lagoon-white);
+}
+:is(
+  body.julia-home-page .lagoon-stage .lagoon-actions .lagoon-secondary,
+  body.phu-quoc-page .phu-hero-actions .phu-hero-route
+):is(:hover, :focus-visible) {
+  border-color: transparent;
+  background: transparent;
+  color: var(--jt-yellow);
+}
+:is(
+  body.julia-home-page .lagoon-actions .lagoon-secondary .home-chevron-disc,
+  body.phu-quoc-page .phu-hero-route .phu-chevron-disc
+) {
+  background: var(--jt-light-green);
+}
+:is(
+  body.julia-home-page .lagoon-actions .lagoon-secondary:is(:hover, :focus-visible) .home-chevron-disc,
+  body.phu-quoc-page .phu-hero-route:is(:hover, :focus-visible) .phu-chevron-disc
+) {
+  background: var(--lagoon-white);
+}
+
+/* Identical shadow below the hero, with no lateral overflow. */
+body:is(.julia-home-page, .phu-quoc-page) main > :is(#offers, #planning)::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: clamp(36px, 4vw, 70px);
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 58, 50, .30) 0%,
+    rgba(15, 58, 50, .11) 38%,
+    rgba(15, 58, 50, 0) 100%
+  );
+}
+
+/* The same surface for the full guide, mini-guide and paid plan cards. */
+:is(
+  body.julia-home-page #phu-quoc-guide :is(.product, .mini-card),
+  body.phu-quoc-page :is(.phu-mint-card, .phu-route)
+) {
+  border: 1px solid var(--lagoon-white);
+  background: var(--jt-guide-gradient);
+  box-shadow: var(--card-shadow);
+}
+
+/* Route 1 uses the very pale yellow; route 2 uses soft blush pink. */
+:is(
+  body.julia-home-page #phu-quoc-guide .mini > .mini-card:first-child,
+  body.phu-quoc-page #routes .phu-routes-grid > .phu-route:first-child
+) {
+  background: var(--jt-pale-yellow);
+}
+:is(
+  body.julia-home-page #phu-quoc-guide .mini > .mini-card:nth-child(2),
+  body.phu-quoc-page #routes .phu-routes-grid > .phu-route:nth-child(2)
+) {
+  background: var(--jt-pale-pink);
+}
+:is(
+  body.julia-home-page #phu-quoc-guide .mini > .mini-card:first-child .mini-purchase .v5-button,
+  body.phu-quoc-page #routes .phu-route:first-child .phu-purchase .v5-button.primary
+):not(:hover):not(:focus-visible) {
+  background: var(--jt-light-green);
+  color: var(--fg);
+}
+:is(
+  body.julia-home-page #phu-quoc-guide .mini > .mini-card:nth-child(2) .mini-purchase .v5-button,
+  body.phu-quoc-page #routes .phu-route:nth-child(2) .phu-purchase .v5-button.primary
+):not(:hover):not(:focus-visible) {
+  background: var(--jt-yellow);
+  color: var(--fg);
+}
+:is(
+  body.julia-home-page #phu-quoc-guide .mini-purchase .v5-button,
+  body.phu-quoc-page #routes .phu-purchase .v5-button.primary
+):is(:hover, :focus-visible) {
+  background: var(--lagoon-deep);
+  color: var(--lagoon-white);
+}
+
+/* Matching full-guide typography and room between description and list. */
+:is(
+  body.julia-home-page #phu-quoc-guide .product h3,
+  body.phu-quoc-page .phu-guide h3
+) {
+  margin: 0;
+  font-size: clamp(32px, 3.1vw, 50px);
+  line-height: 1.06;
+  letter-spacing: -.04em;
+}
+:is(
+  body.julia-home-page #phu-quoc-guide .product > div:last-child > p,
+  body.phu-quoc-page .phu-guide-copy > p
+) {
+  margin-block-end: clamp(18px, 1.8vw, 34px);
+  font-size: var(--card-copy);
+  line-height: 1.38;
+}
+:is(
+  body.julia-home-page #phu-quoc-guide .product ul,
+  body.phu-quoc-page .phu-guide ul
+) {
+  display: grid;
+  gap: .38em;
+  margin: 0 0 .3em;
+  padding: 0;
+  list-style: none;
+}
+:is(
+  body.julia-home-page #phu-quoc-guide .product li,
+  body.phu-quoc-page .phu-guide li
+) {
+  display: grid;
+  grid-template-columns: 1.15em minmax(0, 1fr);
+  align-items: center;
+  gap: .58em;
+  margin: 0;
+  padding-inline-start: 0;
+  background: none;
+  font-size: var(--card-copy);
+  line-height: 1.38;
+}
+:is(
+  body.julia-home-page #phu-quoc-guide .product li,
+  body.phu-quoc-page .phu-guide li
+)::before {
+  content: "";
+  width: 1.15em;
+  height: 1.15em;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--jt-yellow) 64%, var(--lagoon-white))
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m4 8 2.5 2.5L12 5' fill='none' stroke='%23153b32' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 85% no-repeat;
+}
+
+/* Shared prices, separators and guide purchase-button dimensions. */
+:is(
+  body.julia-home-page #phu-quoc-guide :is(.guide-purchase, .mini-purchase),
+  body.phu-quoc-page .phu-purchase
+) {
+  width: 100%;
+  margin-block-start: auto;
+  padding-block-start: clamp(10px, 1.3vw, 24px);
+  border-top: 1px solid var(--jt-line);
+}
+:is(
+  body.julia-home-page #phu-quoc-guide :is(.product, .mini-card) strong,
+  body.phu-quoc-page :is(.phu-route, .phu-guide) .phu-purchase strong
+) {
+  font-size: clamp(19px, 1.65vw, 40px);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+:is(
+  body.julia-home-page #phu-quoc-guide :is(.guide-purchase, .mini-purchase) .v5-button,
+  body.phu-quoc-page .phu-purchase .v5-button
+) {
+  border-color: transparent;
+  padding-inline: clamp(12px, 1.35vw, 28px);
+}
+
+/* Same hover lift and photo zoom across both pages. */
+@media (hover: hover) and (pointer: fine) {
+  :is(
+    body.julia-home-page #destinations .lagoon-destination,
+    body.julia-home-page #phu-quoc-guide :is(.product, .mini-card),
+    body.phu-quoc-page :is(.phu-route, .phu-guide, .phu-mini)
+  ) {
+    transition: transform .32s cubic-bezier(.22,.61,.36,1), box-shadow .32s ease;
+  }
+  :is(
+    body.julia-home-page #destinations .lagoon-destination,
+    body.julia-home-page #phu-quoc-guide :is(.product, .mini-card),
+    body.phu-quoc-page :is(.phu-route, .phu-guide, .phu-mini)
+  ):hover {
+    transform: translateY(-4px);
+    box-shadow: var(--jt-lift-shadow);
+  }
+  :is(
+    body.julia-home-page #phu-quoc-guide :is(.cover-placeholder, .mini-photo) img,
+    body.phu-quoc-page :is(.phu-product-media img, .phu-mini-main, .phu-mini-inset)
+  ) {
+    transition: transform .55s cubic-bezier(.22,.61,.36,1);
+  }
+  body.julia-home-page #phu-quoc-guide :is(.product, .mini-card):hover :is(.cover-placeholder, .mini-photo) img,
+  body.phu-quoc-page :is(.phu-route, .phu-guide):hover .phu-product-media img,
+  body.phu-quoc-page .phu-mini:hover :is(.phu-mini-main, .phu-mini-inset) {
+    transform: scale(1.045);
+  }
+  /* The free-resource cards also lift, without their earlier 3D tilt. */
+  body.julia-home-page #free-materials .lagoon-material-card {
+    transform: none;
+    transition: transform .32s cubic-bezier(.22,.61,.36,1), box-shadow .32s ease;
+  }
+  body.julia-home-page #free-materials .lagoon-materials-item:hover .lagoon-material-card {
+    transform: translateY(-4px);
+    box-shadow: var(--jt-lift-shadow);
+  }
+}
+
+/* Lighten the blog category pills on hover and keyboard focus. */
+body:is(.julia-home-page, .phu-quoc-page) #useful-articles .lagoon-article-panel .lagoon-reading-time {
+  transition: background-color .3s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  body:is(.julia-home-page, .phu-quoc-page) #useful-articles .lagoon-article:hover .lagoon-reading-time {
+    background-color: #fff9ec;
+  }
+}
+body:is(.julia-home-page, .phu-quoc-page) #useful-articles .lagoon-article:focus-within .lagoon-reading-time {
+  background-color: #fff9ec;
+}
