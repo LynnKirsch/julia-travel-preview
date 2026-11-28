@@ -463,3 +463,39 @@
     to { opacity: 1; scale: 1; }
   }
 }
+
+
+/* Hero LQIP: tiny preview from the very same Phu Quoc image; no dark blank while loading. */
+.phu-quoc-page .phu-hero-shell {
+  background-color: #8ecac4; /* fallback only, never the intended loading state */
+}
+.phu-quoc-page .phu-hero-shell::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/webp;base64,UklGRuwBAABXRUJQVlA4IOABAAAQCwCdASpAACQAPvl0r1IqpqQiqrv4AVAfCWwAnTlBfgHG6c38Ry2O+AFMl2H4mbkey4aF4chPAui8oBfvYn2NLkkTU2Fw0y/9ScJ7LObxjGALI6QUObDxWHr67365PK70AP7r39Z6uionpPdXM//wQS2gCiFOLQoYt2Wj09GQGY1HeLN9tcYlzODkxxgooFcfvU7L5544/66SeWB+QX935FxZUS8H2BhYASXaxsMKoZk6wlqkLnCeBAfox5iE4lj+DT/4X/yu2ZNXQs8HsaQVzVPVUExpsVbp4GO+nK52Sme3Jaw9v4ZkAvRgyK77PE48Z2EQiyEKeQZEAw9SvsSaVulKE/gEw0JL/Gn+d1vVH8HgjkkijZaFxlXQSJIVnXJGPiAUcEIAwkBKGhbD7xhhIzcQFMc1yiZz10NkK/lKkaEK6Z9HTZ3nN/dITaFtpFQV6xmWm8+wmmM0HywLjzItSB5BLlEFbpPTree4Qi2uDpL6F7txWe9PDEKikWQnH6Oh1hOYdNWPVemNyBGhWTEmJlGp9N49mWLQ2LA+zKI9p/B9yR8COwd8YP9BLJ4x7XUvMi+j03tuXaYENxxV5TxkMhOvy5hvBuTQ80m/Jn4D8AlcJBGbkrJcsNiqBVegAAA=");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  filter: blur(18px);
+  transform: scale(1.04);
+}
+html.phu-lqip .phu-quoc-page .phu-hero-photo {
+  opacity: 0;
+  filter: blur(15px);
+  transition:
+    opacity 680ms ease-out,
+    filter 1060ms cubic-bezier(.2,.7,.25,1);
+}
+html.phu-lqip .phu-quoc-page .phu-hero-shell.phu-hero-loaded .phu-hero-photo {
+  opacity: 1;
+  filter: blur(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  html.phu-lqip .phu-quoc-page .phu-hero-photo {
+    filter: none;
+    transition: none;
+  }
+}
