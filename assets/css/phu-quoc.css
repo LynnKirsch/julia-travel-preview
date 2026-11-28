@@ -308,3 +308,158 @@
   .phu-quoc-page .phu-gallery figure { grid-column: span 6; }
   .phu-quoc-page .phu-hero .phu-hero-route { justify-content: flex-start; }
 }
+
+
+/* Scoped refinements: planning/blog rhythm, guide emphasis, hover and scroll motion — 2026-11-28. */
+
+/* Planning uses exactly the three-column proportions and spacing of the site's blog. */
+.phu-quoc-page main > #planning.phu-section {
+  padding-block-start: calc(var(--section-inset) * .8775); /* +35% to the original .65 inset */
+}
+@media (min-width: 761px) {
+  .phu-quoc-page .phu-planning-grid {
+    --reference-row: min(calc(100vw - 32px), 1290px);
+    --reference-gap: clamp(19px, 2.06vw, 30px);
+    --reference-card: calc((var(--reference-row) - 2 * var(--reference-gap)) / 3);
+    --planning-drop: clamp(24px, 2.5vw, 36px);
+    grid-template-columns: repeat(3, minmax(0, min(var(--reference-card), calc((100% - 2 * var(--reference-gap)) / 3))));
+    column-gap: var(--reference-gap);
+    justify-content: space-between;
+    padding-block-end: var(--planning-drop);
+  }
+  .phu-quoc-page .phu-planning-grid > .phu-planning-card {
+    grid-column: auto; /* previous span 4 belongs to the old 12-column grid */
+  }
+  .phu-quoc-page .phu-planning-grid > .phu-planning-card:nth-child(2) {
+    position: relative;
+    top: var(--planning-drop);
+  }
+}
+@media (max-width: 760px) {
+  .phu-quoc-page .phu-planning-grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 440px;
+    margin-inline: auto;
+    gap: 22px;
+  }
+  .phu-quoc-page .phu-planning-grid > .phu-planning-card {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Softer, slightly hand-shaped takeaway labels and numbered markers. */
+.phu-quoc-page .phu-planning-card .phu-takeaway {
+  background: #eaf3e2;
+  border-radius: 26px 19px 28px 17px / 18px 27px 19px 25px;
+}
+.phu-quoc-page .phu-planning-card:nth-child(2) .phu-takeaway {
+  background: #fff3d0;
+  border-radius: 19px 27px 18px 30px / 27px 20px 28px 18px;
+}
+.phu-quoc-page .phu-planning-card:nth-child(3) .phu-takeaway {
+  background: #edf5e5;
+  border-radius: 29px 17px 23px 28px / 20px 27px 18px 25px;
+}
+.phu-quoc-page .phu-planning-card:nth-child(1) .lagoon-offers-number {
+  border-radius: 53% 46% 55% 47% / 47% 55% 46% 54%;
+}
+.phu-quoc-page .phu-planning-card:nth-child(2) .lagoon-offers-number {
+  border-radius: 44% 55% 48% 57% / 58% 45% 55% 46%;
+}
+.phu-quoc-page .phu-planning-card:nth-child(3) .lagoon-offers-number {
+  border-radius: 57% 46% 53% 45% / 46% 56% 45% 54%;
+}
+
+/* First-screen interactions, preserving the background photo and composition. */
+.phu-quoc-page .phu-hero-actions .v5-button.primary:is(:hover, :focus-visible) {
+  background: var(--phu-light-button);
+  color: var(--fg);
+}
+.phu-quoc-page .phu-hero-actions .phu-hero-route {
+  color: var(--phu-light-button);
+}
+.phu-quoc-page .phu-hero-actions .phu-hero-route:is(:hover, :focus-visible) {
+  color: var(--lagoon-white);
+  background: transparent;
+}
+.phu-quoc-page .phu-hero-actions .phu-hero-route:is(:hover, :focus-visible) .phu-chevron-disc {
+  background: var(--lagoon-white);
+}
+
+/* Mini-guide tag is light green, the headline reads in two lines on desktop. */
+.phu-quoc-page .phu-mini-label {
+  background: #e3f0dc;
+  color: #427653;
+  font-size: clamp(10px, .83vw, 14px);
+  line-height: 1.2;
+}
+.phu-quoc-page .phu-mini h2 {
+  max-width: none;
+  font-size: clamp(28px, 2.55vw, 48px);
+  line-height: 1.12;
+  letter-spacing: -.038em;
+  text-wrap: balance;
+}
+.phu-quoc-page .phu-dark-action:is(:hover, :focus-visible) {
+  background: var(--phu-light-button);
+  color: var(--fg);
+}
+
+/* Gentle whole-card hover emphasis; images zoom only within their frames. */
+@media (hover: hover) and (pointer: fine) {
+  .phu-quoc-page :is(.phu-route, .phu-guide) {
+    transition: box-shadow .32s ease;
+  }
+  .phu-quoc-page :is(.phu-route, .phu-guide) .phu-product-media img {
+    transition: transform .55s cubic-bezier(.22,.61,.36,1);
+  }
+  .phu-quoc-page :is(.phu-route, .phu-guide):hover {
+    box-shadow: 0 16px 34px #403b2736;
+  }
+  .phu-quoc-page :is(.phu-route, .phu-guide):hover .phu-product-media img {
+    transform: scale(1.045);
+  }
+}
+
+/* Full-guide hierarchy: bigger heading, stronger list separation, close action pair. */
+.phu-quoc-page .phu-guide h3 {
+  font-size: clamp(40px, 3.8vw, 78px);
+  line-height: 1.06;
+  letter-spacing: -.04em;
+}
+.phu-quoc-page .phu-guide-copy > p {
+  margin-block-end: clamp(18px, 1.8vw, 34px);
+}
+@media (min-width: 1200px) {
+  .phu-quoc-page .phu-guide .phu-purchase {
+    justify-content: flex-start;
+    column-gap: clamp(12px, 1.25vw, 24px);
+  }
+  .phu-quoc-page .phu-guide .phu-purchase > .v5-button {
+    margin-inline-start: auto;
+  }
+}
+@media (min-width: 901px) and (max-width: 1199px) {
+  .phu-quoc-page .phu-guide .phu-purchase {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+}
+
+/* The existing observer adds cascade-reveal to text and buttons on scroll.
+   Keep text cascading; make actions pop in place without changing their hover layout. */
+@media (prefers-reduced-motion: no-preference) {
+  .phu-quoc-page :is(main, .lagoon-footer) .cascade-reveal[data-reveal-state="shown"] {
+    --reveal-duration: 640ms;
+    --reveal-offset: 15px;
+    --reveal-delay: var(--cascade-delay, 0ms);
+  }
+  .phu-quoc-page :is(main, .lagoon-footer) :is(a, button, input).cascade-reveal[data-reveal-state="shown"] {
+    animation: phu-action-pop 440ms cubic-bezier(.2,.75,.3,1) var(--cascade-delay,0ms) backwards;
+    transform-origin: center;
+  }
+  @keyframes phu-action-pop {
+    from { opacity: 0; scale: .76; }
+    to { opacity: 1; scale: 1; }
+  }
+}
