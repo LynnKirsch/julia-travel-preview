@@ -603,3 +603,20 @@ html.phu-lqip .phu-quoc-page .phu-hero-shell.phu-hero-loaded .phu-hero-photo {
     aspect-ratio: 1.45;
   }
 }
+
+
+/* Day plans: service-card 02 pale yellow and service-card 03 pale blush pink. */
+.phu-quoc-page #routes .phu-routes-grid > .phu-route:first-child {
+  background: #faf1d5;
+}
+.phu-quoc-page #routes .phu-routes-grid > .phu-route:nth-child(2) {
+  background: #f8ebe0;
+}
+.phu-quoc-page #routes .phu-route:first-child .phu-purchase .v5-button.primary:not(:hover):not(:focus-visible) {
+  background: #cee6c3;
+  color: var(--fg);
+}
+.phu-quoc-page #routes .phu-route:nth-child(2) .phu-purchase .v5-button.primary:not(:hover):not(:focus-visible) {
+  background: #f3d477;
+  color: var(--fg);
+}
