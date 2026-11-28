@@ -114,28 +114,29 @@ body:is(.julia-home-page, .phu-quoc-page) main > :is(#offers, #planning)::before
   );
 }
 
-/* The same surface for the full guide, mini-guide and paid plan cards. */
+/* Solid light surfaces restored for paid guides and day plans on both pages. */
 :is(
   body.julia-home-page #phu-quoc-guide :is(.product, .mini-card),
-  body.phu-quoc-page :is(.phu-mint-card, .phu-route)
+  body.phu-quoc-page :is(.phu-guide, .phu-route, .phu-mini)
 ) {
   border: 1px solid var(--lagoon-white);
-  background: var(--jt-guide-gradient);
   box-shadow: var(--card-shadow);
 }
-
-/* Route 1 uses the very pale yellow; route 2 uses soft blush pink. */
 :is(
-  body.julia-home-page #phu-quoc-guide .mini > .mini-card:first-child,
-  body.phu-quoc-page #routes .phu-routes-grid > .phu-route:first-child
+  body.julia-home-page #phu-quoc-guide .product,
+  body.phu-quoc-page .phu-guide
 ) {
-  background: var(--jt-pale-yellow);
+  background: #eaf5e8;
 }
 :is(
-  body.julia-home-page #phu-quoc-guide .mini > .mini-card:nth-child(2),
-  body.phu-quoc-page #routes .phu-routes-grid > .phu-route:nth-child(2)
+  body.julia-home-page #phu-quoc-guide .mini-card,
+  body.phu-quoc-page #routes .phu-route
 ) {
-  background: var(--jt-pale-pink);
+  background: var(--lagoon-white);
+}
+/* The free mini-guide retains its separate soft mint gradient. */
+body.phu-quoc-page .phu-mini {
+  background: var(--jt-guide-gradient);
 }
 :is(
   body.julia-home-page #phu-quoc-guide .mini > .mini-card:first-child .mini-purchase .v5-button,
