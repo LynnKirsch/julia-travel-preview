@@ -326,8 +326,8 @@
   padding: var(--v5-card-padding);
 }
 
-#offers .card:nth-child(2) { --service-background: #faf1d5; }
-#offers .card:nth-child(3) { --service-background: #f8ebe0; }
+#offers .card:nth-child(2) { --service-background: var(--jt-pale-yellow); }
+#offers .card:nth-child(3) { --service-background: var(--jt-pale-pink); }
 #offers .lagoon-offers-number {
   width: clamp(46px, 4.7vw, 67px);
   margin-bottom: clamp(20px, 1.67vw, 44px);
@@ -637,15 +637,7 @@
   gap: var(--purchase-copy-gap);
 }
 .mini .mini-card p { margin: 0; }
-.mini-purchase .v5-button {
-  border-color: transparent;
-  background: #f3d477;
-  color: var(--fg);
-}
-.mini-purchase .v5-button:is(:hover, :focus-visible) {
-  background: var(--lagoon-deep);
-  color: var(--lagoon-white);
-}
+/* Day-plan button palette and hovers now live in julia-shared-components.css. */
 #phu-quoc-guide .subhead {
   margin-top: calc(var(--section-inset) * 2);
   text-align: center;
