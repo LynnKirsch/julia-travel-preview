@@ -571,3 +571,19 @@ html.phu-lqip .phu-quoc-page .phu-hero-shell.phu-hero-loaded .phu-hero-photo {
 .phu-quoc-page #useful-articles .lagoon-article:focus-within .lagoon-reading-time {
   background-color: #fff9ec;
 }
+
+
+/* Compact free mini-guide: smaller hero photograph and calmer copy spacing. */
+.phu-quoc-page .phu-mini-copy > .phu-intro {
+  margin-block-start: clamp(26px, 2.4vw, 46px);
+}
+.phu-quoc-page .phu-mini-main {
+  aspect-ratio: 1.45;
+}
+@media (min-width: 761px) {
+  .phu-quoc-page .phu-mini-main {
+    width: 90%;
+    margin-inline-start: auto;
+    aspect-ratio: 1.45;
+  }
+}
