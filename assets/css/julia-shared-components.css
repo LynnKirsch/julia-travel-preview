@@ -5,27 +5,30 @@
  * day-plan palettes and blog-tag hover states are owned here.
  * Page-specific geometry and responsive layouts stay in their own stylesheets.
  */
-body:is(.julia-home-page, .phu-quoc-page) {
-  --jt-yellow: #f3d477;
-  --jt-light-green: #cee6c3;
-  --jt-line: #cdd5b8;
-  --jt-pale-yellow: #faf1d5;
-  --jt-pale-pink: #f8ebe0;
-  --jt-guide-gradient: linear-gradient(135deg, #f4faef 0%, #e9f4e7 50%, #e0eee7 100%);
-  --jt-section-gap: clamp(110px, 9.2vw, 230px);
-  --jt-lift-shadow: 0 8px 18px #403b2720;
-  --jt-chevron-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m6 3 5 5-5 5' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+.concept-lagoon :is(.card, .product, .lagoon-destination, .lagoon-materials-item .lagoon-material-card, .lagoon-article, .lagoon-review-card) {
+  border: var(--jt-card-border);
+  box-shadow: var(--card-shadow);
+}
+.concept-lagoon :is(.card, .product, .lagoon-destination-copy, .lagoon-material-copy, .lagoon-article-panel, .lagoon-review-card) h3 {
+  font-size: var(--card-title);
+  line-height: 1.13;
+}
+.concept-lagoon :is(.card > p, .mini-card p, .product p, .product li, .lagoon-destination-copy p, .lagoon-material-copy > p, .lagoon-article-panel > p, .lagoon-review-text) {
+  font-size: var(--card-copy);
+  line-height: var(--jt-card-leading);
+}
+:where(.v5-grid) { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:var(--v5-gap); }
 
-  /* Compatibility aliases for markup/CSS already used by the two pages. */
-  --home-yellow: var(--jt-yellow);
-  --home-light-green: var(--jt-light-green);
-  --home-line: var(--jt-line);
-  --home-guide-gradient: var(--jt-guide-gradient);
-  --home-chevron-mask: var(--jt-chevron-mask);
-  --phu-yellow: var(--jt-yellow);
-  --phu-light-button: var(--jt-light-green);
-  --phu-line: var(--jt-line);
-  --phu-chevron: var(--jt-chevron-mask);
+.concept-lagoon :is(
+  .v5-wrap,
+  .lagoon-materials > .container,
+  .lagoon-blog > .container,
+  .lagoon-faq-layout,
+  .lagoon-reviews > .container
+) {
+  width: var(--section-width);
+  max-width: none;
+  margin-inline: auto;
 }
 
 /* The same chevron, circle and sizes across pages. */
@@ -119,7 +122,7 @@ body:is(.julia-home-page, .phu-quoc-page) main > :is(#offers, #planning)::before
   body.julia-home-page #phu-quoc-guide :is(.product, .mini-card),
   body.phu-quoc-page :is(.phu-guide, .phu-route, .phu-mini)
 ) {
-  border: 1px solid var(--lagoon-white);
+  border: var(--jt-paid-border);
   box-shadow: var(--card-shadow);
 }
 /* Identical solid ivory surface for the full guide and both day plans. */
@@ -172,7 +175,7 @@ body.phu-quoc-page .phu-mini {
   margin-block-start: 0;
   margin-block-end: clamp(18px, 1.8vw, 34px);
   font-size: var(--card-copy);
-  line-height: 1.38;
+  line-height: var(--jt-card-leading);
 }
 :is(
   body.julia-home-page #phu-quoc-guide .product ul,
@@ -196,7 +199,7 @@ body.phu-quoc-page .phu-mini {
   padding-inline-start: 0;
   background: none;
   font-size: var(--card-copy);
-  line-height: 1.38;
+  line-height: var(--jt-card-leading);
 }
 :is(
   body.julia-home-page #phu-quoc-guide .product li,
@@ -224,7 +227,7 @@ body.phu-quoc-page .phu-mini {
   body.julia-home-page #phu-quoc-guide :is(.product, .mini-card) strong,
   body.phu-quoc-page :is(.phu-route, .phu-guide) .phu-purchase strong
 ) {
-  font-size: clamp(19px, 1.65vw, 40px);
+  font-size: var(--jt-price);
   line-height: 1.2;
   white-space: nowrap;
 }
@@ -243,34 +246,34 @@ body.phu-quoc-page .phu-mini {
     body.julia-home-page #phu-quoc-guide :is(.product, .mini-card),
     body.phu-quoc-page :is(.phu-route, .phu-guide, .phu-mini)
   ) {
-    transition: transform .32s cubic-bezier(.22,.61,.36,1), box-shadow .32s ease;
+    transition: transform var(--jt-lift-duration) var(--jt-motion-ease), box-shadow var(--jt-lift-duration) ease;
   }
   :is(
     body.julia-home-page #destinations .lagoon-destination,
     body.julia-home-page #phu-quoc-guide :is(.product, .mini-card),
     body.phu-quoc-page :is(.phu-route, .phu-guide, .phu-mini)
   ):hover {
-    transform: translateY(-4px);
+    transform: translateY(var(--jt-lift));
     box-shadow: var(--jt-lift-shadow);
   }
   :is(
     body.julia-home-page #phu-quoc-guide :is(.cover-placeholder, .mini-photo) img,
     body.phu-quoc-page :is(.phu-product-media img, .phu-mini-main, .phu-mini-inset)
   ) {
-    transition: transform .55s cubic-bezier(.22,.61,.36,1);
+    transition: transform var(--jt-photo-duration) var(--jt-motion-ease);
   }
   body.julia-home-page #phu-quoc-guide :is(.product, .mini-card):hover :is(.cover-placeholder, .mini-photo) img,
   body.phu-quoc-page :is(.phu-route, .phu-guide):hover .phu-product-media img,
   body.phu-quoc-page .phu-mini:hover :is(.phu-mini-main, .phu-mini-inset) {
-    transform: scale(1.045);
+    transform: scale(var(--jt-photo-scale));
   }
   /* The free-resource cards also lift, without their earlier 3D tilt. */
   body.julia-home-page #free-materials .lagoon-material-card {
     transform: none;
-    transition: transform .32s cubic-bezier(.22,.61,.36,1), box-shadow .32s ease;
+    transition: transform var(--jt-lift-duration) var(--jt-motion-ease), box-shadow var(--jt-lift-duration) ease;
   }
   body.julia-home-page #free-materials .lagoon-materials-item:hover .lagoon-material-card {
-    transform: translateY(-4px);
+    transform: translateY(var(--jt-lift));
     box-shadow: var(--jt-lift-shadow);
   }
 }
@@ -281,9 +284,46 @@ body:is(.julia-home-page, .phu-quoc-page) #useful-articles .lagoon-article-panel
 }
 @media (hover: hover) and (pointer: fine) {
   body:is(.julia-home-page, .phu-quoc-page) #useful-articles .lagoon-article:hover .lagoon-reading-time {
-    background-color: #fff9ec;
+    background-color: var(--lagoon-white);
   }
 }
 body:is(.julia-home-page, .phu-quoc-page) #useful-articles .lagoon-article:focus-within .lagoon-reading-time {
-  background-color: #fff9ec;
+  background-color: var(--lagoon-white);
+}
+
+/* Component-specific text sizes converge on the wide role at 1920px. */
+@media (1440px <= width < 1920px) {
+  .concept-lagoon .lagoon-contact, .concept-lagoon .lagoon-reviews-controls button, .concept-lagoon .lagoon-material-footer .lagoon-guide-cta {
+    font-size: calc(14px + 5 * var(--jt-desktop-step));
+  }
+  .concept-lagoon .lagoon-review-toggle {
+    font-size: calc(13px + 6 * var(--jt-desktop-step));
+  }
+  .concept-lagoon .lagoon-guide-cta {
+    font-size: calc(17px + 2 * var(--jt-desktop-step));
+  }
+  .concept-lagoon :is(.lagoon-footer-form button, .lagoon-footer-field input) {
+    font-size: calc(16px + 3 * var(--jt-desktop-step));
+  }
+  .concept-lagoon .lagoon-footer-intro p {
+    font-size: calc(17px + 5 * var(--jt-desktop-step));
+  }
+  .concept-lagoon .lagoon-footer :is(.lagoon-footer-brand p, .lagoon-footer-nav ul, .lagoon-footer-contacts ul) {
+    font-size: calc(15px + 5 * var(--jt-desktop-step));
+  }
+  .concept-lagoon .lagoon-footer h3 {
+    font-size: calc(22.896px + 5.104 * var(--jt-desktop-step));
+  }
+  .concept-lagoon .lagoon-footer-contacts small {
+    font-size: calc(12px + 4 * var(--jt-desktop-step));
+  }
+  .julia-home-page #phu-quoc-guide :is(.guide-purchase, .mini-purchase) .v5-button {
+    font-size: calc(14.688px + 4.312 * var(--jt-desktop-step));
+  }
+  .concept-lagoon :is(.v5-button, .lagoon-article-read) { font-size: var(--grid-action-copy); }
+}
+
+@media (1920px <= width < 2560px) {
+  .concept-lagoon .site-nav :is(a, button) { font-size: clamp(14px, calc(14px + (100vw - 1920px) * 0.00625), 18px); }
+  .concept-lagoon .media-badge { font-size: clamp(15.36px, calc(15.36px + (100vw - 1920px) * 0.00725), 20px); }
 }

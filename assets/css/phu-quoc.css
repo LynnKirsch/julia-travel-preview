@@ -206,7 +206,7 @@
 .phu-quoc-page .phu-route:nth-child(2) .phu-product-media img { object-position: center 62%; }
 .phu-quoc-page :is(.phu-route-copy, .phu-guide-copy) { display: flex; flex-direction: column; min-width: 0; gap: clamp(9px, 1.05vw, 22px); }
 .phu-quoc-page .phu-route-copy { padding: var(--phu-inset); }
-.phu-quoc-page :is(.phu-route-copy > p, .phu-guide-copy > p, .phu-guide li) { font-size: var(--card-copy); line-height: 1.38; }
+.phu-quoc-page :is(.phu-route-copy > p, .phu-guide-copy > p, .phu-guide li) { font-size: var(--card-copy); line-height: var(--jt-card-leading); }
 .phu-quoc-page .phu-purchase {
   display: flex;
   flex-wrap: wrap;
@@ -422,7 +422,7 @@ html.phu-lqip .phu-quoc-page .phu-hero-shell.phu-hero-loaded .phu-hero-photo {
 
 /* Mini-guide badge: larger ivory tag aligned to top edge of the photo. */
 .phu-quoc-page .phu-mini-label {
-  background: #fff9ec;
+  background: var(--lagoon-white);
   color: #427653;
   font-size: clamp(12px, .95vw, 17px);
   padding: .68em 1.28em;

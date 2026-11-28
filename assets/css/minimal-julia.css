@@ -1,12 +1,12 @@
 .lagoon-actions a { display:inline-flex; align-items:center; justify-content:center; min-height:clamp(44px,4.2vw,60px); padding:8px 24px; border:1px solid #f2faf4; border-radius:14px; font-size:18px; font-weight:750; text-decoration:none; }
-.lagoon-actions a:hover { background:#fff9ec; color:#153b32; }
+.lagoon-actions a:hover { background:var(--lagoon-white); color:var(--fg); }
 .v5-section header { text-align:center; margin:0 auto 42px; } .v5-section h2 { font-size:clamp(30px,3.4vw,48px); line-height:1.14; letter-spacing:-.03em; margin:0 0 16px; }
 .v5-section h3 { font-size:23px; line-height:1.2; margin:0 0 14px; } .v5-section p { line-height:1.65; } .v5-section header p { margin:0; }
-.v5-grid { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:var(--v5-gap); }
-.card { background:#fff9ec; padding:28px; display:flex; flex-direction:column; gap:12px; } .card p { margin:0; } .card > .v5-button { margin-top:auto; }
-.v5-button { display:inline-flex; justify-content:center; padding:14px 18px; border:1px solid #aab391; border-radius:10px; color:#153b32; text-decoration:none; font-weight:700; } .v5-button.primary { color:#fff9ec; background:#103f38; } .v5-button:hover { background:#cee6c3; color:#153b32; } .photo-placeholder { width:100%; height:240px; object-fit:cover; } .photo-placeholder,.cover-placeholder { display:grid; place-items:center; padding:20px; background:#d4ded2; color:#50614c; text-align:center; } .pending { margin-top:auto; } .pending { font-size:14px; color:#50614c; }
+
+.card { background:var(--lagoon-white); padding:28px; display:flex; flex-direction:column; gap:12px; } .card p { margin:0; } .card > .v5-button { margin-top:auto; }
+.v5-button { display:inline-flex; justify-content:center; padding:14px 18px; border:1px solid #aab391; border-radius:10px; color:var(--fg); text-decoration:none; font-weight:700; } .v5-button.primary { color:var(--lagoon-white); background:var(--lagoon-deep); } .v5-button:hover { background:var(--jt-light-green); color:var(--fg); } .photo-placeholder { width:100%; height:240px; object-fit:cover; } .photo-placeholder,.cover-placeholder { display:grid; place-items:center; padding:20px; background:#d4ded2; color:#50614c; text-align:center; } .pending { margin-top:auto; } .pending { font-size:14px; color:#50614c; }
 .about { align-items:center; } .about > img { grid-column:span 5; width:100%; height:520px; object-fit:cover; border-radius:16px; } .about > div { grid-column:7 / span 6; } .about p + p { margin-top:22px; }
-.product { background:#fff9ec; } .product li { margin:8px 0; } .product strong,.mini strong { font-size:22px; }
+.product { background:var(--lagoon-white); } .product li { margin:8px 0; } .product strong,.mini strong { font-size:22px; }
 @media(max-width:900px) { .about > img,.about > div { grid-column:span 6; } .mini > * { grid-column:span 12; } }
 @media(max-width:640px) { .about > img,.about > div,.product > :first-child,.product > :last-child { grid-column:span 12; } .lagoon-actions a { width:100%; } }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition-duration:.01ms !important; animation-duration:.01ms !important; } }
@@ -14,9 +14,9 @@
 /* Shared grid and deliberately quiet states for the fifth concept. */
 .v5-button { align-items:center; min-height:48px; font:inherit; font-weight:700; text-align:center; }
 .v5-button:disabled { opacity:.64; cursor:not-allowed; }
-.v5-button:disabled:hover { background:transparent; color:#153b32; }
-.v5-button.primary:disabled:hover { background:#103f38; color:#fff9ec; }
-.v5-button:focus-visible { outline:3px solid #103f38; outline-offset:3px; }
+.v5-button:disabled:hover { background:transparent; color:var(--fg); }
+.v5-button.primary:disabled:hover { background:var(--lagoon-deep); color:var(--lagoon-white); }
+.v5-button:focus-visible { outline:3px solid var(--lagoon-deep); outline-offset:3px; }
 .button-row { display:flex; flex-wrap:wrap; gap:12px; margin-top:22px; }
 .product small,.mini small { display:block; font-size:12px; font-weight:400; color:#50614c; }
 .mini > * { grid-column:span 6; }
@@ -33,7 +33,7 @@
 }
 
 /* Refinements for concept 05. */
-.concept-lagoon .hero h1 { font-size:min(68px, 8cqi); line-height:1.1; }
+.concept-lagoon .hero h1 { font-size:clamp(52px, 8cqi, 68px); line-height:1.1; }
 .lagoon-description { font-size:clamp(15px,1.25vw,18px); line-height:1.48; margin-top:16px; }
 .lagoon-actions { margin-top:26px; gap:14px; }
 .lagoon-actions a,.lagoon-contact { display:inline-flex; align-items:center; justify-content:center; line-height:1.2; text-align:center; }
@@ -46,11 +46,11 @@
 .about > div .v5-button { margin-top:18px; }
 .cover-placeholder { position:relative; padding:0; overflow:hidden; }
 .cover-placeholder img { width:100%; height:100%; position:absolute; inset:0; object-fit:cover; }
-.cover-placeholder span { position:relative; align-self:end; margin:16px; padding:6px 10px; background:#fff9ec; border-radius:6px; font-size:12px; }
+.cover-placeholder span { position:relative; align-self:end; margin:16px; padding:6px 10px; background:var(--lagoon-white); border-radius:6px; font-size:12px; }
 .v5-button,.lagoon-contact,.site-nav a { transition:background-color .2s,color .2s,border-color .2s; }
-.v5-button:hover { background:#cee6c3; color:#153b32; }
-.v5-button.primary:hover { background:#103f38; color:white; }
-.lagoon-contact:hover { background:#fff9ec; color:#153b32; }
+.v5-button:hover { background:var(--jt-light-green); color:var(--fg); }
+.v5-button.primary:hover { background:var(--lagoon-deep); color:white; }
+.lagoon-contact:hover { background:var(--lagoon-white); color:var(--fg); }
 .site-nav a:hover { color:#9cebaf; }
 .brand:hover { opacity:.75; }
 .preview-toolbar a:hover,.skip-link:hover { text-decoration:underline; }
@@ -113,15 +113,7 @@
 }
 
 /* Shared page edges and fluid sizing for large displays. */
-.concept-lagoon {
-  --v5-gutter: clamp(14px, 2.2vw, 76px);
-  --v5-width: calc(100% - 2 * var(--v5-gutter));
-  --section-gutter: clamp(12px, 1.55vw, 52px);
-  --section-width: calc(100% - 2 * var(--section-gutter));
-  --section-inset: clamp(56px, 6vw, 148px);
-  --v5-gap: clamp(18px, 1.67vw, 44px);
-  --v5-card-padding: clamp(28px, 1.95vw, 48px);
-}
+
 .concept-lagoon .lagoon-stage .container {
   width: var(--v5-width);
   max-width: none;
@@ -129,13 +121,10 @@
 }
 .concept-lagoon main > section { padding-block: var(--section-inset); }
 #offers { padding-block-start: calc(var(--section-inset) + clamp(12px, 1.4vw, 28px)); }
-@media (max-width: 760px) {
-  .concept-lagoon { --section-inset: 72px; }
-}
 .v5-section header > p { max-width: 76ch; margin-inline: auto; }
 
 @media (min-width: 1440px) {
-  .concept-lagoon { --section-gutter: 4vw; }
+
   .v5-section header { margin-bottom: clamp(54px, 3.75vw, 94px); }
   .v5-section h2 { font-size: clamp(48px, 3.3vw, 80px); }
   .v5-section h3 { font-size: clamp(23px, 1.6vw, 38px); }
@@ -147,18 +136,14 @@
 }
 
 /* Concept 05 content and actions. */
-.concept-lagoon {
-  --v5-action-gap: clamp(48px, 3.34vw, 76px);
-  --v5-button-light: #cee6c3;
-  --v5-button-dark: #103f38;
-}
+
 .section-action { margin-top: var(--v5-action-gap); }
 #offers .card { gap: 0; }
 #offers .card > p { margin-bottom: 36px; }
 
 .about .v5-button, .guide-purchase .v5-button:not(.primary) {
   background: var(--v5-button-light);
-  color: #153b32;
+  color: var(--fg);
   border-color: transparent;
 }
 
@@ -184,8 +169,8 @@
   margin: 0;
   padding: 6px 10px;
   border-radius: 7px;
-  background: #fff9ec;
-  color: #153b32;
+  background: var(--lagoon-white);
+  color: var(--fg);
   font-size: clamp(10px, .8vw, 16px);
   font-weight: 750;
   letter-spacing: .04em;
@@ -216,21 +201,7 @@
   .guide-purchase { grid-template-columns: minmax(0, 1fr); }
 }
 @media (min-width: 1920px) {
-  .concept-lagoon {
-    --wide-heading: clamp(54px, calc(18px + 1.875vw), 68px);
-    --wide-card-title: clamp(28px, calc(16px + .625vw), 34px);
-    --wide-copy: clamp(22px, calc(16px + .3125vw), 25px);
-    --wide-card-copy: clamp(20px, calc(14px + .3125vw), 23px);
-    --wide-small: clamp(16px, calc(10px + .3125vw), 19px);
-    --wide-price: clamp(30px, calc(18px + .625vw), 36px);
-    --wide-button-text: clamp(19px, calc(13px + .3125vw), 22px);
-    --wide-button-height: clamp(64px, calc(40px + 1.25vw), 76px);
-    --wide-inset: clamp(38px, 2vw, 56px);
-    --wide-copy-gap: clamp(24px, 1.25vw, 34px);
-    --wide-action-space: clamp(40px, 2.2vw, 58px);
-    --wide-row-gap: clamp(24px, 1.25vw, 32px);
-    --wide-intro-gap: clamp(64px, 3.1vw, 86px);
-  }
+
   .v5-section {
     font-size: var(--wide-copy);
   }
@@ -267,15 +238,7 @@
 }
 
 @media (min-width: 2560px) {
-  .concept-lagoon {
-    --wide-card-title: clamp(36px, calc(20px + .625vw), 38px);
-    --wide-copy: clamp(28px, calc(20px + .3125vw), 29px);
-    --wide-card-copy: clamp(26px, calc(18px + .3125vw), 27px);
-    --wide-small: clamp(22px, calc(14px + .3125vw), 23px);
-    --wide-price: clamp(38px, calc(22px + .625vw), 40px);
-    --wide-button-text: clamp(25px, calc(17px + .3125vw), 26px);
-    --wide-button-height: clamp(84px, calc(52px + 1.25vw), 88px);
-  }
+
   .lagoon-description { font-size: 33px; }
   .concept-lagoon .site-nav :is(a, button) { font-size: 18px; }
   .concept-lagoon :is(.v5-button, .lagoon-actions a, .lagoon-contact) {
@@ -294,24 +257,12 @@
 
 /* Concept 04 components use the wider content edges of concept 05. */
 .concept-lagoon {
-  background: #f5efdf;
-}
-
-.concept-lagoon :is(
-  .v5-wrap,
-  .lagoon-materials > .container,
-  .lagoon-blog > .container,
-  .lagoon-faq-layout,
-  .lagoon-reviews > .container
-) {
-  width: var(--section-width);
-  max-width: none;
-  margin-inline: auto;
+  background: var(--jt-page-bg);
 }
 
 .v5-button.primary {
   border-color: transparent;
-  background: #f3d477;
+  background: var(--jt-yellow);
   color: var(--fg);
 }
 
@@ -334,7 +285,7 @@
 }
 #offers .card:nth-child(2) .lagoon-offers-number {
   border-radius: 46% 58% 44% 58% / 52% 41% 58% 45%;
-  background: #f3d477;
+  background: var(--jt-yellow);
 }
 #offers .card:nth-child(3) .lagoon-offers-number {
   border-radius: 55% 42% 48% 56% / 47% 56% 45% 52%;
@@ -363,7 +314,7 @@
   place-items: center;
   text-decoration: none;
 }
-.destination-cards > :nth-child(2) { --destination-button-bg: #f3d477; }
+.destination-cards > :nth-child(2) { --destination-button-bg: var(--jt-yellow); }
 .destination-cards > :nth-child(3) { --destination-button-bg: var(--lagoon-sand); }
 
 .lagoon-materials-actions {
@@ -423,23 +374,11 @@
 }
 
 /* Action controls, headings, and card type share the same scale throughout concept 05. */
-.concept-lagoon {
-  --action-height: clamp(48px, 4.14vw, 60px);
-  --section-title: clamp(46px, 4.2vw, 58px);
-  --section-copy: clamp(16px, 1.38vw, 20px);
-  --card-title: clamp(19px, 1.74vw, 25px);
-  --card-copy: clamp(14px, 1.18vw, 17px);
-  --grid-action-copy: clamp(18px, 1.25vw, 23px);
-  --card-radius: clamp(16px, 1.65vw, 23px);
-  --card-shadow: 0 8px 22px #403b271c;
-  --heading-stroke-color: #f3d477;
-  --heading-stroke: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 27' preserveAspectRatio='none'%3E%3Cpath d='M1 24C89 1 250-8 376 14c-89-12-205-9-296 2C46 20 24 23 1 26c-1 0-1-1 0-2Z'/%3E%3C/svg%3E");
-}
 
 .concept-lagoon :is(#destinations, #phu-quoc-guide, #useful-articles, #traveler-reviews) {
   --heading-stroke-color: #a8c89a;
 }
-.subhead { --heading-stroke-color: #f3d477; }
+.subhead { --heading-stroke-color: var(--jt-yellow); }
 
 .concept-lagoon :is(main h2, .lagoon-footer h2) {
   font-size: var(--section-title);
@@ -472,7 +411,7 @@
 .concept-lagoon :is(.lagoon-actions a, .lagoon-contact, .v5-button, .lagoon-guide-cta, .lagoon-destination-more, .lagoon-article-read, .lagoon-review-toggle, .lagoon-reviews-controls button, .lagoon-footer-form button) {
   min-height: var(--action-height);
   padding-block: 0;
-  border-radius: 999px;
+  border-radius: var(--jt-pill-radius);
   line-height: 1.25;
   text-decoration: none;
 }
@@ -511,18 +450,6 @@
   border-radius: var(--card-radius) var(--card-radius) 0 0;
   overflow: hidden;
 }
-.concept-lagoon :is(.card, .product, .lagoon-destination, .lagoon-materials-item .lagoon-material-card, .lagoon-article, .lagoon-review-card) {
-  border: 1px solid #fff;
-  box-shadow: var(--card-shadow);
-}
-.concept-lagoon :is(.card, .product, .lagoon-destination-copy, .lagoon-material-copy, .lagoon-article-panel, .lagoon-review-card) h3 {
-  font-size: var(--card-title);
-  line-height: 1.13;
-}
-.concept-lagoon :is(.card > p, .mini-card p, .product p, .product li, .lagoon-destination-copy p, .lagoon-material-copy > p, .lagoon-article-panel > p, .lagoon-review-text) {
-  font-size: var(--card-copy);
-  line-height: 1.38;
-}
 .concept-lagoon .lagoon-article-panel h3 {
   min-block-size: 0;
   padding-block-end: 0;
@@ -531,7 +458,7 @@
 .lagoon-article-panel .lagoon-reading-time {
   margin-bottom: 4px;
   padding: 4px 9px;
-  border-radius: 999px;
+  border-radius: var(--jt-pill-radius);
   background: #dcebd5;
   color: var(--fg);
 }
@@ -567,19 +494,12 @@
 }
 
 @media (max-width: 760px) {
-  .concept-lagoon { --section-title: clamp(34px, 6.8vw, 46px); }
+
   .concept-lagoon .lagoon-actions a { min-width: 0; }
 }
 
 @media (min-width: 1920px) {
-  .concept-lagoon {
-    --action-height: var(--wide-button-height);
-    --section-title: calc(var(--wide-heading) + 4px);
-    --section-copy: var(--wide-copy);
-    --card-title: var(--wide-card-title);
-    --card-copy: var(--wide-card-copy);
-    --grid-action-copy: var(--wide-button-text);
-  }
+
   .concept-lagoon .lagoon-description { font-size: clamp(26px, 1.38vw, 36px); }
   .concept-lagoon :is(.lagoon-guide-cta, .lagoon-destination-more, .lagoon-article-read, .lagoon-review-toggle, .lagoon-reviews-controls button) {
     font-size: var(--wide-button-text);
@@ -593,7 +513,7 @@
 .concept-lagoon :is(.offers-cards .v5-button, .destination-cards .lagoon-destination-more) {
   font-size: var(--grid-action-copy);
 }
-.concept-lagoon .lagoon-destination-copy h3 {
+body.julia-home-page .lagoon-destination-copy h3 {
   font-size: calc(var(--card-title) + 3px);
 }
 .wide-title-break { display: none; }
@@ -725,7 +645,6 @@ body.julia-home-page #phu-quoc-guide .guide-purchase .v5-button:not(.primary):is
   color: #427653;
 }
 
-
 /* Genuine low-resolution preview from the travel photo: show it immediately,
    then fade the decoded full poster above it, followed by the playing video. */
 body.julia-home-page .lagoon-stage {
@@ -762,5 +681,17 @@ body.julia-home-page .lagoon-stage .home-hero-poster.is-ready {
     filter: none;
     transform: none;
     transition: none;
+  }
+}
+
+@media (1440px <= width < 1920px) {
+  .julia-home-page .lagoon-description {
+    font-size: calc(20.736px + 5.76 * var(--jt-desktop-step));
+  }
+  .julia-home-page .about p {
+    font-size: calc(18px + 4 * var(--jt-desktop-step));
+  }
+  .julia-home-page .about .about-facts {
+    font-size: calc(14.4px + 1.6 * var(--jt-desktop-step));
   }
 }
