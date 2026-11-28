@@ -314,7 +314,7 @@
 
 /* Planning uses exactly the three-column proportions and spacing of the site's blog. */
 .phu-quoc-page main > #planning.phu-section {
-  padding-block-start: calc(var(--section-inset) * .8775); /* +35% to the original .65 inset */
+  padding-block-start: calc(var(--section-inset) * 1.2); /* extra air below the full-screen hero */
 }
 @media (min-width: 761px) {
   .phu-quoc-page .phu-planning-grid {
