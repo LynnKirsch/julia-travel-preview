@@ -198,8 +198,8 @@
   display: grid;
   align-items: center;
   min-height: 21px;
-  padding-inline-start: 32px;
-  background: url("../images/generated-drafts/img-80x80.png") left center / 21px 21px no-repeat;
+  padding-inline-start: 0;
+  background: none;
 }
 .guide-purchase, .mini-purchase { align-items: center; }
 .guide-purchase strong, .mini-purchase strong { white-space: nowrap; }
@@ -723,4 +723,44 @@ body.julia-home-page #phu-quoc-guide .guide-purchase .v5-button:not(.primary) {
 body.julia-home-page #phu-quoc-guide .guide-purchase .v5-button:not(.primary):is(:hover, :focus-visible) {
   background: transparent;
   color: #427653;
+}
+
+
+/* Genuine low-resolution preview from the travel photo: show it immediately,
+   then fade the decoded full poster above it, followed by the playing video. */
+body.julia-home-page .lagoon-stage {
+  background-color: #80c4bd;
+  background-image: url("data:image/webp;base64,UklGRkQBAABXRUJQVlA4IDgBAACQCwCdASpQAC0APuFao08opSMiPdgIARAcCWgApLPkB8jStZFisKdwGiKfrLDtdt40DQYbrfbcEAAmKakRlaBrdvn+dNM4uY5dRItLPpih6VmJpMV0cmVLtKMiecq7EFPAIp4fAAD+kabPgboN0c4ghPGnYtud89XzxgWRH8ufkXJbvTD8mJ5JHhJuJSHenjhaLXHM1OYea5QoPkqAZmgXsvKPhAZRF2+su3AJc3a3cenxWSwevaTXSO8cyiZrzqxkfgY8vRZJVqvEbQrJq4rswArFsxIUD4fYqVZrVk3p5/9vRUIIm7/0yzI4BUaELWm+Gv+o8Je8fdQtM8B3fnJ+CADQr2Jo7QL1NGz7eyADT8d3l0qskWV3AVKdjh7+hQISYNhP24yaMXkIYc3wFj/AqOaaRCpgUAA=");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+body.julia-home-page .lagoon-stage .home-hero-poster {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  filter: blur(16px);
+  transform: scale(1.04);
+  transition:
+    opacity 680ms ease-out,
+    filter 1060ms cubic-bezier(.2,.7,.25,1),
+    transform 1060ms cubic-bezier(.2,.7,.25,1);
+  pointer-events: none;
+}
+body.julia-home-page .lagoon-stage .home-hero-poster.is-ready {
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  body.julia-home-page .lagoon-stage .home-hero-poster {
+    filter: none;
+    transform: none;
+    transition: none;
+  }
 }
